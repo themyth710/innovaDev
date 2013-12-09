@@ -1,0 +1,16 @@
+name = Innova
+description = The default theme of Innova Technology based on PSD template
+version = VERSION
+core = 7.x
+engine = phptemplate
+
+regions[content] = Main Content
+stylesheets[all][] = css/style.css
+
+version = "7.1.1"
+project = "Innova"
+; Information added by drupal.org packaging script on 2011-11-15
+version = "7.x-1.9"
+core = "7.x"
+datestamp = "1321351835"
+

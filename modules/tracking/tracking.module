@@ -1,0 +1,273 @@
+<?php
+	/*
+		@this module added forms which is used on drupal
+		@the form includes sign in, reset password and phone select form
+		@moreover this module also has functions to define the email that send to user
+	*/
+	
+	/*
+		include the file need to perform the necessary function in the database
+	*/
+	include_once drupal_get_path('module', 'Tracking').'/module/handler.inc';
+	include_once drupal_get_path('module', 'Tracking').'/communication/clientAction.php';
+	include_once drupal_get_path('module', 'Tracking').'/communication/clientDataChecking.php';
+	include_once drupal_get_path('module', 'Tracking').'/communication/sendMessage.php';
+	include_once drupal_get_path('module', 'Tracking').'/database/config.inc';
+
+	/*========================================================================
+		@This function defined the email sent from server
+		@according the key, the email will be sent respectively
+		@params key, message, params
+		@the subject and the body of the email is defined according to params
+	========================================================================*/
+	function Tracking_mail($key, &$message, $params) {
+		  global $user;
+		  switch ($key) {
+		    	case 'reset_mail':
+		    		// Send a simple message from the reset form.
+		    		$message['subject'] = $params['subject'];
+		     		$message['token'] = $params['token'];
+		     	break;
+		     	case 'activation_mail':
+		    		// Send a simple message from the reset form.
+		    		$message['subject'] = $params['subject'];
+		     		$message['token']   = $params['token'];
+		     	break;
+		     	case 'passive_track_mail':
+		    		// Send a simple message from the reset form.
+		    		$message['subject'] = $params['subject'];
+		     		$message['lat']     = $params['lat'];
+		     		$message['long']    = $params['long'];
+		     		$message['bat']     = $params['bat'];
+		     		$message['acc']     = $params['acc'];
+		     		$message['date']    = $params['date'];
+		     	break;
+		     	case 'upload_image_mail':
+		     		$message['subject'] = $params['subject'];
+		     		$message['image1']  = $params['image1'];
+		     		$message['image2']	= $params['image2'];
+		     	break;
+				case 'non_user_found_mail':
+					$message['subject'] = $params['subject'];
+		     		$message['reporter_name'] = $params['reporter_name'];
+		     		$message['reporter_email']  = $params['reporter_email'];
+		     		$message['reporter_contact_number']	= $params['reporter_contact_number'];
+					$message['message'] = $params['message'];
+		     	break;
+		  }
+	}
+
+	/*
+		create the registration form
+		it includes 3 arrays in PHP
+		all are formated according to Drupal Module Development
+	*/
+	function form_registration_form($form, &$form_state) {
+		  $form['registration']['email'] = array(
+			'#type'      => 'textfield',
+			'#required'  => TRUE,
+			'#size'      => 44,
+			'#maxlength' => '80',
+			'#attributes'=> array('placeholder' => 'Email','data-email'=>'','data-min-chars'=>'5'),
+		  );
+		  $form['registration']['password'] = array(
+			'#type'      => 'password',
+			'#required'  => TRUE,
+			'#size'      => 44,
+			'#maxlength' => '80',
+			'#attributes'=> array('placeholder' => 'Password'),
+		  );
+		  $form['registration']['submit'] = array(
+			'#value'     => 'SIGN IN',
+			'#type'      => 'submit',
+			'#submit'    => array('form_registration_handler'),
+			);
+		  return $form;
+	}
+
+	/*
+		Password reset form
+	*/
+	function form_reset_password($form, &$form_submit){
+		$form['reset']['email'] = array(
+			'#type'      => 'textfield',
+			'#required'  => TRUE,
+			'#size'      => 44,
+			'#maxlength' => '80',
+			'#attributes'=> array('placeholder' => 'Email','data-email'=>'','data-min-chars'=>'5', 'data-trim' =>''),
+			);
+		$form['reset']['submit'] = array(
+			'#value'     => 'SUBMIT',
+			'#type'      => 'submit',
+			'#submit'    => array('form_password_reset_handler'),
+			'#attributes'=> array('name' => 'resetPswSubmit'),
+			 );
+	  	return $form;
+	}
+	
+	/*
+		new password form user
+	*/
+	function form_new_password($form, &$form_submit){
+		$form['enter']['password'] = array(
+						'#type'     => 'password',
+						'#required' => TRUE,
+						'#size'     => 44,
+						'#maxlength'=> '80',
+						'#attributes'=> array('placeholder' => 'Password'),
+						);
+		$form['enter']['submit'] = array(
+						'#value'    => 'RESET',
+						'#type'     => 'submit',
+						'#submit'   => array('form_new_password_handler'),
+						'#attributes'=> array('name' => 'newPswSubmit'),
+						 );
+	  	return $form;
+	}
+
+	/*
+		activation form
+	*/
+	function form_account_activation($form, &$form_submit){
+		$form['activation']['email'] = array(
+			'#type'      => 'textfield',
+			'#required'  => TRUE,
+			'#size'      => 44,
+			'#maxlength' => '80',
+			'#attributes'=> array('placeholder' => 'Email','data-email'=>'','data-min-chars'=>'5', 'data-trim' =>''),
+			);
+		$form['activation']['submit'] = array(
+			'#value'     => 'SUBMIT',
+			'#type'      => 'submit',
+			'#submit'    => array('form_account_activation_handler'),
+			'#attributes'=> array('name' => 'accountActivationSubmit'),
+			 );
+	  	return $form;
+	}
+
+	/*Ajax call function*/
+	function Tracking_menu() {
+	 
+		// Ajax Callback.
+		$items['ajax/userAction'] = array(
+		    'title' => 'Browser Inner Action',
+		    'page callback' => 'userActionCallBack',
+		    'access arguments' => array('access content'),
+		    'type' => MENU_CALLBACK,
+		);
+
+		// Ajax Callback.
+		$items['ajax/phoneAction'] = array(
+		    'title' => 'Phone Inner Action',
+		    'page callback' => 'phoneActionCallBack',
+		    'access arguments' => array('access content'),
+		    'type' => MENU_CALLBACK,
+		);
+
+		$items['ajax/sendMessage'] = array(
+			'title' => 'Send Message Action',
+		    'page callback' => 'sendMessageCallBack',
+		    'access arguments' => array('access content'),
+		    'type' => MENU_CALLBACK,
+		);
+		 
+		return $items;
+	}
+
+	function Tracking_init(){
+		if(drupal_get_path_alias() == 'tracking'){
+			drupal_add_js(drupal_get_path('module', 'Tracking') . '/js/alertify.js', array('scope' => 'footer'));
+			drupal_add_js(drupal_get_path('module', 'Tracking') . '/js/jquery.fancybox.js', array('scope' => 'footer'));
+			drupal_add_js(drupal_get_path('theme', 'INNOVA') . 'sites/all/themes/core/js/login/jquery.formvalidate.min.js', array('scope' => 'footer'));
+			drupal_add_js("http://maps.googleapis.com/maps/api/js?sensor=false");
+			drupal_add_js(drupal_get_path('module', 'Tracking') . '/js/tracking_ajax.js', array('scope' => 'footer'));
+			drupal_add_js(drupal_get_path('module', 'Tracking') . '/js/tracking_ui.js', array('scope' => 'footer'));
+			drupal_add_js(drupal_get_path('module', 'Tracking') . '/js/tracking.js', array('scope' => 'footer'));
+		}
+	}
+
+	//calll back for user action
+	function userActionCallBack() {
+
+	 	$userID = $_SESSION[USER_ID];
+	 	$email  = $_SESSION[EMAIL];
+	 	$regID  = $_SESSION[REG_ID];
+	 	
+	 	if(isset($_POST[ACTION])){
+	 		$action  = $_POST[ACTION];
+	 		$message = null;
+
+	 		if(isset($_POST[MESSAGE]))
+	 			$message = $_POST[MESSAGE];
+
+			if($action == LOAD_PHONE){ 	
+		 		retrievePhoneList($userID, $email);	 			
+			}
+					
+			if($action == REMOVE_PHONE){
+				phoneRemove($userID, $email, $message, $regID);	
+			}
+
+			if($action == RETRIEVE_IMAGE_CAPTURE){
+				retrieveImage($userID, $email);
+			}
+
+			if($action == RETRIEVE_PROFILE){
+				retrieveProfile($userID, $email);
+			}
+
+			if($action == SAVE_PROFILE){
+				saveProfile($userID, $email, $message);
+			}
+
+			if($action == RETRIEVE_PROTAG){
+				//displayJSON(true);
+				retrieveProtag($userID, $email);
+			}
+
+			if($action == SAVE_PHONE_NAME){
+
+				savePhoneName($userID, $email, $message, $regID);
+			}
+		}
+	}
+
+	function phoneActionCallBack(){
+
+		$userID = $_SESSION[USER_ID];
+		$email  = $_SESSION[EMAIL];
+		$regID  = $_SESSION[REG_ID];
+
+		if(isset($_POST[ACTION]) && isset($_POST[MESSAGE])){
+			$action    = $_POST[ACTION];
+			$message   = $_POST[MESSAGE];
+			retrievePhoneData($action, $userID, $email, $regID, $message);
+		}
+	}
+
+	function sendMessageCallBack(){
+
+		if(isset($_POST[ACTION]) && isset($_POST[MESSAGE])){
+	 		$action  = $_POST[ACTION];
+	 		$message = $_POST[MESSAGE];
+	 		$userID = $_SESSION[USER_ID];
+			$email  = $_SESSION[EMAIL];
+			$regID  = $_SESSION[REG_ID];
+			
+			sendMessage($action, $message, $userID, $email, $regID);	
+		}
+	}
+
+	function displayJSON($success){
+		$arr = array();
+		if($success)
+			$arr = array('status' => array('status' => 'fail', 'code' => '100'));
+		else
+			$arr = array('status' => 'fail',    'code' => '100');
+
+		$json = array();
+		$json = json_encode($arr);			
+		header('Content-Type: application/json');
+		echo $json;
+	}
+?>

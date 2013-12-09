@@ -1,0 +1,111 @@
+a{
+	color:#2995fd;
+}
+
+span{
+	clear:both;
+}
+
+.background{
+	background:url(image/world.png) no-repeat center;
+	height:291px;
+	width:100%;
+	margin-bottom:20px;
+	padding-top:1%;
+}
+
+.logo{
+	background:url(image/logo.png) no-repeat center;
+	height:40px;
+}
+
+.container-2{
+	width:700px;
+}
+
+.grid-1{
+	width:300px;
+}
+
+.grid-1,.grid-2{
+	margin:0 15px;
+}
+
+.grid-2 input[type='password'], input[type='text']{
+	line-height: 40px;
+	height:40px;
+	padding-left: 10px;
+}
+
+.grid-2 input[type='password'], input[type='submit']{
+	margin-top:20px;
+}
+
+.grid-2 input[type='submit']{
+	float:left;
+	padding:8px 15px 8px;
+}
+
+.grid-2 a#forgot-psw{
+	float:right;
+	margin-top:20px;
+}
+
+.grid-2 a#forgot-psw:hover{
+	color:#D85724;
+}
+
+@media screen and (max-width: 768px) {
+	.instruction{
+		display:none;
+	}
+
+	.error-text{
+		width:303px;
+		margin:0 auto;
+	}
+
+	.grid-1{
+		margin-bottom:20px;
+	}
+
+	.grid-1, .grid-2{
+		margin:15px auto;	
+		width:303px;	
+	}
+
+	.grid-2 input[type='text'], input[type='password']{
+		width:293px;
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.error-text{
+		margin-left:255px;
+		text-align:left;
+	}
+
+ 	.grid-2, .grid-1{
+ 		float:left;
+ 	}
+}
+
+/*page reset */
+.instruction{
+	text-align:left;
+	margin-bottom:10px;
+	margin-left:15px;
+}
+
+.grid-2#re-form input[type='password']{
+	margin-top:0px;
+}
+
+#reportFound p{
+	color: gray;
+}
+
+#returnMessage p{
+	color: gray;
+}
+

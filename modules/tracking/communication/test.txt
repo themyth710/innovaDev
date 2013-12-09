@@ -1,0 +1,2 @@
+INSERT INTO tr_protag_information(macAddress,userID,protagName,currentLatitude,currentLongitude,dateCreate,lastDateKnown)  
+                            VALUES('00:1a:7d:20:00:3c', '3', 'PROTAG', '0', '0', '', '2013-11-14 13:35:44')

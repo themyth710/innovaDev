@@ -1,0 +1,278 @@
+@font-face{
+	font-family: QuattrocentoSans ;
+	src:url(font/Quantto.TTF);
+}
+
+body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, code,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, dialog, figure, footer, header,
+hgroup, nav, section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+ 
+/* This helps to make newer HTML5 elements behave like DIVs in older browers */
+article, aside, details, figcaption, figure, dialog,
+footer, header, hgroup, menu, nav, section {
+    display:block;
+}
+ 
+/* Line-height should always be unitless! */
+body,textarea {
+  line-height: 1.5;
+  background: white;
+  font-family: QuattrocentoSans, Helvetica, Arial, sans-serif;
+  color:#444444;
+  font-size:100%; 
+  text-shadow: 0 0 1px rgba(0,0,0,0.3);
+ -webkit-font-smoothing: antialiased;
+ -webkit-text-stroke: 1px transparent;
+}
+
+ 
+/* Remember to define your own focus styles! */
+:focus { outline: 0; }
+
+html, body{
+	height:100%;
+}
+ 
+/* Tables still need 'cellspacing="0"' in the markup. */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* float:none prevents the span-x classes from breaking table-cell display */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  float:none !important;
+}
+
+table, th, td {
+  vertical-align: middle;
+}
+ 
+/* Remove possible quote marks (") from <q>, <blockquote>. */
+blockquote:before, blockquote:after, q:before, q:after { content: ''; }
+blockquote, q { quotes: "" ""; }
+
+/*remove the underline default of a*/
+ a, a:visited{text-decoration:none;white-space: nowrap;}
+
+/* Remove annoying border on linked images. */
+a img { border: none; }
+ul{list-style-type: none;}
+/*
+* remove the skip link
+*/
+#skip-link{
+	display:none;
+}
+/*
+* remove the skip link
+*/
+
+/*
+*set full page display
+*/
+#wrapper{
+	min-height: 100%;
+	height: auto;
+	margin: 0 auto -40px; 
+	position: relative;
+	min-width:600px;
+}
+
+#push{
+	height:40px;
+}
+/*
+*set full page display
+*/
+.center{
+	margin:0 auto;
+	text-align: center;
+}
+
+.text-remove{
+	text-indent:-9999px;
+}
+
+.text-bold{
+  font-weight: bold;
+}
+
+.float-right{
+  float:right;
+}
+
+.clear{
+	clear: both;
+	display: block;
+	overflow: hidden;
+	visibility: hidden;
+	width: 0;
+	height: 0;
+}
+
+/*
+* form default design
+*/
+input[type='text'], input[type='password'], textarea{
+	background-color: #e9e9e9;
+	border:	none;
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	border-radius: 1px;
+  position:relative;
+}
+
+input[type='submit'], input[type='submit']:visited, .button, .button:visited{
+  color: #fff;
+  text-decoration: none;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+  border-radius:2px;
+  -moz-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.6);
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.25);
+  border:none;
+  cursor: pointer;
+  background-color: #2981e4;
+  position:relative;
+}
+
+input[type='submit']:hover, .button:hover{
+  background-color: #2575cf;
+}
+
+input[type='submit']:active, .button:active{
+  top:1px;
+}
+
+input[type="text"]:-webkit-autofill, input[type="password"]:-webkit-autofill {
+      -webkit-box-shadow: 0 0 0 1000px #e9e9e9 inset; }
+input[type="text"]:focus, input[type="password"]:focus, textarea:focus {
+  box-shadow: inset 0 1px 2px rgba(153, 153, 153, 0.45); }
+input[type="text"]:focus::-webkit-input-placeholder, input[type="password"]:focus::-webkit-input-placeholder {
+  color: transparent; }
+input[type="text"]:focus:-moz-input-placeholder, input[type="password"]:focus:-moz-input-placeholder {
+  color: transparent; }
+input[type="text"]:focus::-moz-input-placeholder, input[type="password"]:focus::-moz-input-placeholder {
+  color: transparent; }
+input[type="text"]:focus:-ms-input-placeholder, input[type="password"]:focus:-ms-input-placeholder {
+  color: transparent; }
+
+.small-text{
+  font-size:0.9em;
+}
+
+.normal-text{
+  font-size:1em;
+}
+
+.large-text{
+  font-size:1.1em;
+}
+
+.xxlarge-text{
+  font-size:1.5em;
+}
+
+.error-text{
+  color: #dd4b39;
+}
+
+.no-border{
+  border:none !important;
+}
+
+.title{
+
+}
+
+.transition{
+  -webkit-transition: all 0.5 ease-in; /*Safari & Chrome*/
+  transition: all 0.5s ease-in;
+  -moz-transition: all 0.5s ease-in; /* Firefox 4 */
+  -o-transition: all 0.5s ease-in; /* Opera */
+  -ms-transition: all 0.5s ease-in;
+}
+
+/*
+*bootstrap label used for form validation
+*/
+.label-important{
+  background-color: #b94a48;
+}
+
+.label{
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  position:absolute;
+  padding: 2px 4px;
+  font-size: 11.844px;
+  font-weight: bold;
+  line-height: 14px;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.25);
+  white-space: nowrap;
+  right:0;
+  bottom:0;
+}
+
+form .form-item{
+  position:relative;
+}
+/*
+*boostrap lable used for form validation
+*/
+/*remove drupal status message*/
+h2.element-invisible{
+  display:none;
+}
+/*remove drupal status message*/
+
+/*!
+ * Bootstrap v3.0.1 by @fat and @mdo
+ * Copyright 2013 Twitter, Inc.
+ * Licensed under http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Designed and built with all the love in the world by @mdo and @fat.
+ */
+
+/*wupei's modification on css*/
+.form-control{
+  margin-bottom: 8px;
+}
+
+#lostLabel{
+  color: red;
+}
+
+#securedLabel{
+  color: green;
+}
+
+.modal-header{
+  background-color: #2babe2;
+  color:white;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.mybtn{
+  background-color: #2babe2;
+  color: white;
+  margin-top: 8px;
+}
