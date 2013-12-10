@@ -255,7 +255,7 @@
 
             global $base_url;
             $params    = array('subject' => 'Account Activation',
-                               'token'   => $base_url.'/activation?token='.$token
+                               'token'   => 'http://innovatechnology.com.sg/development/activation?token='.$token
                               );
             $this           -> send -> sendMail(ACTIVATION_MAIL, $email, $params);
 

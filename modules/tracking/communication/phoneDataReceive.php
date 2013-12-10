@@ -1,13 +1,13 @@
 <?php
 	require_once(dirname(__FILE__).'/../database/phone.inc');
 	require_once(dirname(__FILE__).'/../database/config.inc');
-	file_put_contents('test2.txt', 'go here');
+	file_put_contents('test2.txt', 'heher');
 	if(isset($_POST[ACTION])){
 		
 		$phone = new phone();
-
+		
 		if($_POST[ACTION] == REGISTER){
-
+			
 			if(isset($_POST[EMAIL]) &&
 			   isset($_POST[PASSWORD]) &&
 			   isset($_POST[DATE_CREATE])){
