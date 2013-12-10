@@ -247,7 +247,6 @@ var ui = (function ($){
 
 		//remove phone click 
  		$(document).on('click','#remove-phone',function(){
-			
 			//take the id of the phone into message and call ajax	
 			var message = $(this).attr('data-id'); 
 
@@ -1455,6 +1454,8 @@ var ui = (function ($){
                         if(api.curPhoneType == 'iOS'){
                                 message += '_' +api._customeiOSMessage;
                         }
+		}else{
+			message = api._curPhoneID + '_' + api._curPhoneType;
 		}
 		
 		api._ajaxObject.phoneSendMsgAction(action, message, successCallBack, errorCallBack);
@@ -1473,7 +1474,6 @@ var ui = (function ($){
 		$('#track-button.start').on('click', function(e){
 			e.preventDefault();
 			e.stopPropagation();
-
 			if(api._curPhoneType == null|| api._curPhoneID == null){
 				alertify.alert(api.MESSAGE.noPhoneSelection);
 				return false;

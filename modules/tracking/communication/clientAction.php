@@ -8,7 +8,7 @@
 	require_once(dirname(__FILE__).'/../database/config.inc');
 
 	function retrievePhoneList($hashUserID, $email){
-
+		
 		//initiate instance of class browser
 		$br = new browser();
 

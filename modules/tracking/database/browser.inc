@@ -44,7 +44,7 @@
 
                 //retrieve list of regID from IOS user table
                 $iOSRegID  = $this -> retrieve -> retrieveMacPhoneOrRegIDFromPhoneUserTableUsingUserID($userID, false);
-                
+                file_put_contents('test2.txt', 'go there');
                 //retrieve list of reg ID from list of macphone according to phone information table
                 $andrRegID = $this -> retrieve -> retrieveRegIDFromMacPhoneList($andrMacPhoneList);
 
@@ -272,10 +272,11 @@
         public function brSendMessage($typePhone, $message, $regID, $userID, $action){
             //update the notification table
             $this -> dbAction($action, $userID, null, $regID);
-
+            
             //if it is android then send the message to the phone
             //if it is ios then just update the notification table only            
             if($typePhone == ANDROID){
+
                 $this -> brSendPhoneRequest($regID, $message);   
 
             }

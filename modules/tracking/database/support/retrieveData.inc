@@ -397,8 +397,7 @@
                     $query = sprintf("SELECT ".PHONE_INFO_REGID_COL." FROM "
                                               .PHONE_INFORMATION_TABLE." WHERE "
                                               .PHONE_INFO_MAC_COL." = '%s'",
-                                      mysql_real_escape_string($macPhone));
-                     
+                                      mysql_real_escape_string($macPhone));    
                      //execute the query
                      $executeQuery = mysql_query($query);
 

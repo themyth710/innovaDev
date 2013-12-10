@@ -221,7 +221,6 @@
 			}
 
 			if($action == RETRIEVE_PROTAG){
-				//displayJSON(true);
 				retrieveProtag($userID, $email);
 			}
 

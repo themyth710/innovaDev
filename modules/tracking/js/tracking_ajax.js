@@ -125,6 +125,7 @@
 	        
 	        //the success call back when all the data are sent to server
 	        success: function(data){console.log(data);
+
 	        	if(successCallBack){
 	        		if(data)
 
@@ -139,7 +140,7 @@
 	        				successCallBack(data, action);      			
 	        		else
 	        			errorCallBack();
-	        	}       
+	        	}
 	        },
 	        //the error call back when we can not connect to server or server down
 	        error: function(xhr,err){

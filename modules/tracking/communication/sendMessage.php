@@ -44,7 +44,8 @@
 				$browser -> brUpdateImageNum($userID, $imgNum);
 			}else if($action == TEST_TRACK && $typePhone == IOS){
 				$messageSend = MSG_IOS_TEST_TRACK;
-			}           
+			}   
+			        
 			$browser -> brSendMessage($typePhone, $messageSend, $regID, $userID, $action);
 		}
 		
