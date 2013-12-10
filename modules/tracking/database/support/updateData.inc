@@ -539,5 +539,22 @@
           return true;
       }
     }
+
+    public function updateUserActivity($userID,$activity){
+      $query = sprintf("UPDATE ".ACTIVITY_UPDATES_TABLE." SET ".ACTIVITY_USER_ACTIVITY_COL." = '%s' WHERE ".ACTIVITY_USER_ID_COL." = '%s'", 
+              mysql_real_escape_string($activity),
+                      mysql_real_escape_string($userID));
+      
+      $executeQuery = mysql_query($query);
+      //Activity stored in format
+      //<log num><space><date and time display><use this [] to seperate other log>
+      /*It is better to store everything in one column because it allows reordering of information
+      after the max num of logs has been reached, but it requires more processing*/   
+      
+      if(!$executeQuery)
+        return false;
+      else
+        return true;
+    }
   }
 ?>

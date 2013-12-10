@@ -5,6 +5,8 @@
 	var api = {
 		USER_ACTION:{
 			phoneLoad : 'phoneListLoad',
+			activityLoad : 'activityListLoad',
+
 			removePhone: 'removePhone',
 			retrieveImgCap: 'loadImageCapture',
 			retrieveProfile : 'retrieveProfile',
@@ -54,6 +56,7 @@
 		   action == api.USER_ACTION.saveProfile||
 		   action == api.USER_ACTION.retrieveProtag||
 		   action == api.USER_ACTION.savePhoneName||
+		   action == api.USER_ACTION.activityLoad ||
 		   action == api.USER_ACTION.retrieveLostReport){
 			api._this.ajaxCall(action, message, successCallBack, errorCallBack, 0);
 		}

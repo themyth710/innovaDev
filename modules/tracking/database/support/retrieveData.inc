@@ -887,5 +887,20 @@
                     return false;
             }
         }
+
+        public function retrieveUserActivity($userID){              
+                //the query to execute
+                    $query = sprintf("SELECT ".ACTIVITY_USER_ACTIVITY_COL." FROM ".ACTIVITY_UPDATES_TABLE." WHERE ".ACTIVITY_USER_ID_COL." = '%s' ",
+                                  mysql_real_escape_string($userID));
+    
+                    $executeQuery = mysql_query($query);
+                
+                if(!$executeQuery || mysql_num_rows($executeQuery) == 0){
+                    return "";
+                }else{
+                    $row = mysql_fetch_array($executeQuery);
+                            return $row[0];
+                }
+        }
 	}
 ?>

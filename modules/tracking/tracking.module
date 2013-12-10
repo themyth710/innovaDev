@@ -228,6 +228,10 @@
 
 				savePhoneName($userID, $email, $message, $regID);
 			}
+
+			if($action == LOAD_ACTIVITY){
+				retrieveActivityList($userID, $email);
+			}
 		}
 	}
 

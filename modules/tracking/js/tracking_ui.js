@@ -54,6 +54,7 @@ var ui = (function ($){
 
 		USER_ACTION:{
 			phoneLoad : 'phoneListLoad',
+			activityLoad : 'activityListLoad',
 			removePhone: 'removePhone',
 			retrieveImgCap: 'loadImageCapture',
 			retrieveProfile : 'retrieveProfile',
@@ -74,6 +75,16 @@ var ui = (function ($){
 			takePicture:'imageCapture',
 			passiveTrack :'passiveTrack',
 			stopPassiveTrack : 'stopPassiveTrack',
+		},
+
+		ACTIVITY_LOG:{
+			//Follow Config file
+			startTrack : '1',
+			stopTrack: '2',
+			testTrack: '3',
+			backup: '4',
+			lock: '5',
+			imageCapture: '6',	
 		},
 
 		_this: null,
@@ -139,6 +150,7 @@ var ui = (function ($){
 		//loading the phone list and added to user
 		api._this.bigScreenAction(false);
 		api._ajaxObject.ajaxAction(api.USER_ACTION.phoneLoad, null, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);	
+		api._ajaxObject.ajaxAction(api.USER_ACTION.activityLoad, null, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
 	}
 
 	/*=============================================================
@@ -170,6 +182,7 @@ var ui = (function ($){
 					$(this).addClass('nav-active');
 					
 					api._ajaxObject.ajaxAction(api.USER_ACTION.phoneLoad, null, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);				
+					api._ajaxObject.ajaxAction(api.USER_ACTION.activityLoad, null, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
 				}
 				api._this.displayObject($('#map-region'), false);
 				api._this.displayObject($('#title'), true);
@@ -282,40 +295,61 @@ var ui = (function ($){
 			$('#nav-tr-mobile').addClass('nav-active');
 		})
 
-		$(document).on('click','#save-phone-name', function(e){
+		$(document).on('click','#pencil-icon', function(e){		
 			e.preventDefault();
-
-			//take the phone id from the selection
-			var phoneID   = $(this).closest('.phone-list').children('#remove-phone').attr('data-id');
-			var phoneName = $(this).prev().prev().children('h2').text();
-
-			var message   = phoneID + '_' + phoneName; 
-
-			api._ajaxObject.ajaxAction(api.USER_ACTION.savePhoneName, message, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
-		})
-
-		$(document).on('click','#lost-phone', function(e){
+			var textPhoneName = $(this).parent().get(0);
+			var inputPhoneName = $(this).parents('.phone-title').find('.input-phone-name').get(0);
+			$(textPhoneName).hide();
+			$(inputPhoneName).val($(textPhoneName).text());
+			$(inputPhoneName).show();
+			$(inputPhoneName).select();
+			$(inputPhoneName).keyup(function(event){
+				//enter key
+				if(event.which == 13){
+					$(this).unbind();
+					$(textPhoneName).show();
+					$(this).hide();
+					//Fast update
+					$(textPhoneName).text($(this).val());
+					$(textPhoneName).append("<span class = 'pencil-icon' id='pencil-icon'/>");
+					//take the phone id from the selection
+					var phoneID   = $(this).closest('.phone-list').children('#remove-phone').attr('data-id');
+					var phoneName = $(this).val();
+		
+					var message   = phoneID + '_' + phoneName; 
+		
+					api._ajaxObject.ajaxAction(api.USER_ACTION.savePhoneName, message, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
+		
+				}else if(event.which == 27){
+					//esc key
+					$(this).unbind();
+					$(textPhoneName).show();
+					$(this).hide();
+				}
+			});			
+		});
+		
+		$(document).on('click','#slider',function(e){
 			e.preventDefault();
-
+			
 			//take the phone id from the selection
 			var phoneID   = $(this).closest('.phone-list').children('#remove-phone').attr('data-id');
 			var typePhone = $(this).closest('.phone-list').children('#remove-phone').attr('type-phone');
-
+			
 			var message   = phoneID + '_' + typePhone; 
-
-			api._ajaxObject.phoneSendMsgAction(api.PHONE_ACTION.passiveTrack, message, null, null);
-		})
-
-		$(document).on('click','#receive-phone', function(e){
-			e.preventDefault();
-
-			//take the phone id from the selection
-			var phoneID   = $(this).closest('.phone-list').children('#remove-phone').attr('data-id');
-			var typePhone = $(this).closest('.phone-list').children('#remove-phone').attr('type-phone');
-
-			var message   = phoneID + '_' + typePhone; 
-			api._ajaxObject.phoneSendMsgAction(api.PHONE_ACTION.stopPassiveTrack, message, null, null);
-		})
+			
+			if($(this).hasClass('slider-red')){
+				//switch to secured
+				$(this).closest('.phone-slider').children('.slider-text').text('Normal');				
+				$(this).removeClass('slider-red').addClass('slider-green');
+				api._ajaxObject.phoneSendMsgAction(api.PHONE_ACTION.stopPassiveTrack, message, null, null);
+			}else{
+				//switch to unsecured
+				$(this).closest('.phone-slider').children('.slider-text').text('Reported');
+				$(this).removeClass('slider-green').addClass('slider-red');
+				api._ajaxObject.phoneSendMsgAction(api.PHONE_ACTION.passiveTrack, message, null, null);
+			}
+		});
 
 		$(document).on('click','#backup-contact', function(e){
 			e.preventDefault();
@@ -435,6 +469,11 @@ var ui = (function ($){
 				var content = api._this.phoneListDisplay(data);
 				api._this.displayHtml($('#content'), content);
 				break;
+			case api.USER_ACTION.activityLoad:
+				api._this.removeHtml($('#activity-updates').find('.activity-table'));
+				var content = api._this.activityListDisplay(data);
+				api._this.displayHtml($('#activity-updates').find('.activity-table'), content);
+				break;
 			case api.USER_ACTION.removePhone:
 				api._ajaxObject.ajaxAction(api.USER_ACTION.phoneLoad, null, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
 				break;
@@ -544,6 +583,105 @@ var ui = (function ($){
 		@prepend the content of the html to home page
 		@param value : json data received from server
 	================================================*/
+	ui.prototype.activityListDisplay = function(value){
+	
+		var content = "";
+
+		//if not empty then proceed
+		if(value.data && value.data!=""){
+			var activityArray = activityDataToArray(value.data);
+			var displayArray = activityArrayToDisplayArray(activityArray);
+			for(var i=0;i<displayArray.length;i++){
+				content += "<div class='activity-row'>";
+				content += "<p class='tick'/>";
+				content += "<div'>"
+				content += "<span style='float:right'>"+displayArray[i][2]+"</span>";
+				content += "<p>";
+				content += "<font size = 5>"+displayArray[i][0]+"</font> ";
+	    			content += "<br/>";
+	    			content += displayArray[i][1];
+	    			content += "</p>";
+	    			content += "</div>";
+	    			content += "</div>";
+			}
+		}
+		
+		return content;
+	}
+
+	//private function Converts storage data to an array
+	var activityDataToArray = function(data){
+		return data.split("[]");
+	}
+	//private function
+	var activityArrayToDisplayArray = function(activityArray){
+		//index 0 store title
+    		//index 1 store details
+    		//index 2 store date
+    		var displayArray = [];
+    		for(var i = 0; i < activityArray.length; i++){
+    			var indexOfSpace = activityArray[i].indexOf(" ");
+    			
+    			if(indexOfSpace<0){
+    				continue;
+	    		}else{
+	    			var logNum = activityArray[i].substring(0,indexOfSpace);
+	    			var logDate = activityArray[i].substring(indexOfSpace+1);
+	    			
+	    			var title = getTitleFromLogNum(logNum);
+	    			var details = getDetailsFromLogNum(logNum);
+	    			
+	    			displayArray.push([title,details,logDate]);
+    			}
+    		}
+    		return displayArray;
+	}
+	//private function
+	var getTitleFromLogNum = function(logNum){
+		//Don't need break because all perform return
+    		switch (logNum) {
+    			case api.ACTIVITY_LOG.startTrack:
+    				return "Start Track";
+    			case api.ACTIVITY_LOG.stopTrack:
+    				return "Stop Track";
+    			case api.ACTIVITY_LOG.testTrack:
+    				return "Test Track";
+    			case api.ACTIVITY_LOG.backup:
+    				return "Backup";
+    			case api.ACTIVITY_LOG.lock:
+    				return "Lock";
+    			case api.ACTIVITY_LOG.imageCapture:
+    				return "Image Capture";
+    			default:
+    				return "Title";
+    		}
+	}
+	//private function
+	var getDetailsFromLogNum = function(logNum){
+		//Don't need break because all perform return
+    		switch (logNum) {
+    			case api.ACTIVITY_LOG.startTrack:
+    				return "Started tracking on your phone";
+    			case api.ACTIVITY_LOG.stopTrack:
+    				return "Stop tracking your phone";
+    			case api.ACTIVITY_LOG.testTrack:
+    				return "Initiated Test Track";
+    			case api.ACTIVITY_LOG.backup:
+    				return "Backup phone";
+    			case api.ACTIVITY_LOG.lock:
+    				return "Lock phone";
+    			case api.ACTIVITY_LOG.imageCapture:
+    				return "Image Capture";
+    			default:
+    				return "Details";
+    		}
+	}
+
+	/*================================================
+
+		@prepend the content of the html to home page
+		@param value : json data received from server
+	================================================*/
 	ui.prototype.phoneListDisplay = function(value){
 		
 		var content;
@@ -561,23 +699,47 @@ var ui = (function ($){
 				if(value.data[i]){
 
 					content += "<li>";
-					content += "<div class = 'phone-list transition'>";
-					content += "<span class = 'remove-icon transition' id = 'remove-phone' data-id = '" + i + "' type-phone = '" + value.data[i][0] + "'></span>"
-		        	content += "<div>";
-		        	content += "<div class = 'phone-title center'>";
-		        	content += "<h2 class = 'text-bold large-text' contenteditable = 'true'>" + value.data[i][1] + "</h2>";
-		        	content += "</div>";
-		        	content += "<div class = 'button center' id = 'select-phone'>Select</div>";
-		        	content += "<div class = 'button center' id = 'save-phone-name'>Save</div>"; 
-		        	content += "<div class = 'button center' id = 'lost-phone'>Lost</div>"; 
-		        	content += "<div class = 'button center' id = 'receive-phone'>StopPassive</div>";
-		        	content += "<div class = 'button center' id = 'backup-contact'>Backup</div>";
-		        	content += "<div class = 'button center' id = 'see-backup'>Backup file</div>";
-		        	content += "</div></div></li>";
-
-		        	//add to phone list global variables
-		        	api._phoneList.push(value.data[i][0]);
-	        	}
+					content += "<div class = 'phone-list'>";
+					//data-id & type-phone is used by other functions
+					content += "<span class = 'remove-icon' id = 'remove-phone' data-id = '" + i + "' type-phone = '" + value.data[i][0] + "'></span>"
+			        	content += "<div>";
+			        	
+			        	//Phone name
+			        	content += "<div class = 'phone-title center'>";
+			       		content += "<p class = 'text-bold large-text' class='text-phone-name'>"
+			       		content += value.data[i][1];
+			       		content += "<span class = 'pencil-icon' id='pencil-icon'/>";			       		
+			       		content += "</p>";
+			       		content += "<input type='text' class= 'input-phone-name'>";	
+			        	content += "</div>";
+			        	
+			        	//To show secure / unscure
+			        	content += "<div class = 'phone-slider center'>";
+			        	//TODO remember to set this slider according to preference
+			        	content += "<span class = 'slider slider-green' id='slider'></span>";
+			        	content += "<h4 class='slider-text'>Normal</h4>";
+			        	content += "</div>";
+			        	//To select the phone to go to track
+			        	content += "<div class = 'button center' id = 'select-phone'>Track</div>";
+			        	//Lock, backup, delete
+			        	content += "<div class = 'small-icon-3 center'>"
+			        	content += "<span class = 'small-icon-lock'/>";
+			        	content += "<span class = 'small-icon-seperator'/>";
+			        	content += "<span class = 'small-icon-backup' id='backup-contact'/>";
+			        	content += "<span class = 'small-icon-seperator'/>";
+			        	content += "<span class = 'small-icon-trash' id='trash-phone'/>";
+			        	content += "</div>";
+			        	
+			        	/*
+			        	content += "<div class = 'button center' id = 'backup-contact'>Backup</div>";
+			        	content += "<div class = 'button center' id = 'see-backup'>Backup file</div>";
+			        	*/
+			        	
+			        	content += "</div></div></li>";
+	
+			        	//add to phone list global variables
+			        	api._phoneList.push(value.data[i]);
+		        	}
 			}
 		}
 		content += '<ul>';
@@ -1471,7 +1633,7 @@ var ui = (function ($){
 	ui.prototype.trackingPageButtonClickAction = function(){
 		//track button click
 
-		$('#track-button.start').on('click', function(e){
+		$(document).on('click', '#track-button.start', function(e){
 			e.preventDefault();
 			e.stopPropagation();
 			if(api._curPhoneType == null|| api._curPhoneID == null){
@@ -1506,10 +1668,9 @@ var ui = (function ($){
 		});
 
 		//stop track button click
-		$('#track-button.stop').on('click', function(e){
+		$(document).on('click','#track-button.stop', function(e){
 			e.preventDefault();
 			e.stopPropagation();
-
 			if($(this).hasClass('active')){
 				return false;
 			}

@@ -304,5 +304,33 @@
           else
               return true;
         }
+
+        /*=============================================
+  
+            @insert the data of the activity into database
+            @param as follow
+  
+          ==============================================*/
+          public function storeUserActivity($userID, $activity){
+            //the query to execute
+            $query = sprintf("INSERT INTO ".ACTIVITY_UPDATES_TABLE."(".ACTIVITY_USER_ID_COL.","
+                                           .ACTIVITY_USER_ACTIVITY_COL.") 
+                        VALUES('%s','%s')",
+                        mysql_real_escape_string($userID),
+                        mysql_real_escape_string($activity));
+            
+            //Activity stored in format
+            //<log num><space><date and time display><use this [] to seperate other log>
+            /*It is better to store everything in one column because it allows reordering of information
+            after the max num of logs has been reached, but it requires more processing*/           
+            
+            //execute the query
+            $executeQuery = mysql_query($query);
+            
+            if(!$executeQuery)
+              return false;
+            else
+              return true;
+          }
     }
 ?>

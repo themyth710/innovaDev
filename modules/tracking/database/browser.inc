@@ -4,7 +4,8 @@
 		@this file is used to implement functions in browser
 	======================================================*/
 	require_once 'db_functions.inc';
-
+    require_once 'activityLog.inc';
+    
 	class browser extends DB_Functions{
 
 		/*==================================
@@ -273,11 +274,13 @@
             //update the notification table
             $this -> dbAction($action, $userID, null, $regID);
             
+            $logger = new activityLog();
             //if it is android then send the message to the phone
             //if it is ios then just update the notification table only            
             if($typePhone == ANDROID){
 
-                $this -> brSendPhoneRequest($regID, $message);   
+                $this -> brSendPhoneRequest($regID, $message);
+                $logger -> addActionToLog($userID,$action);   
 
             }
             else
@@ -286,8 +289,9 @@
                     $tempToken = $this -> retrieve -> retrieve_iOS_NotiTokenUsingRegID($regID);
 			
                     if($tempToken!=NULL && $this -> send -> sendiOSNotification($tempToken, $message, $action)){
-	                $this -> display -> displayJSON('SUCCESS');
-	                return true;
+                        $logger -> addActionToLog($userID,$action);
+	                    $this -> display -> displayJSON('SUCCESS');
+	                    return true;
 	            }
 	            else{
 	                $this -> display -> displayJSON('FAIL', 'PHONE_REQUEST_SEND_FAIL');
@@ -496,6 +500,13 @@
                 
                 return false;
             }
+        }
+
+        public function retrieveActivityList($hashUserID){
+        if($userID = $this -> retrieve -> retrieveUserID(null, $hashUserID))
+            return $this -> retrieve -> retrieveUserActivity($userID);
+        else
+            return false;
         }
 
         /*==========================================

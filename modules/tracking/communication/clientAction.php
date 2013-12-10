@@ -38,6 +38,18 @@
 		return false;
 	}
 
+	function retrieveActivityList($hashUserID, $email){
+		$br = new browser();
+		
+		if($br -> brCheckSession($hashUserID, $email)){
+			$dataRetrieve = $br -> retrieveActivityList($hashUserID);
+			jsonDisplay(true, $dataRetrieve);
+			return true;
+		}
+		jsonDisplay(false);		
+		return false;
+	}
+
 	function phoneRemove($hashUserID, $email, $message, $regID){
 		//initiate instance of class browser
 		$br = new browser();

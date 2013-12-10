@@ -29,6 +29,7 @@
 	define('PROTAG_INFORMATION_TABLE'		,'tr_protag_information');
 	define('PROTAG_LOST_REPORT_TABLE'       ,'tr_user_lost_report');
 	define('NONUSER_FOUND_REPORT_TABLE'	,'tr_nonuser_found_report');
+	define('ACTIVITY_UPDATES_TABLE'			,'tr_user_activity');
 	/*
 			Success code
 	*/
@@ -158,6 +159,9 @@
 	define('PROTAG_INFO_LAST_DATE_COL'		,'lastDateKnown');
 	define('PROTAG_INFO_IS_LOST_COL'		,'isLost');
 	define('PROTAG_INFO_SERIAL_COL'			,'serialNumber');
+
+	define('ACTIVITY_USER_ID_COL'			,'userID');
+	define('ACTIVITY_USER_ACTIVITY_COL'		,'activity');
 	/*
 		browser command
 	*/
@@ -175,6 +179,7 @@
 	define('HOST'							,'http://themyth92.com/home/');
 	define('IMAGE_CAPTURE'					,'imageCapture');
 	define('PHONE_NAME'						,'phoneName');
+	define('LOAD_ACTIVITY'					,'activityListLoad');
 
 	/*
 		browser action
@@ -224,4 +229,14 @@
 		messages
 	*/
 	define('MSG_IOS_TEST_TRACK'				,'Please enter PROTAG application and send the request again');
+	/*
+		activity log
+	*/
+	define('ACTIVITY_LOG_UNKNOWN'			, '0');
+	define('ACTIVITY_LOG_START_TRACK'		, '1');
+	define('ACTIVITY_LOG_STOP_TRACK'		, '2');
+	define('ACTIVITY_LOG_TEST_TRACK'		, '3');
+	define('ACTIVITY_LOG_BACKUP'			, '4');
+	define('ACTIVITY_LOG_LOCK'			, '5');
+	define('ACTIVITY_LOG_IMAGE_CAPTURE'		, '6');
 ?>
