@@ -6,7 +6,7 @@
 		USER_ACTION:{
 			phoneLoad : 'phoneListLoad',
 			activityLoad : 'activityListLoad',
-
+			phoneInfo : 'loadPhoneInfo',
 			removePhone: 'removePhone',
 			retrieveImgCap: 'loadImageCapture',
 			retrieveProfile : 'retrieveProfile',
@@ -50,6 +50,7 @@
 	===================================================*/
 	Drupal.behaviors.innerAction.prototype.ajaxAction = function(action, message, successCallBack, errorCallBack){
 		if(action == api.USER_ACTION.phoneLoad ||
+		   action == api.USER_ACTION.phoneInfo||
 		   action == api.USER_ACTION.removePhone||
 		   action == api.USER_ACTION.retrieveImgCap||
 		   action == api.USER_ACTION.retrieveProfile||

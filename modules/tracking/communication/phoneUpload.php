@@ -5,28 +5,29 @@
        // if(isset($_POST[ACTION])){
 
 		//if($_POST[ACTION] == OK_B_CONTACT){
-                       	$content = file_get_contents('php://input');
+            $content = file_get_contents('php://input');
  
 			$xml_source = str_replace(array("&amp;", "&"), array("&", "&amp;"), $content);
 			
-                        $phone 		= new phone();
+            $phone 		= new phone();
 
 			$xml 		= simplexml_load_string($xml_source);
                     
 			$action 	= $xml -> action;
 			$typePhone 	= $xml -> typePhone;
                         
-                        $regID = null;
-                        $email = null;
-                        if(isset($xml->userID)){
-		                  $userID = $xml->userID;
-		                  file_put_contents('BackupContact.txt', $content);
-	                }
-	                else{
-		                  $email = $xml -> email;
-	                }
-	                $phone = new phone();
-	                $phone -> phBackupUserContact($userID, $email);
+            $regID = null;
+            $email = null;
+            if(isset($xml->userID)){
+              	$userID = $xml->userID;
+              	file_put_contents('BackupContact.txt', $content);
+        	}
+	        else{
+		        $email = $xml -> email;
+	        }
+	        
+	        $phone = new phone();
+	        $phone -> phBackupUserContact($userID, $email);
 
                     /*  if($action == OK_B_CONTACT){
 			if($typePhone == IOS){

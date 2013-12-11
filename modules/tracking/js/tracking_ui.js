@@ -26,7 +26,7 @@ var ui = (function ($){
 			sending:'Tracking ...',
 			waitingReply:'Waiting for location',
 			locked:'Your phone has been locked',
-			backuped:'All your data has been backed up',
+			backuped:'All your data has been backed up. Do you want to take a look at your file now ?',
 			done:'Done!',
 			phoneResponseFirstTime:'Location received ...',
 			tracked:'Tracking',
@@ -54,6 +54,7 @@ var ui = (function ($){
 
 		USER_ACTION:{
 			phoneLoad : 'phoneListLoad',
+			phoneInfo : 'loadPhoneInfo',
 			activityLoad : 'activityListLoad',
 			removePhone: 'removePhone',
 			retrieveImgCap: 'loadImageCapture',
@@ -149,6 +150,7 @@ var ui = (function ($){
 		
 		//loading the phone list and added to user
 		api._this.bigScreenAction(false);
+		api._this.showPhoneInfoPopup(false);
 		api._ajaxObject.ajaxAction(api.USER_ACTION.phoneLoad, null, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);	
 		api._ajaxObject.ajaxAction(api.USER_ACTION.activityLoad, null, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
 	}
@@ -358,13 +360,27 @@ var ui = (function ($){
 			var phoneID   = $(this).closest('.phone-list').children('#remove-phone').attr('data-id');
 			var typePhone = $(this).closest('.phone-list').children('#remove-phone').attr('type-phone');
 
-			var message   = phoneID + '_' + typePhone; 
-			api._ajaxObject.phoneSendMsgAction(api.PHONE_ACTION.backupContact, message, null, null);
+			var message   = phoneID + '_' + typePhone;
+
+			api._this.bigScreenAction(false);
+			api._this.sendMessage(api.PHONE_ACTION.backupContact, api._this.dataSuccessSendMessageHandle, api._this.displayErrorCallBackAction, message);
+
+			api._this.send
+			
 		})
 
 		$(document).on('click', '#see-backup', function(){
 			window.open('http://innovatechnology.com.sg/development/sites/all/modules/tracking/UserRegion/Backup/yourfile.php', '_blank');
 		})
+
+		$(document).on({
+		    mouseenter: function () {
+					        
+		    },
+		    mouseleave: function () {
+		    
+		    }
+		}, ".phone-list"); 
 	};
 
 	/*=================================================
@@ -485,6 +501,9 @@ var ui = (function ($){
 				break;
 			case api.USER_ACTION.retrieveLostReport:
 				api._this.retrieveLostReportInfo(data);
+				break;
+			case api.USER_ACTION.backupContact:
+				api._this.dataSuccessCheckingHandle(action, data);
 				break;
 			case api.USER_ACTION.saveProfile:
 				api._this.profileSave(data);
@@ -1159,10 +1178,6 @@ var ui = (function ($){
 		api._ajaxObject.ajaxAction(api.USER_ACTION.retrieveProtag, null, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
 	}
 
-	ui.prototype.retrieveLostReportInfo= function(value){
-
-	}
-
 	ui.prototype.retrieveProtagAction = function(value){
 		api._this.loadListMapLocation(value);
 	}
@@ -1416,8 +1431,16 @@ var ui = (function ($){
 						break;
 
 					case api.PHONE_ACTION.backupContact:
-						api._this.statusBarAction(api.done, false);
-						alertify.alert(api.MESSAGE.backuped);
+						//api._this.statusBarAction(api.done, false);
+						alertify.confirm(api.MESSAGE.backuped, function (e) {
+						    if (e) {			    	
+						    	api._this.bigScreenAction(true);
+						        window.open('http://innovatechnology.com.sg/development/sites/all/modules/tracking/UserRegion/Backup/yourfile.xml', '_blank');
+						        return true;
+						    }
+						    else
+						    	return false; 
+						});
 						break;
 
 					case api.PHONE_ACTION.track:
@@ -1595,7 +1618,7 @@ var ui = (function ($){
 		@function to send message to the phone
 
 	===========================================*/
-	ui.prototype.sendMessage = function(action, successCallBack, errorCallBack){
+	ui.prototype.sendMessage = function(action, successCallBack, errorCallBack, backupMsg){
 		if(api._curPhoneID == null || api._curPhoneType == null){
 			alertify.alert(api.MESSAGE.noPhoneSelection);
 			return false;
@@ -1612,10 +1635,11 @@ var ui = (function ($){
 				message += '_' + api._customiOSMessage;
 			}
 		}else if(action == api.PHONE_ACTION.backupContact){
-			message = api._curPhoneID + '_' + api._curPhoneType;
-                        if(api.curPhoneType == 'iOS'){
+			//message = api._curPhoneID + '_' + api._curPhoneType;
+			message  = backupMsg;
+                        /*if(api.curPhoneType == 'iOS'){
                                 message += '_' +api._customeiOSMessage;
-                        }
+                        }*/
 		}else{
 			message = api._curPhoneID + '_' + api._curPhoneType;
 		}
@@ -1781,6 +1805,9 @@ var ui = (function ($){
 				break;
 			case api.PHONE_ACTION.takePicture:
 				api._this.clientDataChecking(api.PHONE_ACTION.takePicture, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
+				break;
+			case api.PHONE_ACTION.backupContact:
+				api._this.clientDataChecking(api.PHONE_ACTION.backupContact, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
 				break;
 			default:break;
 		}

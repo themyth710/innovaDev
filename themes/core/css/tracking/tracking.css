@@ -1368,3 +1368,8 @@
     text-decoration: underline;
     font-style: italic;
 }
+
+.phone-info-popup{
+    position: absolute;
+    width:320px;
+}

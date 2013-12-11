@@ -45,7 +45,7 @@
 
                 //retrieve list of regID from IOS user table
                 $iOSRegID  = $this -> retrieve -> retrieveMacPhoneOrRegIDFromPhoneUserTableUsingUserID($userID, false);
-                file_put_contents('test2.txt', 'go there');
+       
                 //retrieve list of reg ID from list of macphone according to phone information table
                 $andrRegID = $this -> retrieve -> retrieveRegIDFromMacPhoneList($andrMacPhoneList);
 
