@@ -175,6 +175,23 @@
 			jsonDisplay(false);
 	}
 
+	function loadPhoneInfo($hashUserID, $email, $message, $regIDList){
+		$br = new browser();
+
+		if($br -> brCheckSession($hashUserID, $email)){
+			$decode    = explode('_', $message);
+
+			$regID     = $regIDList[$decode[0]];
+			
+			$phoneType = $decode[1];
+
+			//jsonDisplay(true, $phoneName);
+			$br -> brLoadPhoneInfo($regID, $phoneType);
+		}
+		else
+			jsonDisplay(false);
+	}
+
 	function jsonDisplay($success, $data = null){
 		$arr = array();
 		

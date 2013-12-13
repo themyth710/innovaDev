@@ -502,6 +502,37 @@
             }
         }
 
+        public function brLoadPhoneInfo($regID, $phoneType){
+
+            if($phoneType == IOS){
+
+            }
+            else
+                if($phoneType == ANDROID){
+
+                    $macAddr = $this -> retrieve -> retrieveMacPhoneUsingRegID($regID);
+
+                    $data    = $this -> retrieve -> retrievePhoneInformation(null, $macAddr);
+
+                    if($data[0] == null){
+                        $data[0] = $phoneType;    
+                    }
+
+                    if($data[1] == ANDROID_ID){
+                        $data[1] = ANDROID;
+                    }
+                    else{
+                        $data[1] = IOS;
+                    }
+
+                    file_put_contents('yourfile.txt', $data[0]);
+                    
+                    $data = array('phoneName' => $data[0], 'phoneType' => $data[1]);
+
+                    $this -> display -> displayJSON('SUCCESS', null ,  $data);
+                }
+        }
+
         public function retrieveActivityList($hashUserID){
         if($userID = $this -> retrieve -> retrieveUserID(null, $hashUserID))
             return $this -> retrieve -> retrieveUserActivity($userID);

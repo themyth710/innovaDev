@@ -1,0 +1,542 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"xml",
+				"xmlReader"
+			],
+			[
+				"clie",
+				"clientDataChecking"
+			],
+			[
+				"da",
+				"api._this.dataSuccessCheckingHandle"
+			],
+			[
+				"PH",
+				"api.PHONE_ACTION.backupContact"
+			],
+			[
+				"succ",
+				"successCallBack"
+			],
+			[
+				"$macPhone",
+				"$macPhoneList"
+			],
+			[
+				"$and",
+				"$andrMacPhoneList"
+			],
+			[
+				"$has",
+				"$hashUserID"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"p",
+				"population"
+			],
+			[
+				"next",
+				"nextFeatureArr"
+			],
+			[
+				"globa",
+				"globalChange"
+			],
+			[
+				"PASS",
+				"PASSIVE_TRACK"
+			],
+			[
+				"check",
+				"checkOutOfFrame"
+			],
+			[
+				"che",
+				"checkOutOfFrame"
+			],
+			[
+				"OUT",
+				"OUT_OF_FRAME_STATUS"
+			],
+			[
+				"feat",
+				"featureArr"
+			],
+			[
+				"new",
+				"newSearch"
+			],
+			[
+				"back",
+				"backtrackKTL"
+			],
+			[
+				"count",
+				"countNumberPointsOutOfFrame"
+			],
+			[
+				"numOut",
+				"numOutOfFrame"
+			],
+			[
+				"cou",
+				"checkOutOfFrame"
+			],
+			[
+				"windwo",
+				"windowSizeID"
+			],
+			[
+				"rawne",
+				"rawNextFeatureArr"
+			],
+			[
+				"use",
+				"useHomo"
+			],
+			[
+				"ho",
+				"useHomo"
+			],
+			[
+				"windw",
+				"windowSizeID"
+			],
+			[
+				"max",
+				"maxNumberPointOutline"
+			],
+			[
+				"wind",
+				"windowSizeID"
+			],
+			[
+				"num",
+				"numPointOut"
+			],
+			[
+				"numPoint",
+				"numPointOutline"
+			],
+			[
+				"remove",
+				"removePointsOutOfTrack"
+			],
+			[
+				"fram",
+				"frameid"
+			],
+			[
+				"diff",
+				"diff_status"
+			],
+			[
+				"ch",
+				"checkChangeGlobalIntensity"
+			],
+			[
+				"good",
+				"goodOld"
+			],
+			[
+				"trac",
+				"trackNew"
+			],
+			[
+				"result",
+				"result2"
+			],
+			[
+				"resut",
+				"result1"
+			],
+			[
+				"video",
+				"video"
+			],
+			[
+				"show",
+				"showTrackResult"
+			],
+			[
+				"sta",
+				"standardizeTrackResult"
+			],
+			[
+				"nex",
+				"nextGrayScale"
+			],
+			[
+				"gra",
+				"grayImg"
+			],
+			[
+				"in",
+				"intensity"
+			],
+			[
+				"olg",
+				"oldGrayImg"
+			],
+			[
+				"spli",
+				"splitLine"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 51.0,
+		"selected_items":
+		[
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package control: inst",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Package Control: Install Package"
+			],
+			[
+				"ang",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"instal pc",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 146.0,
+		"history":
+		[
+			"import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/nhat/project/modules/tracking/communication/backup.php",
+		"/home/nhat/project/themes/core/css/tracking/tracking.css",
+		"/home/nhat/project/themes/core/page/page--tracking.tpl.php",
+		"/home/nhat/project/modules/tracking/js/tracking_ajax.js",
+		"/home/nhat/project/modules/tracking/js/tracking_ui.js",
+		"/var/www/dump/test.php",
+		"/home/nhat/project/modules/tracking/communication/error_log",
+		"/var/www/dump/test.xml",
+		"/home/nhat/Downloads/yourFile.xml",
+		"/home/nhat/project/modules/tracking/communication/test2.txt",
+		"/home/nhat/project/modules/tracking/database/browser.inc",
+		"/home/nhat/project/modules/tracking/communication/test.txt",
+		"/home/nhat/project/modules/tracking/communication/phoneUpload.php",
+		"/home/nhat/project/modules/tracking/tracking.module",
+		"/home/nhat/project/modules/tracking/tracking.info",
+		"/home/nhat/.config/sublime-text-3/Packages/User/SFTP.sublime-settings",
+		"/home/nhat/.config/sublime-text-3/Packages/SFTP/SFTP.sublime-settings",
+		"/home/nhat/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/nhat/project/mongodb-linux-x86_64-2.5.4.tgz",
+		"/home/nhat/project/modules/tracking/database/activityLog.inc",
+		"/home/nhat/project/modules/tracking/database/support/updateData.inc",
+		"/home/nhat/project/modules/tracking/database/support/storeData.inc",
+		"/home/nhat/Downloads/tracking/database/support/updateData.inc",
+		"/home/nhat/Downloads/tracking/js/tracking_ui.js",
+		"/home/nhat/project/modules/tracking/database/config.inc",
+		"/home/nhat/project/modules/tracking/js/tracking.js",
+		"/home/nhat/Downloads/tracking/database/config.inc",
+		"/home/nhat/project/modules/tracking/communication/clientAction.php",
+		"/home/nhat/Downloads/tracking/database/support/storeData.inc",
+		"/home/nhat/Downloads/tracking/database/support/retrieveData.inc",
+		"/home/nhat/Downloads/tracking/communication/clientAction.php",
+		"/home/nhat/project/modules/tracking/database/support/retrieveData.inc",
+		"/home/nhat/Downloads/tracking/database/activityLog.inc",
+		"/home/nhat/Downloads/tracking/database/browser.inc",
+		"/home/nhat/Downloads/tracking/tracking.module",
+		"/home/nhat/Downloads/tracking/js/tracking_ajax.js",
+		"/home/nhat/project/modules/tracking/communication/clientDataChecking.php",
+		"/home/nhat/project/modules/tracking/communication/sendMessage.php",
+		"/home/nhat/project/modules/tracking/module/handler.inc",
+		"/home/nhat/project/modules/tracking/database/phone.inc",
+		"/home/nhat/project/themes/core/css/login/login.css",
+		"/home/nhat/.config/sublime-text-3/Packages/SFTP/Default (Linux).sublime-keymap",
+		"/home/nhat/project/modules/tracking/communication/phoneDataReceive.php",
+		"/home/nhat/project/modules/tracking/database/support/displayData.inc",
+		"/home/nhat/project/sftp-config.json",
+		"/home/nhat/project/.apport-ignore.xml",
+		"/var/www/innova_dev/sites/all/themes/core/css/login/login.css",
+		"/var/www/angularjs/angular.html",
+		"/var/www/angularjs/style.css",
+		"/var/www/angularjs/script.js",
+		"/var/www/angularjs/angular.js",
+		"/var/www/test.php",
+		"/home/nhat/project/test/program.py",
+		"/home/nhat/test/index.html",
+		"/home/nhat/test/sftp-config.json",
+		"/home/nhat/test/index2.html",
+		"/home/nhat/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/tmp/fz3temp-1/index.html",
+		"/home/nhat/project/CS4243/videoRender/project.py",
+		"/home/nhat/project/project.py",
+		"/tmp/fz3temp-2/phoneDataReceive.php",
+		"/tmp/fz3temp-2/error_log",
+		"/tmp/fz3temp-1/phoneDataReceive.php",
+		"/tmp/fz3temp-1/retrieveData.inc",
+		"/tmp/fz3temp-1/phone.inc",
+		"/tmp/fz3temp-1/error_log",
+		"/tmp/fz3temp-2/htmlmail--Tracking--passive_track_mail.tpl.php",
+		"/tmp/fz3temp-1/tracking.module",
+		"/tmp/fz3temp-1/config.inc",
+		"/media/nhat/987C70257C700074/data/project.py",
+		"/home/nhat/project/test2.py",
+		"/home/nhat/project/program.py",
+		"/home/nhat/project/project_new.py",
+		"/home/nhat/project/tracking.py",
+		"/home/nhat/project/test.py"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"yourfile.php",
+			"backup",
+			"sendMessage",
+			"lock-button",
+			"displaySuccessCallBackAction",
+			"api._this.sendMessage(api.PHONE_ACTION.lock, api._this.dataSuccessSendMessageHandle, api._this.displayErrorCallBackAction);",
+			"dataSuccessSendMessageHandle",
+			"lock-button",
+			"backup",
+			"dataSuccessSendmessage",
+			"lock-button",
+			"lock",
+			"backup",
+			"dataSuccess",
+			"backup",
+			"file_put",
+			"dataSuccessChecking",
+			"dataSuccess",
+			"backup",
+			"bckup",
+			"alertify.confirm",
+			"dataSuccess",
+			"backup",
+			"lock",
+			"api.Phone_action.lock",
+			"backup",
+			"alertify",
+			"e",
+			"dataSuccessChecking",
+			"displayErrorCallBackAction",
+			"showBackupDe",
+			"backup",
+			"brSendPhoneRe",
+			"backup",
+			"addDateToLog",
+			"logger",
+			"updateUserAct",
+			"updateUser",
+			"stopTrack",
+			"track-button",
+			"activity",
+			"logger",
+			"activity",
+			"phoneListDisplay",
+			"activityListDisplay",
+			"displaySuccessCallBackAction",
+			"displaySucc",
+			"slider",
+			"phoneListDisplay",
+			"displaySuccessCallBackAction",
+			"sendMessage",
+			"track-button",
+			"PHONE_ACTION.track",
+			"track ",
+			"track",
+			"startTrack",
+			"innerAction",
+			"brSendPhone",
+			"brSendPhoneRequest",
+			"dataSuccessChecking",
+			"displaySuccessCallBackAction",
+			"displaySuccess",
+			"retrieveRegIDFrom",
+			"retrievePhone",
+			".instruction",
+			"send",
+			"hash",
+			"length",
+			"lenght",
+			"frameId",
+			"mail",
+			"sendMail",
+			"send",
+			"fixtrackresultnohomo",
+			"la",
+			"linalg",
+			"drawOpticalFlow",
+			"newtracking",
+			"backtrac",
+			"standard",
+			"ivid",
+			"count_num_out_of_frame",
+			"is_out_of_frame",
+			"checkOutOf",
+			"filename",
+			"rawNextFeatArr",
+			"maxOut",
+			"stopInd",
+			"chosen",
+			"origin",
+			"returnStatus",
+			"outline_status",
+			"outline",
+			"numGood",
+			"stand",
+			"newtracking",
+			"stan",
+			"showTrac",
+			"flatten",
+			"flatter"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"project": ".directory.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": false,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 276.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

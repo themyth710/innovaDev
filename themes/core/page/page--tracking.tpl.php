@@ -33,9 +33,10 @@
 				
 				<div class = 'grid-4' id = 'content-list'>
 					<div id = 'content'>
-						<!--contains the phone list-->
+
 					</div>
-				
+					<!--contains the phone list-->
+					
 					<div id = 'content-2'>
 						<!--contains image capture & backup-->
 					</div>
@@ -135,14 +136,6 @@
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
-	<div class = 'phone-info-popup' id = 'phone-info-popup'>
-		<span class = 'smallest-reloader'></span>
-		<div id = 'phone-info'>
-			<ul>
-				<li>Phone name : <span id = 'phone-name-popup'>hell</span></li>
-				<li>Phone type : <span id = 'phone-type-popup'>hell</span></li>	
-			</ul>
-		</div>
-	</div>
+	
 	<div id = 'push'></div>
 </div>

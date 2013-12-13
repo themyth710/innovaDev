@@ -180,6 +180,7 @@
 	define('IMAGE_CAPTURE'					,'imageCapture');
 	define('PHONE_NAME'						,'phoneName');
 	define('LOAD_ACTIVITY'					,'activityListLoad');
+	define('LOAD_PHONE_INFO'				,'loadPhoneInfo');
 
 	/*
 		browser action

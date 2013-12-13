@@ -218,6 +218,47 @@
             }
         }
 
+        public function retrievePhoneInformation($regID = null, $macPhone = null){
+            
+            $phoneName      = PHONE_INFO_NAME_COL;
+            $phoneType      = PHONE_INFO_PHONE_TYPE_COL;
+            $conditionCol   = PHONE_INFO_MAC_COL;
+            $conditionVal   = $macPhone; 
+            
+            if($regID){
+                $conditionCol = PHONE_INFO_REGID_COL;
+                $conditionVal = $regID; 
+            }
+
+            $query = sprintf("SELECT $phoneName,
+                                     $phoneType FROM "
+                                     .PHONE_INFORMATION_TABLE." WHERE 
+                                     $conditionCol = '%s'",
+                              mysql_real_escape_string($conditionVal));
+
+            //execute the query
+            $executeQuery = mysql_query($query);
+
+            if(!$executeQuery){
+                //query failed to execute
+                die();
+            }
+            else{
+                //perform check the maximum num rows that can retrieve to be 1 only
+                if(mysql_num_rows($executeQuery) === MAXIMUM_USER){
+                    
+                    $row = mysql_fetch_array($executeQuery);
+                    
+                    return array($row[0], $row[1]);
+                }
+                else{
+
+                    //if there is no records about this email or the number of email exist in databse > 1
+                    return false;
+                }
+            }
+        }
+
         /*===============================================================================
 
             @return the notification column

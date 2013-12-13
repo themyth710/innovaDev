@@ -375,13 +375,56 @@ var ui = (function ($){
 
 		$(document).on({
 		    mouseenter: function () {
-					        
+				
+				//take the phone id from the selection
+				var phoneID   = $(this).children('#remove-phone').attr('data-id');
+				var typePhone = $(this).children('#remove-phone').attr('type-phone');
+
+				var message   = phoneID + '_' + typePhone;
+
+				var pos = $(this).position();
+
+				var html = api._this.markupPhoneInfoPopup();
+				$(this).closest('li').prepend(html);
+				api._this.showPhoneInfoPopup(true, pos.left + 20, pos.top-50);
+
+				api._ajaxObject.ajaxAction(api.USER_ACTION.phoneInfo, message, api._this.addValueToPhoneInfo, api._this.displayErrorCallBackAction);	        
 		    },
 		    mouseleave: function () {
-		    
+		    	api._this.showPhoneInfoPopup(false);
 		    }
 		}, ".phone-list"); 
 	};
+
+	ui.prototype.showPhoneInfoPopup = function(show, posX, posY){
+		if(show){
+			$('#phone-info-popup').css({'left':posX, 'top':posY}).show();
+		}
+		else{
+			$('#phone-info-popup').remove();
+		}
+	}
+
+	ui.prototype.markupPhoneInfoPopup = function(){
+		
+		var html = '';
+		html += "<div class = 'phone-info-popup alert alert-success' id = 'phone-info-popup'>";
+		html += "<div id = 'phone-info'>";
+		html +=	"<ul>";
+		html += 	"<li>Phone name : <span id = 'phone-name-popup'></span></li>";
+		html +=		"<li>Phone type : <span id = 'phone-type-popup'></span></li>";	
+		html +=	"</ul>";
+		html +=	"</div>";
+		html += "</div>";
+
+		return html;
+	}
+
+	ui.prototype.addValueToPhoneInfo = function(value, action){
+		console.log('go here');
+		$('#phone-name-popup').text(value.data.phoneName);
+		$('#phone-type-popup').text(value.data.phoneType);
+	}
 
 	/*=================================================
 	

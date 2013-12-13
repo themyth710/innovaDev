@@ -232,6 +232,11 @@
 			if($action == LOAD_ACTIVITY){
 				retrieveActivityList($userID, $email);
 			}
+
+			if($action == LOAD_PHONE_INFO){
+
+				loadPhoneInfo($userID, $email, $message, $regID);
+			}
 		}
 	}
 
