@@ -53,7 +53,7 @@
             @perform step by step login for phone into the system
 
         ========================================================*/
-        public function phPhoneLogin($email, $password, $regID, $macPhone, $dateCreate, $typePhone, $userID = null){
+        public function phPhoneLogin($email, $password, $regID, $macPhone, $dateCreate, $typePhone, $userID = null, $phoneName = null, $imei = null){
             
            //if the email and password is not null
             if(!is_null($email) && !is_null($password)){
@@ -94,7 +94,7 @@
 	                }
 	                else{
 	                	//creates row in PHONE_INFORMATION_TABLE
-				$this -> phStorePhoneInfo($regID, $macPhone, $dateCreate, $typePhone);
+				$this -> phStorePhoneInfo($regID, $macPhone, $dateCreate, $typePhone, $phoneName, $imei);
 				//Create phone entry and set this user as FirstUser
 				//$isFirstUser does not matter, $isStore here is true
 				$this -> phStorePhoneUser(null, $macPhone, $typePhone, true, true, null, $userID);
@@ -372,9 +372,10 @@
 
         /*=================================================================================================================================*/
         /*=================================================================================================================================*/
-        private function phStorePhoneInfo($regID, $macPhone, $dateCreate, $typePhone){
+        private function phStorePhoneInfo($regID, $macPhone, $dateCreate, $typePhone, $phoneName, $imei){
             //store phone in phone information table, 0 0 0 0 corresponding to lat, long, acc, bat (these are default value)
-            $this           -> store -> storePhoneInformation($macPhone, $regID, $typePhone, 0, 0, 0, 0, $dateCreate);      
+
+            $this           -> store -> storePhoneInformation($macPhone, $regID, $typePhone, 0, 0, 0, 0, $dateCreate, $phoneName, $imei);      
         }
 
         /*=================================================================================================================================*/

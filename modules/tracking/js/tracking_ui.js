@@ -1225,23 +1225,326 @@ var ui = (function ($){
 		api._this.loadListMapLocation(value);
 	}
 
+	ui.prototype.createDetailedModalForProtag = function (){
+		var length = api._markerList.length ;
+		for (var i=0; i<length ; i++){
+			api._this.createModalForm(i);
+		}
+	}
+
+	var switchCallFunctionFlag = true;
+	var sendReportSuccFlag = false;
+	var checkReportExistence = false;
+
+	$('#mySwitch0').on('switch-change', function (e, data) {
+		if (!switchCallFunctionFlag) {
+			switchCallFunctionFlag = true;
+			return ;
+		}
+	    var val = data.value;
+	    var switchName = '#mySwitch0';
+	    console.log("switch0 chagned");
+	    if(!val && api._lost_info_list[0]==0){
+	    	$('#myModal').modal({
+	    		show: true
+	    	});
+
+	    	$('#myModal').on('hidden.bs.modal', function () {
+	    	  if(sendReportSuccFlag || checkReportExistence){
+	    	  	sendReportSuccFlag = false;
+	    	  	checkReportExistence = false;
+	    	  	return;
+	    	  }
+			  $(switchName).bootstrapSwitch('setState', true);  
+			  console.log('please hideen calsl s 0');
+			});
+	    }
+	    else if(api._lost_info_list[0]==1){
+	    	$.ajax({
+	    		type: "POST",
+	    		dataType: "json",
+	    		url: "/development/sites/all/modules/tracking/communication/found_report.php",
+	    		data:{
+	    			"mac_ad": api._ad_mac_list[0]
+	    		},
+	    		success: function(data,textStatus,xhr){
+	    			console.log("success");
+				    $(switchName).bootstrapSwitch('setState', true);  
+				    api._lost_info_list[0] = 0; // set the lost info as secured
+				    $("#alertMessage0").html("<font color = 'green'>Belongings reported as secured<br></br></font>");
+				    $('#statusLabel0').html("<font color = 'green'>Secured</font>");
+	    		},
+	    		error: function(textStatus,xhr){
+	    			console.log("failure");
+			        $(switchName).bootstrapSwitch('setState', true);  
+	    		}
+	    	})
+
+	    }
+	    else{
+
+	    }
+	});
+
+	$('#mySwitch1').on('switch-change', function (e, data) {
+	    var val = data.value;
+	    var switchName = '#mySwitch1';
+	    if (!switchCallFunctionFlag) {
+			switchCallFunctionFlag = true;
+			return ;
+		}
+	    if(!val && api._lost_info_list[1]==0){
+	    	$('#myModal').modal({
+	    		show: true
+	    	});
+
+	    	$('#myModal').on('hidden.bs.modal', function () {
+	    	if(sendReportSuccFlag || checkReportExistence){
+	    	  	sendReportSuccFlag = false;
+	    	  	checkReportExistence = false;
+	    	  	return;
+	    	}
+			  $(switchName).bootstrapSwitch('setState', true);  
+			  console.log('please hideen calsl s 1');
+			});
+	    }
+	    else if(api._lost_info_list[1]==1){
+	    	$.ajax({
+	    		type: "POST",
+	    		dataType: "json",
+	    		url: "/development/sites/all/modules/tracking/communication/found_report.php",
+	    		data:{
+	    			"mac_ad": api._ad_mac_list[1]
+	    		},
+	    		success: function(data,textStatus,xhr){
+	    			console.log("success");
+				    $(switchName).bootstrapSwitch('setState', true);  
+				    api._lost_info_list[1] = 0; // set the lost info as secured
+					$("#alertMessage1").html("<font color = 'green'>Belongings reported as secured<br></br></font>");
+				    $('#statusLabel1').html("<font color = 'green'>Secured</font>");	    		
+				},
+	    		error: function(textStatus,xhr){
+	    			console.log("failure");
+			        $(switchName).bootstrapSwitch('setState', true);  
+	    		}
+	    	})
+
+	    }
+	});
+
+	$('#mySwitch2').on('switch-change', function (e, data) {
+	    var val = data.value;
+	    var switchName = '#mySwitch2';
+	    if (!switchCallFunctionFlag) {
+			switchCallFunctionFlag = true;
+			return ;
+		}
+	    if(!val && api._lost_info_list[2]==0){
+	    	$('#myModal').modal({
+	    		show: true
+	    	});
+
+	    	$('#myModal').on('hidden.bs.modal', function () {
+	    	  if(sendReportSuccFlag || checkReportExistence){
+	    	  	sendReportSuccFlag = false;
+	    	  	checkReportExistence = false;
+	    	  	return;
+	    	  }
+			  $(switchName).bootstrapSwitch('setState', true);  
+			  console.log('please hideen calsl s 2');
+			});
+	    }
+	    else if(api._lost_info_list[2]==1){
+	    	$.ajax({
+	    		type: "POST",
+	    		dataType: "json",
+	    		url: "/development/sites/all/modules/tracking/communication/found_report.php",
+	    		data:{
+	    			"mac_ad": api._ad_mac_list[2]
+	    		},
+	    		success: function(data,textStatus,xhr){
+	    			console.log("success");
+				    $(switchName).bootstrapSwitch('setState', true);
+				    api._lost_info_list[2] = 0; // set the lost info as secured  
+				    $("#alertMessage2").html("<font color = 'green'>Belongings reported as secured<br></br></font>");
+				    $('#statusLabel2').html("<font color = 'green'>Secured</font>");	 
+	    		},
+	    		error: function(textStatus,xhr){
+	    			console.log("failure");
+			        $(switchName).bootstrapSwitch('setState', true);  
+	    		}
+	    	})
+
+	    }
+	});
+
+	$('#mySwitch3').on('switch-change', function (e, data) {
+	    var val = data.value;
+    	var switchName = '#mySwitch3';
+    	if (!switchCallFunctionFlag) {
+			switchCallFunctionFlag = true;
+			return ;
+		}
+	    if(!val && api._lost_info_list[3]==0){
+	    	$('#myModal').modal({
+	    		show: true
+	    	});
+
+	    	$('#myModal').on('hidden.bs.modal', function () {
+	    		if(sendReportSuccFlag || checkReportExistence){
+		    	  	sendReportSuccFlag = false;
+		    	  	checkReportExistence = false;
+		    	  	return;
+		    	  }
+			  $(switchName).bootstrapSwitch('setState', true);  
+			  console.log('please hideen calsl s 3');
+			});
+	    }
+	    else if(api._lost_info_list[3]==1){
+	    	$.ajax({
+	    		type: "POST",
+	    		dataType: "json",
+	    		url: "/development/sites/all/modules/tracking/communication/found_report.php",
+	    		data:{
+	    			"mac_ad": api._ad_mac_list[3]
+	    		},
+	    		success: function(data,textStatus,xhr){
+	    			console.log("success");
+				    $(switchName).bootstrapSwitch('setState', true); 
+				    api._lost_info_list[3] = 0; // set the lost info as secured  
+				    $("#alertMessage3").html("<font color = 'green'>Belongings reported as secured<br></br></font>");
+				    $('#statusLabel3').html("<font color = 'green'>Secured</font>");	 
+	    		},
+	    		error: function(textStatus,xhr){
+	    			console.log("failure");
+			        $(switchName).bootstrapSwitch('setState', true);  
+	    		}
+	    	})
+
+	    }
+	});
+	
+	$(document).on('click', '#sendReport', function(){
+		$.ajax({
+			type: "post",
+			dataType: "json",
+			url: "/development/sites/all/modules/tracking/communication/lost_report.php",
+			data:{
+				"mac_ad": $('#mac_addr').attr('value'),
+				"location": $('#location').val(),
+				"contact_name": $('#contact_name').val(),
+				"contact_number": $('#contact_number').val(),
+				"description": $('#description').val(),
+				"message": $('#message').val(),
+				"will_notify": $('#will_notify').val()
+			},
+			success: function(data,textStatus,xhr){
+				sendReportSuccFlag = true;
+				console.log("sendReport successfully");
+				console.log(currentIndex);
+			    api._lost_info_list[currentIndex] = 1; // set the lost info as lost
+			    $("#alertMessage"+currentIndex).html("<font color = 'red'>Belongings reported as lost<br></br></font>");
+			    $('#statusLabel'+currentIndex).html("<font color = 'red'>Lost</font>");
+			    $('#myModal').modal('hide');
+			},
+			error: function(textStatus,xhr){
+				console.log("sendReport Failure");
+			}	
+		})
+		return;
+	});
+
 	ui.prototype.lostReportAction = function (){
 		// for(var i=0; i<3; i++){
-		$(document).on('click', '#link0', function(){
-			console.log("here0");
+		$(document).on('click', '#link0', function(){		
+			// api._this.createModalForm(0);
+			$('#serialNum0').html('<a href="#" id="serial_num0" data-type="text" data-pk="1" data-url="/development/sites/all/modules/tracking/communication/set_serial_number.php" data-title="Enter Serial Number"></a>'); 
+			$('#serial_num0').editable({
+		   		url: "/development/sites/all/modules/tracking/communication/set_serial_number.php",
+		   		value: api._serial_list[0],
+		   		params: function(params){
+		   			params.mac_ad = api._ad_mac_list[0];
+		   			api._serial_list[0] = params.value;
+		   			return params;
+		   		},
+		   		success: function(response, newValue){
+		   			console.log(response.status+"success");
+		   		},
+		   		error: function(response, newValue){
+
+		   			if(response.status == '400'){
+		   				alert("Duplicate Serial number. Please enter a new one");
+		   			}
+		   			else if(response.status == '401'){
+		   				alert("Invald Serial number. Please enter valid 8 digits serial number");
+		   			}
+		   		}
+
+		   });
 			api._this.listenClicker(0);
 		});
 		$(document).on('click', '#link1', function(){
-			console.log("here1");
+			$('#serialNum1').html('<a href="#" id="serial_num1" data-type="text" data-pk="1" data-url="/development/sites/all/modules/tracking/communication/set_serial_number.php" data-title="Enter Serial Number"></a>');
+			$('#serial_num1').editable({
+		   		url: "/development/sites/all/modules/tracking/communication/set_serial_number.php",
+		   		value: api._serial_list[1],
+		   		params: function(params){
+		   			params.mac_ad = api._ad_mac_list[1];
+		   			api._serial_list[1] = params.value;
+		   			return params;
+		   		},
+		   		success: function(response, newValue){
+		   			if(response.status == '400'){
+		   				alert("Duplicate Serial number. Please enter a new one");
+		   			}
+		   			else if(response.status == '401'){
+		   				alert("Invald Serial number. Please enter valid 8 digits serial number");
+		   			}
+		   		}
+		   });
 			api._this.listenClicker(1);
 		});
 		$(document).on('click', '#link2', function(){
-			console.log("here2");
+			$('#serialNum2').html('<a href="#" id="serial_num2" data-type="text" data-pk="1" data-url="/development/sites/all/modules/tracking/communication/set_serial_number.php" data-title="Enter Serial Number"></a>');
+			$('#serial_num2').editable({
+		   		url: "/development/sites/all/modules/tracking/communication/set_serial_number.php",
+		   		value: api._serial_list[2],
+		   		params: function(params){
+		   			params.mac_ad = api._ad_mac_list[2];
+		   			api._serial_list[2] = params.value;
+		   			return params;
+		   		},
+		   		success: function(response, newValue){
+		   			if(response.status == '400'){
+		   				alert("Duplicate Serial number. Please enter a new one");
+		   			}
+		   			else if(response.status == '401'){
+		   				alert("Invald Serial number. Please enter valid 8 digits serial number");
+		   			}
+		   		}
+		   });
 			api._this.listenClicker(2);
 		});
 		// }
 		$(document).on('click', '#link3', function(){
-			console.log("here3");
+			$('#serialNum3').html('<a href="#" id="serial_num3" data-type="text" data-pk="1" data-url="/development/sites/all/modules/tracking/communication/set_serial_number.php" data-title="Enter Serial Number"></a>');
+			$('#serial_num3').editable({
+		   		url: "/development/sites/all/modules/tracking/communication/set_serial_number.php",
+		   		value: api._serial_list[3],
+		   		params: function(params){
+		   			params.mac_ad = api._ad_mac_list[3];
+		   			api._serial_list[3] = params.value;
+		   			return params;
+		   		},
+		   		success: function(response, newValue){
+		   			if(response.status == '400'){
+		   				alert("Duplicate Serial number. Please enter a new one");
+		   			}
+		   			else if(response.status == '401'){
+		   				alert("Invald Serial number. Please enter valid 8 digits serial number");
+		   			}
+		   		}
+		   });
 			api._this.listenClicker(3);
 		});		
 	}
@@ -1296,8 +1599,6 @@ var ui = (function ($){
 				api._ad_mac_list[i]  = value.data[i].protag[4];
 				api._lost_info_list[i]  = value.data[i].protag[5]; //lost status
 				api._serial_list[i] = value.data[i].protag['serialNumber'];
-				console.log("data");
-				console.log(value.data[i]);
 
 				if(lat && long){
 					var point = new google.maps.LatLng(lat,long);	
@@ -1316,12 +1617,12 @@ var ui = (function ($){
 				else
 					continue;
 
-				var contentString =  '<div id="infowindowDiv"><center><div><strong><a id="link'+i+'" href="#" data-toggle="modal" data-target="#myModal2">'+ api._protag_name_list[i] + '</a></strong></div>';					
+				var contentString =  '<div id="infowindowDiv"><center><div><strong><a id="link'+i+'" href="#" data-toggle="modal" data-target="#protag'+i+'">'+ api._protag_name_list[i] + '</a></strong></div>';					
 					if(api._lost_info_list[i]==1){
-						contentString += "<div id='lostLabel'> LOST </div></dvi></div></center>";
+						contentString += "<div class='lostLabel' id='statusLabel" + i + "'> LOST </div></dvi></div></center>";
 					}
 					else{
-						contentString += "<div id='securedLabel'> Secured </div></center></div>";
+						contentString += "<div class='securedLabel' id ='statusLabel" + i + "'> Secured </div></center></div>";
 					}
 				var infowindow = new google.maps.InfoWindow({
 				    content: contentString
@@ -1331,6 +1632,7 @@ var ui = (function ($){
 
 				api._this.listenMarker(marker, infowindow, i);
 			}
+
 			if(infoWindowArray){
 		        for(j in infoWindowArray){
 		            infoWindowArray[j].open(api._map,api._markerList[j]);
@@ -1342,81 +1644,32 @@ var ui = (function ($){
 		return false;
 	}
 
-	ui.prototype.listenClicker = function(i){
-	   
-   	   $('#serial_num').editable({
-   	   		url: "/development/sites/all/modules/tracking/communication/set_serial_number.php",
-   	   		value: api._serial_list[i],
-   	   		params: function(params){
-   	   			params.mac_ad = api._ad_mac_list[i];
-   	   			console.log("params here");
-   	   			console.log(params);
-   	   			return params;
-   	   		},
-   	   		success: function(response, newValue){
-   	   			console.log("success");
-   	   			if(response.status == 'error') return response.msg;
-   	   		}
-   	   });   
+	var currentIndex;
+	ui.prototype.listenClicker = function(i){ 
+	   var switchName = '#mySwitch'+ i; 
+	   currentIndex = i;
        if(api._lost_info_list[i]==1){
-       		$('#mySwitch').bootstrapSwitch('setState', false);
-       		console.log(api._lost_info_list[i]);
-       		console.log("false");
-       		$('#reportMessage').html("Your device is reported as lost please slide back if you already find your device or it will keep tracking and drain battery.")
+       		switchCallFunctionFlag = false;
+       		$(switchName).bootstrapSwitch('setState', false);
+       		$('#reportMessage'+i).html("Your device is reported as lost please slide back if you already find your device or it will keep tracking and drain battery.")
        		$('#saveBtn').html("<button  class='btn mybtn pull-right' data-toggle='modal' data-target='#myModal'>Edit Report</button>")
        }
        else{
-       		$('#mySwitch').bootstrapSwitch('setState', true);
-       		$('#reportMessage').html("Your device is in secured status. To mark it as lost please slide the button.");
-       		console.log("true");
+       		$(switchName).bootstrapSwitch('setState', true);
+       		$('#reportMessage'+i).html("Your device is in secured status. To mark it as lost please slide the button.");
        }
 
-   	    $('#mySwitch').on('switch-change', function (e, data) {
-		    var val = data.value;
-		    if(!val && api._lost_info_list[i]==0){
-		    	console.log("wtf");
-		    	$('#myModal').modal({
-		    		show: true
-		    	});
-
-		    	$('#myModal').on('hidden.bs.modal', function () {
-				  $('#mySwitch').bootstrapSwitch('setState', true);  
-				  console.log('please hideen calsl s');
-				});
-		    }
-		    else if(api._lost_info_list[i]==1){
-		    	$.ajax({
-		    		type: "POST",
-		    		dataType: "json",
-		    		url: "/development/sites/all/modules/tracking/communication/found_report.php",
-		    		data:{
-		    			"mac_ad": api._ad_mac_list[i]
-		    		},
-		    		success: function(data,textStatus,xhr){
-		    			console.log("success");
-					    $('#mySwitch').bootstrapSwitch('setState', true);  
-   				   		window.location.assign(window.location.pathname);
-		    		},
-		    		error: function(textStatus,xhr){
-		    			console.log("failure");
-				        $('#mySwitch').bootstrapSwitch('setState', true);  
-		    		}
-		    	})
-
-		    }
-		});
-
+	   $("#mac_addr"+i).val(api._ad_mac_list[i]);
 	   $("#mac_addr").val(api._ad_mac_list[i]);
-	   $("#mac_addr2").val(api._ad_mac_list[i]);
-	   $('#protagName').html(api._protag_name_list[i]);
-	   $('#lastKnownLoc').html(api._location_list[i]);
-	   $('#timeLost').html(api._tagDate_list[i]);
-	   $('#deleteProtag').on('click',function(e){
+	   $('#protagName'+i).html(api._protag_name_list[i]);
+	   $('#lastKnownLoc'+i).html(api._location_list[i]);
+	   $('#timeLost'+i).html(api._tagDate_list[i]);
+	   $('#deleteProtag'+i).on('click',function(e){
 	   		window.location.assign(window.location.pathname);
 	   });
-	   $('#serial_num').html(api._serial_list[i]);
-	   
+	   $('#serial_num'+i).html(api._serial_list[i]);
 	}
+
 	ui.prototype.listenMarker = function(marker, tooltip, i){
 		
 	    // so marker is associated with the closure created for the listenMarker function call
@@ -1843,8 +2096,8 @@ var ui = (function ($){
 				api._this.clientDataChecking(api.PHONE_ACTION.lock, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
 				break;
 			case api.PHONE_ACTION.backupContact:
-                                $('#status-label').text(api.MESSAGE.backuped);
-                                api._this.clientDataChecking(api.PHONE_ACTION.backupContact, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
+                $('#status-label').text(api.MESSAGE.backuped);
+                api._this.clientDataChecking(api.PHONE_ACTION.backupContact, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
 				break;
 			case api.PHONE_ACTION.takePicture:
 				api._this.clientDataChecking(api.PHONE_ACTION.takePicture, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
@@ -1854,6 +2107,17 @@ var ui = (function ($){
 				break;
 			default:break;
 		}
+	}
+
+	//call this function when have mac address to retrieve the lost information
+	ui.prototype.retrieveLostReport = function(macAddress){
+		var message = macAddress;
+		api._ajaxObject.ajaxAction(api.USER_ACTION.retrieveLostReport, message, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
+	}
+
+	//analyze the json return
+	ui.prototype.retrieveLostReportInfo = function(data){
+
 	}
 
 	return ui;

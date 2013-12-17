@@ -237,6 +237,10 @@
 
 				loadPhoneInfo($userID, $email, $message, $regID);
 			}
+
+			if($action == LOST_REPORT_INFO){
+				loadProtagLost($userID, $email, $message);
+			}
 		}
 	}
 

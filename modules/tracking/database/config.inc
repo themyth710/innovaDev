@@ -80,6 +80,7 @@
 	define('MAXIMUM_PROTAG_MAC'				, 1);
 	define('SEND_MAIL_ACCURACY'				, 15);
 	define('MAXIMUM_NON_USER_REPORT'        , 3);
+	define('VALID_SERIAL_NUM_LENGTH'   		, 8);
 	/*
 			Table column
 	*/
@@ -120,6 +121,7 @@
 	define('PHONE_INFO_PHONE_TYPE_COL'		,'phoneType');
 	define('PHONE_INFO_NAME_COL'			,'phoneName');
 	define('PHONE_INFO_LOST_COL'			,'lost');
+	define('PHONE_INFO_IMEI_COL'			,'IMEI');
 
 	define('NOTI_USER_ID_COL'				,'userID');
 	define('NOTI_TRACK_COL'					,'track');
@@ -192,6 +194,7 @@
 	define('SAVE_PROFILE'					,'saveProfile');
 	define('RETRIEVE_PROTAG'				,'retrieveProtag');
 	define('SAVE_PHONE_NAME'				,'savePhoneName');
+	define('LOST_REPORT_INFO'				,'retrieveLostReport');
 	/*
 		phone command
 	*/
@@ -226,6 +229,7 @@
 	define('IOS_NOTI_TOKEN'					,'iOSNotiToken');
 	define('PASSIVE_TRACK'					,'passiveTrack');
 	define('LAST_FLARE'						,'lastFlare');
+	define('IMEI'							,'iMEI');
 	/*
 		messages
 	*/

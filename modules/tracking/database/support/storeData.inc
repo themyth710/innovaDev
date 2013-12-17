@@ -106,7 +106,7 @@
             @return success of query
 
         ==========================================================*/
-        public function storePhoneInformation($macPhone, $regID, $typePhone, $curLat = 0, $curLong = 0, $accuracy = 0, $battery = 0, $dateCreate){
+        public function storePhoneInformation($macPhone, $regID, $typePhone, $curLat = 0, $curLong = 0, $accuracy = 0, $battery = 0, $dateCreate, $phoneName, $imei){
             
             //check if phone is android or ios for type phone table id
             if($typePhone == ANDROID)
@@ -122,8 +122,10 @@
                                                                        .PHONE_INFO_LONG_COL.","
                                                                        .PHONE_INFO_ACC_COL.","
                                                                        .PHONE_INFO_BAT_COL.","
-                                                                       .PHONE_INFO_DATE_CREATE_COL.")  
-                              VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+                                                                       .PHONE_INFO_DATE_CREATE_COL.","
+                                                                       .PHONE_INFO_NAME_COL.","
+                                                                       .PHONE_INFO_IMEI_COL.")  
+                              VALUES('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
                               mysql_real_escape_string($macPhone),
                               mysql_real_escape_string($regID),
                               mysql_real_escape_string($typePhoneID),
@@ -131,8 +133,9 @@
                               mysql_real_escape_string($curLong),
                               mysql_real_escape_string($accuracy),
                               mysql_real_escape_string($battery),
-                              mysql_real_escape_string($dateCreate));
-            
+                              mysql_real_escape_string($dateCreate),
+                              mysql_real_escape_string($phoneName),
+                              mysql_real_escape_string($imei));
             //execute the query
             $executeQuery = mysql_query($query);
 

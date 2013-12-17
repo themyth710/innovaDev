@@ -43,21 +43,25 @@
 				$typePhone = $_POST[TYPE_PHONE];
 				
 				if(isset($_POST[USER_ID]) &&
-				isset($_POST[REG_ID]) &&
-				($typePhone == IOS || isset($_POST[MAC_PHONE])) &&
-				isset($_POST[DATE_CREATE])){
+					isset($_POST[REG_ID]) &&
+					($typePhone == IOS || isset($_POST[MAC_PHONE])) &&
+					isset($_POST[DATE_CREATE])){
+					
 					$userID    = $_POST[USER_ID];
 					$regID 	   = $_POST[REG_ID];
 					//Only Android requires macPhone;
 					$macPhone  = null;
+					
 					if($typePhone == ANDROID){
 						$macPhone  = $_POST[MAC_PHONE];
 					}
 					$dateCreate = $_POST[DATE_CREATE];
-				
+					$phoneName  = $_POST[PHONE_NAME];
+					$imei		= $_POST[IMEI];
+					
 					//check the input format
 					if($phone -> dbValidateInputFormat(null ,null, $regID, $macPhone, $dateCreate)){
-						$phone -> phPhoneLogin(null, null, $regID , $macPhone , $dateCreate , $typePhone , $userID);
+						$phone -> phPhoneLogin(null, null, $regID , $macPhone , $dateCreate , $typePhone , $userID, $phoneName, $imei);
 					}
 				}
 			}

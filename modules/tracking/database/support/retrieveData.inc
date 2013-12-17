@@ -222,6 +222,7 @@
             
             $phoneName      = PHONE_INFO_NAME_COL;
             $phoneType      = PHONE_INFO_PHONE_TYPE_COL;
+            $imei           = PHONE_INFO_IMEI_COL;
             $conditionCol   = PHONE_INFO_MAC_COL;
             $conditionVal   = $macPhone; 
             
@@ -231,7 +232,7 @@
             }
 
             $query = sprintf("SELECT $phoneName,
-                                     $phoneType FROM "
+                                     $phoneType, $imei FROM "
                                      .PHONE_INFORMATION_TABLE." WHERE 
                                      $conditionCol = '%s'",
                               mysql_real_escape_string($conditionVal));
@@ -249,7 +250,7 @@
                     
                     $row = mysql_fetch_array($executeQuery);
                     
-                    return array($row[0], $row[1]);
+                    return array($row[0], $row[1], $row[2]);
                 }
                 else{
 
@@ -827,18 +828,22 @@
                                       .PROTAG_LOST_REPORT_MAC_ADDR_COL." = '%s' AND "
                                       .PROTAG_LOST_REPORT_ACTIVE_COL."= TRUE",
                                mysql_real_escape_string($macAddress));
-
+            
             //execute query
             $executeQuery = mysql_query($query);
             
             if(!$executeQuery){
-                return -1;
+                return false;
             }
             else if(mysql_num_rows($executeQuery) == 0){
-                return -2;
+                return false;
             } else {
-            	$row = mysql_fetch_array($executeQuery, MYSQL_ASSOC);
-				return $row;
+                $arr = array();
+            	while($row = mysql_fetch_array($executeQuery, MYSQL_ASSOC)){
+				    array_push($arr, $row);
+                }
+
+                return $arr;
             }
         }
 

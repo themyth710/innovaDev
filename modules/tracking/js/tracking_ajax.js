@@ -13,6 +13,7 @@
 			saveProfile : 'saveProfile',
 			retrieveProtag : 'retrieveProtag',
 			savePhoneName: 'savePhoneName',
+			retrieveLostReport : 'retrieveLostReport',
 		},
 		PHONE_ACTION:{
 			track : 'track',

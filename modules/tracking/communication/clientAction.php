@@ -192,6 +192,14 @@
 			jsonDisplay(false);
 	}
 
+	function loadProtagLost($hashUserID, $email, $message){
+		$br = new browser();
+
+		if($br -> brCheckSession($hashUserID, $email)){
+			$br -> brRetrieveLostReport($message);
+		}
+	}
+
 	function jsonDisplay($success, $data = null){
 		$arr = array();
 		

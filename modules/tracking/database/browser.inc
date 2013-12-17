@@ -540,6 +540,13 @@
             return false;
         }
 
+        public function brRetrieveLostReport($macAddr){
+            if(!($data = $this -> retrieve -> retrieveLostReport($macAddr)))
+                $this -> display ->displayJSON('FAIL');
+            else
+                $this -> display -> displayJSON('SUCCESS', null, $data); 
+        }
+
         /*==========================================
 
         	@destroy the token by setting it to null
