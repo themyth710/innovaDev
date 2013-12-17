@@ -525,9 +525,11 @@
                         $data[1] = IOS;
                     }
 
-                    file_put_contents('yourfile.txt', $data[0]);
+                    if($data[2] == null){
+                        $data[2] = 'None';
+                    }
                     
-                    $data = array('phoneName' => $data[0], 'phoneType' => $data[1]);
+                    $data = array('phoneName' => $data[0], 'phoneType' => $data[1], 'imei' => $data[2]);
 
                     $this -> display -> displayJSON('SUCCESS', null ,  $data);
                 }

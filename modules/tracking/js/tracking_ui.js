@@ -412,7 +412,8 @@ var ui = (function ($){
 		html += "<div id = 'phone-info'>";
 		html +=	"<ul>";
 		html += 	"<li>Phone name : <span id = 'phone-name-popup'></span></li>";
-		html +=		"<li>Phone type : <span id = 'phone-type-popup'></span></li>";	
+		html +=		"<li>Phone type : <span id = 'phone-type-popup'></span></li>";
+		html +=		"<li>IMEI : <span id = 'phone-imei-popup'></span></li>";	
 		html +=	"</ul>";
 		html +=	"</div>";
 		html += "</div>";
@@ -421,9 +422,9 @@ var ui = (function ($){
 	}
 
 	ui.prototype.addValueToPhoneInfo = function(value, action){
-		console.log('go here');
 		$('#phone-name-popup').text(value.data.phoneName);
 		$('#phone-type-popup').text(value.data.phoneType);
+		$('#phone-imei-popup').text(value.data.imei);
 	}
 
 	/*=================================================
