@@ -188,6 +188,7 @@ var ui = (function ($){
 				}
 				api._this.displayObject($('#map-region'), false);
 				api._this.displayObject($('#title'), true);
+				api._this.displayObject($('#activity-updates'), true);
 			}
 			else
 				if($(this).parent().attr('id') == api.NAV_ATTR.trackMobile){
@@ -198,14 +199,15 @@ var ui = (function ($){
 						if(api._phoneList instanceof Array){
 							
 							var phoneID   = 0;
-							var typePhone = api._phoneList[0];
+							var typePhone = api._phoneList[0].type;
+							var phoneName = api._phoneList[0].name;
 
 							if(api._curPhoneType != null && api._curPhoneID != null){
 								phoneID   = api._curPhoneID;
 								typePhone = api._curPhoneType;
 							}
 							
-							api._this.showPhoneTrackingPage(phoneID, typePhone); 
+							api._this.showPhoneTrackingPage(phoneID, typePhone, phoneName); 
 						}
 						else
 							api._this.showPhoneTrackingPage(null, null);
@@ -288,9 +290,9 @@ var ui = (function ($){
 			//take the phone id from the selection
 			var phoneID   = $(this).closest('.phone-list').children('#remove-phone').attr('data-id');
 			var typePhone = $(this).closest('.phone-list').children('#remove-phone').attr('type-phone');
-
+			var phoneName = $(this).closest('.phone-list').children('#remove-phone').attr('phone-name');
 			//show the phone tracking page
-			api._this.showPhoneTrackingPage(phoneID, typePhone);
+			api._this.showPhoneTrackingPage(phoneID, typePhone, phoneName);
 
 			//add class to navigation sidebar
 			$('#nav-home a').removeClass('nav-active');
@@ -447,37 +449,36 @@ var ui = (function ($){
 		})
 
 		//phone select action
-		// $('#mo-phone-select').toggle(
-		// 	function(){
-		// 		$(this).addClass('active');
-		// 		$(this).children(':first').addClass('active');
-		// 	}, 
-		// 	function(e){
-		// 		e.preventDefault();
-		// 		e.stopPropagation();
+		$('#mo-phone-select').click(function(e){
+		 	if($(this).hasClass('active')){
 
-		// 		if(api._isTracking){
-		// 			alertify.alert(api.MESSAGE.trackingExcuse);
-		// 		}
-		// 		else{
-		// 			//select the phoneID and typePhone from the current target
-		// 			var phoneID   = $(e.target).attr('data-id');				
-		// 			var typePhone = $(e.target).attr('type-phone');
+		 		if(api._isTracking){
+		 			alertify.alert(api.MESSAGE.trackingExcuse);
+		 		}
+		 		else{
+		 			//select the phoneID and typePhone from the current target
+		 			var phoneID   = $(e.target).attr('data-id');				
+		 			var typePhone = $(e.target).attr('type-phone');
+		 			var phoneName = $(e.target).attr('phone-name');
 
-		// 			api._curPhoneID   = phoneID;
-		// 			api._curPhoneType = typePhone;
+		 			api._curPhoneID   = phoneID;
+		 			api._curPhoneType = typePhone;
 
-		// 			$('#top-nav-phone-name').attr('data-id'   , phoneID);
-		// 			$('#top-nav-phone-name').attr('type-phone', typePhone);
-		// 			$('#top-nav-phone-name').text( typePhone);
-		// 			api._this.refreshToolbar();
-		// 			api._this.refreshTrackButtonText();
-		// 		}
+		 			$('#top-nav-phone-name').attr('data-id'   , phoneID);
+		 			$('#top-nav-phone-name').attr('type-phone', typePhone);
+		 			$('#top-nav-phone-name').text(phoneName);
+		 			api._this.refreshToolbar();
+		 			api._this.refreshTrackButtonText();
+		 		}
 
-		// 		$(this).removeClass('active');
-		// 		$(this).children(':first').removeClass('active');
-		// 	}
-		// )
+		 		$(this).removeClass('active');
+		 		$(this).children(':first').removeClass('active');
+		 	}
+		 	else{
+		 		$(this).addClass('active');
+		 		$(this).children(':first').addClass('active');
+		 	}
+		 })
 
 		//close button on phone options bar
 		$('.dialog-top-nav .remove-icon').click(function(e){
@@ -764,7 +765,7 @@ var ui = (function ($){
 					content += "<li>";
 					content += "<div class = 'phone-list'>";
 					//data-id & type-phone is used by other functions
-					content += "<span class = 'remove-icon' id = 'remove-phone' data-id = '" + i + "' type-phone = '" + value.data[i][0] + "'></span>"
+					content += "<span class = 'remove-icon' id = 'remove-phone' data-id = '" + i + "' type-phone = '" + value.data[i][0] + "' phone-name = '" + value.data[i][1]+ "'></span>"
 			        	content += "<div>";
 			        	
 			        	//Phone name
@@ -801,7 +802,8 @@ var ui = (function ($){
 			        	content += "</div></div></li>";
 	
 			        	//add to phone list global variables
-			        	api._phoneList.push(value.data[i]);
+
+			        	api._phoneList.push({'name' : value.data[i][1], 'type' : value.data[i][0]});
 		        	}
 			}
 		}
@@ -834,8 +836,8 @@ var ui = (function ($){
 		var content = '';
 
 		for(var i = 0 ; i < api._phoneList.length ; i++){
-			content += "<div class ='button-top-nav top-nav-child' data-id = '" + i + "' type-phone = '" + api._phoneList[i] 
-			+ "'>" + api._phoneList[i] + "</div>";
+			content += "<div class ='button-top-nav top-nav-child' data-id = '" + i + "' type-phone = '" + api._phoneList[i].type 
+			+ "' phone-name = '" + api._phoneList[i].name + "'>" + api._phoneList[i].name + "</div>";
 		}
 
 		api._this.removeHtml($('#mo-phone-select #top-nav-phone-child-list'));
@@ -851,7 +853,7 @@ var ui = (function ($){
 
 	=================================================*/	
 
-	ui.prototype.showPhoneTrackingPage = function(phoneID, typePhone){
+	ui.prototype.showPhoneTrackingPage = function(phoneID, typePhone, phoneName){
 
 		if(api._markerList){
 			for(var i = 0; i < api._markerList.length; i++){
@@ -864,12 +866,13 @@ var ui = (function ($){
 		api._this.displayObject($('#title'), false);
 		api._this.displayObject($('#content'), false);
 		api._this.displayObject($('#content-2') ,false);
+		api._this.displayObject($('#activity-updates'), false);
 
 		if(phoneID == null || typePhone == null){
 			$('#top-nav-phone-name').text('No phone');
 		}
 		else{
-			$('#top-nav-phone-name').text(typePhone);
+			$('#top-nav-phone-name').text(phoneName);
 			$('#top-nav-phone-name').attr('data-id', phoneID);
 			$('#top-nav-phone-name').attr('type-phone',typePhone);
 
@@ -907,6 +910,7 @@ var ui = (function ($){
 	ui.prototype.showImageCapturePage = function(){
 		//change the title
 		api._this.displayObject($('#title'), true);
+		api._this.displayObject($('#activity-updates'), false);
 		$('#title h1').text('Image Capture');
 		
 
@@ -1040,6 +1044,7 @@ var ui = (function ($){
 		//change the title
 		api._this.displayObject($('#title'), true);
 		$('#title h1').text('BackUp Contacts');
+		api._this.displayObject($('#activity-updates'), false);
 
 
 		if(api._firstTimeLoadBackUpDetailsPage){
@@ -1099,6 +1104,7 @@ var ui = (function ($){
         ui.prototype.showProfileSettingPage = function(){
 		//change the title
 		api._this.displayObject($('#title'), true);
+		api._this.displayObject($('#activity-updates'), false);
 		$('#title h1').text('Profile Settings');
 
 		if(api._firstTimeLoadProfileSettingPage){
@@ -1203,7 +1209,7 @@ var ui = (function ($){
 		api._this.displayObject($('#title'), false);
 		api._this.displayObject($('#content'), false);
 		api._this.displayObject($('#content-2') ,false);
-
+		api._this.displayObject($('#activity-updates'), false);
 		//display the map to user
 		api._this.displayObject($('#map-region'), true);
 
