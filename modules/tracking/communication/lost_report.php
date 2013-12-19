@@ -23,7 +23,7 @@
 			
 			$result = $protag -> prReportLost($location, $message, $will_notify, $mac_addr, $contact_name, $contact_number, $description);
 			if ($result) {
-				trackingRespond(200);
+				respondToClient(200);
 			} else {
 				respondToClient(400,array('reason' => mysql_error()));
 			}

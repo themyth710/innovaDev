@@ -257,11 +257,11 @@ h2.element-invisible{
   margin-bottom: 8px;
 }
 
-#lostLabel{
+.lostLabel{
   color: red;
 }
 
-#securedLabel{
+.securedLabel{
   color: green;
 }
 

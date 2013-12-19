@@ -80,7 +80,7 @@
 	</div><!-- /.modal -->
 
 
-	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<!-- <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -108,7 +108,7 @@
 	  		
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
-	</div><!-- /.modal -->
+	</div><!-- /.modal --> -->
 	<!--full page-->
 	<div id = 'push'></div>
 </div>

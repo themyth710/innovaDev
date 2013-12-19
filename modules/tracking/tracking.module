@@ -145,6 +145,41 @@
 	  	return $form;
 	}
 
+	/* Added form */
+	
+	function form_login_form($form, &$form_state) {
+		  $form['registration']['email'] = array(
+			'#type'      => 'textfield',
+			'#required'  => TRUE,
+			'#size'      => 44,
+			'#maxlength' => '80',
+			'#prefix'    => '<div class = "form-group">',
+			'#suffix'    => '</div>',
+			'#attributes'=> array('placeholder' => 'Email', 'class' => array('form-control')),
+		  );
+		  $form['registration']['password'] = array(
+			'#type'      => 'password',
+			'#required'  => TRUE,
+			'#size'      => 44,
+			'#maxlength' => '80',
+			'#prefix'    => '<div class = "form-group">',
+			'#suffix'    => '</div>',
+			'#attributes'=> array('placeholder' => 'Password', 'class' => array('form-control')),
+		  );
+		  $form['registration']['submit'] = array(
+		  	'#prefix'    => '<div class = "form-inline">',
+			'#suffix'    => '<a href = "" class = "pull-right">Reset your password</a></div>',
+			'#value'     => 'SIGN IN',
+			'#type'      => 'submit',
+			'#submit'    => array('form_registration_handler'),
+			'#attributes'=> array('class' => array('btn', 'btn-primary')),
+		  );
+
+		  return $form;
+	}	
+	
+	/* Added form */
+
 	/*Ajax call function*/
 	function Tracking_menu() {
 	 

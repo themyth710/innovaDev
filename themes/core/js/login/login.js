@@ -48,7 +48,11 @@ jQuery(document).ready(function($){
 		$("#returnMessage").empty();
 		var serial_num = $("#serialNumber").val();
 		var returnMessage = "";
-
+		if(serial_num.length!=8){
+			returnMessage += "<p>Invald Serial number. Please enter valid serial number</p>";	
+			$("#returnMessage").html(returnMessage);	
+			return;
+		}
 		$.ajax({
 			type:"POST",
 			url: "/development/sites/all/modules/tracking/communication/non_user_found_report.php",
@@ -60,14 +64,29 @@ jQuery(document).ready(function($){
 				console.log(data);
 				console.log(textStatus);
 				//when status =200
+				
 				if(xhr.status==200){
-					if(data.reason== 0){//no such protag id
+					if(serial_num == ""){
+						returnMessage += "<p>Serial Number cannot be empty. Please enter valid Serial Number.</p>";
+					}
+					else if(data.reason== 0){//no such protag id
 						returnMessage += "<p>Sorry PROTAG ID is not registered.<br></br>";
 						returnMessage += "Please make sure that you entered the correct serial number on the card</p>";				}
 					else if(data.reason==2){ //not lost 
 						returnMessage += "<p>Serial number "+ serial_num + " has not been reported as lost.<br>";
 						returnMessage += "Please enter your details for onwer to contact you.</p>";
-						returnMessage += "<button class='mybtn btn' data-toggle='modal' data-target='#myModal2'>CONTINUE</button>";
+						returnMessage += "<form action='#'>";
+		      		  	returnMessage += "<input type='hidden' id='serial_number'>";
+		          		returnMessage += "<strong>Your Name*</strong>";
+		    			returnMessage += "<input type='textarea' id='reporter_name' class='form-control'>";
+		          		returnMessage += "<strong>Email</strong>";
+		          		returnMessage += "<input type='textarea' id='reporter_email' class='form-control'>";
+		    		  	returnMessage += "<strong>Contact Number</strong>";
+		    		  	returnMessage += "<input type='textarea' id='contact_number' class='form-control'>";
+		    		  	returnMessage += "<strong>Message</strong></br>";
+		    		  	returnMessage += "<textarea type='textarea' id='message' class='form-control' rows='3'></textarea>";
+		          		returnMessage += "<button class='mybtn btn' id='sendBtn' >SEND</button>";
+		    		  	returnMessage += "</form>";
 						$('#serial_number').val(serial_num);
 					}
 					else if(data.reason==3){ //same message sent three times
@@ -86,16 +105,30 @@ jQuery(document).ready(function($){
 					returnMessage += "<p>Serial Number " + serial_num + " has been reported as lost, the owner's message is as follows: </p>";
 					returnMessage += "<p>Contact Number: "+contact_number + "</p>";
 					returnMessage += "<p>Name: " + contact_name + "</p>";
-					returnMessage += "<p>Message: " + message + "</p>";
- 					returnMessage += "Please contact the owner or enter your details if you wish for owner to contact you instead</p>";
-					returnMessage += "<button class='mybtn btn' data-toggle='modal' data-target='#myModal2'>CONTINUE</button>";
+					returnMessage += "<p>Reward Message: " + message + "</p>";
+					returnMessage += "<p><hr></hr></p>";
+ 					returnMessage += "<p>Please contact the owner or enter your details if you wish for owner to contact you instead</p>";
+					returnMessage += "<form action='#'>";
+	      		  	returnMessage += "<input type='hidden' id='serial_number'>";
+	          		returnMessage += "<strong>Your Name*</strong>";
+	    			returnMessage += "<input type='textarea' id='reporter_name' class='form-control'>";
+	          		returnMessage += "<strong>Email</strong>";
+	          		returnMessage += "<input type='textarea' id='reporter_email' class='form-control'>";
+	    		  	returnMessage += "<strong>Contact Number</strong>";
+	    		  	returnMessage += "<input type='textarea' id='contact_number' class='form-control'>";
+	    		  	returnMessage += "<strong>Message</strong></br>";
+	    		  	returnMessage += "<textarea type='textarea' id='message' class='form-control' rows='3'></textarea>";
+	          		returnMessage += "<button class='mybtn btn' id='sendBtn' >SEND</button>";
+	    		  	returnMessage += "</form>";
 					$('#serial_number').val(serial_num);
 				}
+
 				$("#returnMessage").html(returnMessage);	
 			},
 			error: function(data, textStatus, xhr){
-				console.log(xhr.status);
-				console.log("hahapiange");
+				returnMessage += "<p>Invald Serial number. Please enter valid serial number</p>";	
+				$("#returnMessage").html(returnMessage);
+				console.log("hahapiange error");
 			}
 		});
 

@@ -12,6 +12,21 @@
 			drupal_add_js(drupal_get_path('theme', 'INNOVA') . 'sites/all/themes/core/js/login/login.js');
 			$variables['theme_hook_suggestions'][] = 'page__login';
 		}
+
+		if (drupal_get_path_alias() == 'login2'){
+			drupal_add_js("//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js");
+			drupal_add_js('/development/misc/drupal.js');
+			drupal_add_js("//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js", array('scope' => 'footer'));
+			drupal_add_js("//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js", array('scope' => 'footer'));
+			drupal_add_js(drupal_get_path('module', 'Tracking') . '/web_front/javascript/_script/login/login.js', array('scope' => 'footer'));
+
+			drupal_add_css(drupal_get_path('theme', 'INNOVA') . 'sites/all/themes/core/active/style/desktop/login/login.css');
+			drupal_add_css(drupal_get_path('theme', 'INNOVA') . 'sites/all/themes/core/active/style/style.css');
+			drupal_add_css("//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css", array('type' => 'external'));
+
+			$variables['theme_hook_suggestions'][] = 'page__login2';
+		}
+
 		if(drupal_get_path_alias() == 'tracking'){
 			drupal_add_js("http://code.jquery.com/jquery-2.0.3.min.js");
 			drupal_add_js("//netdna.bootstrapcdn.com/bootstrap/3.0.1/js/bootstrap.min.js");
@@ -54,6 +69,19 @@
 			unset($css[drupal_get_path('module', 'node') . '/node.css']);
 			unset($css[drupal_get_path('module', 'search') . '/search.css']);
 			unset($css[drupal_get_path('module', 'user') . '/user.css']);
+
+			if (drupal_get_path_alias() == 'login2'){
+				unset($css[drupal_get_path('theme', 'INNOVA') . 'sites/all/themes/core/css/style.css']);
+			}
+		}
+	}
+
+	function INNOVA_THEME_js_alter(&$js){
+
+		if (drupal_get_path_alias() == 'login2'){
+			unset($js[drupal_get_path('module', 'jquery_update') . '/replace/jquery/1.5/jquery.min.js']);
+			unset($js['misc/drupal.js']);
+			unset($js['misc/jquery.once.js']);				
 		}
 	}
 
@@ -64,6 +92,7 @@
 	 *   Template variables.
 	 */
 	function INNOVA_THEME_preprocess_html(&$vars) {
+	    
 	    // Setup IE meta tag to force IE rendering mode
 	    $meta_ie_render_engine = array(
 	    	'#type' => 'html_tag',
@@ -74,8 +103,61 @@
 	    	),
 	    	'#weight' => '-99999',
 	 	);
-	  
-	  	// Add header meta tag for IE to head
+		
+		$html5shiv = array(
+			'#tag' => 'script',
+			'#attributes' => array( // Set up an array of attributes inside the tag
+			    'src' => "https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js", 
+			),
+			'#value'  => '',
+			'#prefix' => '<!--[if lte IE 9]>',
+			'#suffix' => '<![endif]-->',
+		);
+
+		$respondJS = array(
+			'#tag' 	      => 'script',
+			'#attributes' => array( // Set up an array of attributes inside the tag
+			    'src' => "https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js", 
+			),
+			'#value'  => '',
+			'#prefix' => '<!--[if lte IE 9]>',
+			'#suffix' => '<![endif]-->',
+		);
+
+		$viewPort = array(
+			'#tag' => 'meta',
+			'#attributes' => array( // Set up an array of attributes inside the tag
+			    'name' => "viewport",
+			    'content' => 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no', 
+			),
+		);
+		
+		// Add header meta tag for IE to head
+		drupal_add_html_head($viewPort, 'viewPort');
+		drupal_add_html_head($html5shiv, 'html5shiv');
+		drupal_add_html_head($respondJS, 'respondJS'); 
 	  	drupal_add_html_head($meta_ie_render_engine, 'meta_ie_render_engine');
+	}
+
+	function INNOVA_THEME_html_head_alter(&$head_elements) {
+  		unset($head_elements['system_meta_generator']);
+	}
+
+	function INNOVA_THEME_button($element) {
+
+		if(drupal_get_path_alias() == 'login2'){
+			
+			if ($element['#id'] == 'edit-submit') {
+			    
+			    if (isset($element['#attributes']['class'])) {
+			      	$element['#attributes']['class'] .= 'btn btn-primary';
+			    }
+			    else {
+			      	$element['#attributes']['class'] = 'btn btn-primary';
+			    }
+		  	}
+		}
+
+		return theme_button($element);
 	}
 ?>

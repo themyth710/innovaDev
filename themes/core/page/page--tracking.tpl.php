@@ -52,8 +52,9 @@
 			</div>
 			
 	</div>
-	<!--full page-->
-	<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+	<!--full page first protag-->
+	<div class="modal fade" id="protag0" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -61,47 +62,145 @@
 	        <h4 class="modal-title" id="myModalLabel">Your Belonging PROTAG</h4>
 	      </div>
 	      <div class="modal-body">
-	      		<div class="mylabel"><strong>Name</strong></div><div class='myvalue' id="protagName"></div><br>
-	      		<div class="mylabel"><strong>Location</strong></div><div class='myvalue' id='lastKnownLoc'></div><br>
-	      		<div class="mylabel"><strong>Last Known Time</strong></div><div id='timeLost' class='myvalue'></div><br>
+	      		<div class="mylabel"><strong>Name</strong></div><div class="myvalue" id="protagName0"></div><br>
+	      		<div class="mylabel"><strong>Location</strong></div><div class="myvalue" id="lastKnownLoc0"></div><br>
+	      		<div class="mylabel"><strong>Last Known Time</strong></div><div id="timeLost0" class="myvalue"></div><br>
 	      		<div class="mylabel"><strong>Serial Number</strong></div>
-	      		<div class='myvalue'>
-	      			<a href="#" id="serial_num" data-type="text" data-pk="1" data-url="/development/sites/all/modules/tracking/communication/set_serial_number.php" data-title="Enter Serial Number"></a>
-	      		</div><br>
+	      		<div class="myvalue" id='serialNum0'></div><br>
 	      		<hr>
 	      		<div id="lostReportMessage">
 	      			<div id="toggleBtn" class="toggleBtn">
-		      				<div id="mySwitch" class="make-switch  switch-small" data-on="success" data-on-label="Secured" data-off-label="LOST"data-off="danger">
-							    	<input type="checkbox" id='toggleSwitch' checked>
-							</div>
+		      				<div id="mySwitch0" class="make-switch  switch-small" data-on="success" data-on-label="Secured" data-off-label="LOST"data-off="danger">
+		      					<input type="checkbox" id='toggleSwitch0' checked>
+		      				</div>
 	      			</div>
-	      			<div id="saveBtn" class="saveBtn"></div>
+	      			<div id="editBtn0" class="saveBtn"></div>
 		      		<br></br>
-	      			<div id="reportMessage"></div>
+	      			<div class="reportMessage" id="reportMessage0"></div>
 	      		</div>
 	      		<br></br>
+	      		<div class="alertMessage" id="alertMessage0"></div>
+	      		<div id="deletePro">
+	      			<form action="sites/all/modules/tracking/communication/delete_protag.php" method="post">
+	      				<input type="hidden" id="mac_addr0" name="mac_ad">
+	      				<a id='deleteProtag0' onclick="$(this).closest('form').submit()">Delete This Belonging</a>
+	      			</form>
+	      		</div>
+	  	  </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<!--full page second protag-->
+	<div class="modal fade" id="protag1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">Your Belonging PROTAG</h4>
+	      </div>
+	      <div class="modal-body">
+	      		<div class="mylabel"><strong>Name</strong></div><div class="myvalue" id="protagName1"></div><br>
+	      		<div class="mylabel"><strong>Location</strong></div><div class="myvalue" id="lastKnownLoc1"></div><br>
+	      		<div class="mylabel"><strong>Last Known Time</strong></div><div id="timeLost1" class="myvalue"></div><br>
+	      		<div class="mylabel"><strong>Serial Number</strong></div>
+	      		<div class="myvalue" id='serialNum1'></div><br>
+	      		<hr>
+	      		<div id="lostReportMessage">
+	      			<div id="toggleBtn" class="toggleBtn">
+		      				<div id="mySwitch1" class="make-switch  switch-small" data-on="success" data-on-label="Secured" data-off-label="LOST"data-off="danger">
+		      					<input type="checkbox" id='toggleSwitch1' checked>
+		      				</div>
+	      			</div>
+	      			<div id="editBtn1" class="saveBtn"></div>
+		      		<br></br>
+	      			<div class="reportMessage" id="reportMessage1"></div>
+	      		</div>
+				<br></br>
+	      		<div class="alertMessage" id="alertMessage1"></div>
+	      		<div id="deletePro">
+	      			<form action="sites/all/modules/tracking/communication/delete_protag.php" method="post">
+	      				<input type="hidden" id="mac_addr1" name="mac_ad">
+	      				<a id='deleteProtag1' onclick="$(this).closest('form').submit()">Delete This Belonging</a>
+	      			</form>
+	      		</div>
+	  	  </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<!--full page second protag-->
+	<div class="modal fade" id="protag2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">Your Belonging PROTAG</h4>
+	      </div>
+	      <div class="modal-body">
+	      		<div class="mylabel"><strong>Name</strong></div><div class="myvalue" id="protagName2"></div><br>
+	      		<div class="mylabel"><strong>Location</strong></div><div class="myvalue" id="lastKnownLoc2"></div><br>
+	      		<div class="mylabel"><strong>Last Known Time</strong></div><div id="timeLost2" class="myvalue"></div><br>
+	      		<div class="mylabel"><strong>Serial Number</strong></div>
+	      		<div class="myvalue" id='serialNum2'></div><br>
+	      		<hr>
+	      		<div id="lostReportMessage">
+	      			<div id="toggleBtn" class="toggleBtn">
+		      				<div id="mySwitch2" class="make-switch  switch-small" data-on="success" data-on-label="Secured" data-off-label="LOST"data-off="danger">
+		      					<input type="checkbox" id='toggleSwitch2' checked>
+		      				</div>
+	      			</div>
+	      			<div id="editBtn2" class="saveBtn"></div>
+		      		<br></br>
+	      			<div class="reportMessage" id="reportMessage2"></div>
+	      		</div>
+				<br></br>
+	      		<div class="alertMessage" id="alertMessage2"></div>
 	      		<div id="deletePro">
 	      			<form action="sites/all/modules/tracking/communication/delete_protag.php" method="post">
 	      				<input type="hidden" id="mac_addr2" name="mac_ad">
-	      				<a id='deleteProtag' onclick="$(this).closest('form').submit()">Delete This Belonging</a>
+	      				<a id='deleteProtag2' onclick="$(this).closest('form').submit()">Delete This Belonging</a>
 	      			</form>
 	      		</div>
+	  	  </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
 
-	          <!-- <strong>Your Name*</strong>
-	    		  <input type="textarea" name="reporter_name" class="form-control">
-	          <strong>Your Email-address*</strong>
-	    		  <input type="textarea" name="reporter_email" class="form-control">
-	          <strong>Contact Number</strong>
-	    		  <input type="textarea" name="contact_number" class="form-control">
-	          <strong>Message</strong></br>
-	    		  <textarea type="textarea" name="message" class="form-control" rows="3"></textarea> -->
-<!-- 	    		  <button class="btn" id="searchBtn" >Search</button>
- -->	  	  </div>
-	      <!-- <div class="modal-footer">
-	      	<button type="submit" class="btn btn-primary" >Save changes</button>
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      </div> -->
-	  		
+	<!--full page second protag-->
+	<div class="modal fade" id="protag3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">Your Belonging PROTAG</h4>
+	      </div>
+	      <div class="modal-body">
+	      		<div class="mylabel"><strong>Name</strong></div><div class="myvalue" id="protagName3"></div><br>
+	      		<div class="mylabel"><strong>Location</strong></div><div class="myvalue" id="lastKnownLoc3"></div><br>
+	      		<div class="mylabel"><strong>Last Known Time</strong></div><div id="timeLost3" class="myvalue"></div><br>
+	      		<div class="mylabel"><strong>Serial Number</strong></div>
+	      		<div class="myvalue" id='serialNum3'></div><br>
+	      		<hr>
+	      		<div id="lostReportMessage">
+	      			<div id="toggleBtn" class="toggleBtn">
+		      				<div id="mySwitch3" class="make-switch  switch-small" data-on="success" data-on-label="Secured" data-off-label="LOST"data-off="danger">
+		      					<input type="checkbox" id='toggleSwitch3' checked>
+		      				</div>
+	      			</div>
+	      			<div id="editBtn3" class="saveBtn"></div>
+		      		<br></br>
+	      			<div class="reportMessage" id="reportMessage3"></div>
+	      		</div>
+	      		<br></br>
+	      		<div class="alertMessage" id="alertMessage3"></div>
+	      		<div id="deletePro">
+	      			<form action="sites/all/modules/tracking/communication/delete_protag.php" method="post">
+	      				<input type="hidden" id="mac_addr3" name="mac_ad">
+	      				<a id='deleteProtag3' onclick="$(this).closest('form').submit()">Delete This Belonging</a>
+	      			</form>
+	      		</div>
+	  	  </div>
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
@@ -114,28 +213,27 @@
 	        <h4 class="modal-title" id="myModalLabel">Lost Report </h4>
 	      </div>
 	      <div class="modal-body">
-	      	<form action="sites/all/modules/tracking/communication/lost_report.php" method='post'>
+	      	
 	          <input type="hidden" name='mac_ad' id="mac_addr">
 	          <strong>Lost Location</strong>
-	    		  <input type="textarea" name="location" class="form-control">
+	    		  <input type="textarea" id="location" name="location" class="form-control">
 	          <strong>Contact Name</strong>
-	    		  <input type="textarea" name="contact_name" class="form-control" >
+	    		  <input type="textarea" id="contact_name" name="contact_name" class="form-control" >
 	          <strong>Contact Number</strong>
-	    		  <input type="textarea" name="contact_number" class="form-control">
+	    		  <input type="textarea" id="contact_number" name="contact_number" class="form-control">
 	    	  <strong>Belonging Descriptions</strong>
-	    		  <textarea type="textarea" name="description" class="form-control"></textarea>
+	    		  <textarea type="textarea" id="description" name="description" class="form-control"></textarea>
 	          <strong>Reward Message</strong>
-	    		  <textarea rows="2" name="message" class="form-control"></textarea>
-	    		  <input type="checkbox" name="will_notify" value='1'> Will notify other users about your lost portag info
+	    		  <textarea rows="2" id="message" name="message" class="form-control"></textarea>
+	    		  <input type="checkbox" id="will_notify" name="will_notify" value='1'> Will notify other users about your lost portag info
 	  		  </div>
 	      <div class="modal-footer">
-	      	<button type="submit" class="btn btn-primary" id="sendReport">Save changes</button>
+	      	<button class="btn btn-primary" id="sendReport">Save changes</button>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	      </div>
-	  		</form>
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->
 	</div><!-- /.modal -->
-	
+
 	<div id = 'push'></div>
 </div>

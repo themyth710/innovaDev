@@ -1,0 +1,11 @@
+.background-img{
+	background:url(../../../assets/image/login_reset/world.png) no-repeat; 
+	height:291px;
+	background-position: center center;
+}
+
+.logo{
+	background:url(../../../assets/image/login_reset/logo.png) no-repeat;
+	height:40px;
+	background-position: center center;
+}

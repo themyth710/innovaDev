@@ -6,12 +6,17 @@
 		} else {
 			$mac_addr = $_POST['mac_ad'];
 			$serial_number = $_POST['value'];
-			$protag = new protag();
-			$result = $protag -> prSetSerialNumber($mac_addr, $serial_number);
-			if ($result) {
-				respondToClient(200);
+			$length = strlen($serial_number);
+			if($length != VALID_SERIAL_NUM_LENGTH){
+				respondToClient(401);
 			} else {
-				respondToClient(400);
+				$protag = new protag();
+				$result = $protag -> prSetSerialNumber($mac_addr, $serial_number);
+				if ($result) {
+					respondToClient(200);
+				} else {
+					respondToClient(400);
+				}
 			}
 		}
 	}

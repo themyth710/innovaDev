@@ -1359,7 +1359,7 @@
     top: -10px;
 }
 
-#reportMessage{
+.reportMessage{
     color: gray;
     font-size: 15px;
 }
