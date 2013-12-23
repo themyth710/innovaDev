@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"drupal_ad",
+				"drupal_add_js"
+			],
+			[
+				"respon",
+				"respondJS"
+			],
+			[
 				"type",
 				"typePhone"
 			],
@@ -239,14 +247,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "/home/nhat/angularjs notes/notes",
-			"settings":
-			{
-				"buffer_size": 2,
-				"line_ending": "Unix"
-			}
-		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -304,18 +304,31 @@
 	},
 	"file_history":
 	[
-		"/home/nhat/project/modules/tracking/js/tracking_ui.js",
-		"/var/www/angularjs/CustomerManager-master/CustomerManager/app/animations/listAnimations.js",
-		"/home/nhat/project/modules/tracking/database/browser.inc",
-		"/home/nhat/project/modules/tracking/database/support/retrieveData.inc",
+		"/home/nhat/project/themes/core/template.php",
+		"/home/nhat/project/themes/core/page/page--tracking2.tpl.php",
+		"/home/nhat/project/themes/core/active/style/desktop/track/tracking.css",
+		"/home/nhat/project/themes/core/active/style/style.css",
+		"/home/nhat/project/modules/tracking/web_front/javascript/_script/track/tracking.js",
+		"/home/nhat/Downloads/simple_fb_html5_sidebar-master/index.html",
+		"/home/nhat/project/themes/core/page/page--login2.tpl.php",
+		"/home/nhat/project/modules/tracking/tracking.module",
 		"/home/nhat/project/modules/tracking/database/config.inc",
+		"/home/nhat/project/modules/tracking/module/handler.inc",
+		"/home/nhat/project/modules/tracking/js/tracking_ui.js",
+		"/home/nhat/project/modules/tracking/database/browser.inc",
+		"/home/nhat/project/modules/tracking/database/support/sendData.inc",
+		"/home/nhat/project/modules/tracking/communication/test2.txt",
+		"/home/nhat/project/sftp-config.json",
+		"/home/nhat/project/themes/core/active/style/desktop/login/login.css",
+		"/home/nhat/project/themes/core/active/assets/image/login/sprite",
+		"/home/nhat/angularjs notes/notes",
+		"/var/www/angularjs/CustomerManager-master/CustomerManager/app/animations/listAnimations.js",
+		"/home/nhat/project/modules/tracking/database/support/retrieveData.inc",
 		"/home/nhat/project/modules/tracking/database/phone.inc",
 		"/home/nhat/project/modules/tracking/communication/phoneDataReceive.php",
 		"/home/nhat/project/modules/tracking/database/support/storeData.inc",
-		"/home/nhat/project/modules/tracking/communication/test2.txt",
 		"/home/nhat/project/modules/tracking/communication/error_log",
 		"/home/nhat/project/modules/tracking/communication/clientAction.php",
-		"/home/nhat/project/modules/tracking/tracking.module",
 		"/home/nhat/project/modules/tracking/js/tracking_ajax.js",
 		"/home/nhat/project/modules/tracking/communication/protagApplication.php",
 		"/home/nhat/project/themes/core/page/page--tracking.tpl.php",
@@ -350,11 +363,9 @@
 		"/home/nhat/Downloads/tracking/js/tracking_ajax.js",
 		"/home/nhat/project/modules/tracking/communication/clientDataChecking.php",
 		"/home/nhat/project/modules/tracking/communication/sendMessage.php",
-		"/home/nhat/project/modules/tracking/module/handler.inc",
 		"/home/nhat/project/themes/core/css/login/login.css",
 		"/home/nhat/.config/sublime-text-3/Packages/SFTP/Default (Linux).sublime-keymap",
 		"/home/nhat/project/modules/tracking/database/support/displayData.inc",
-		"/home/nhat/project/sftp-config.json",
 		"/var/www/innova_dev/sites/all/themes/core/css/login/login.css",
 		"/var/www/angularjs/angular.html",
 		"/var/www/angularjs/style.css",
@@ -401,6 +412,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"font",
+			"#track-button",
+			"track",
+			"clientDataChecking",
+			"backup",
+			"dataSuccessCheckingHandle",
+			"backup",
+			"showPhoneInfoPop",
 			"select-phone",
 			"_phoneList",
 			"refreshPhoneListOntrackingPage",
@@ -520,8 +539,7 @@
 			"newtracking",
 			"stan",
 			"showTrac",
-			"flatten",
-			"flatter"
+			"flatten"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -539,37 +557,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "/home/nhat/angularjs notes/notes",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -606,7 +595,7 @@
 	"menu_visible": true,
 	"output.sftp":
 	{
-		"height": 118.0
+		"height": 353.0
 	},
 	"project": "innova.sublime-project",
 	"replace":
@@ -645,7 +634,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 276.0,
+	"side_bar_width": 221.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

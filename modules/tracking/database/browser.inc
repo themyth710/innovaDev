@@ -287,7 +287,7 @@
                 if($typePhone == IOS && ($action==TEST_TRACK || $action==IMAGE_CAPTURE)){
                 
                     $tempToken = $this -> retrieve -> retrieve_iOS_NotiTokenUsingRegID($regID);
-			
+			         
                     if($tempToken!=NULL && $this -> send -> sendiOSNotification($tempToken, $message, $action)){
                         $logger -> addActionToLog($userID,$action);
 	                    $this -> display -> displayJSON('SUCCESS');

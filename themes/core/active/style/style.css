@@ -12,6 +12,7 @@ hgroup, nav, section {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
  
 /* This helps to make newer HTML5 elements behave like DIVs in older browers */
@@ -64,7 +65,11 @@ blockquote:before, blockquote:after, q:before, q:after { content: ''; }
 blockquote, q { quotes: "" ""; }
 
 /*remove the underline default of a*/
- a, a:visited{text-decoration:none;white-space: nowrap;}
+a, a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none !important;
+    white-space: nowrap;
+}
 
 /* Remove annoying border on linked images. */
 a img { border: none; }
@@ -78,10 +83,22 @@ ul{list-style-type: none;}
 /*
 * remove the skip link
 */
-
+.transition{
+  -webkit-transition: all 0.5 ease-in; /*Safari & Chrome*/
+  transition: all 0.5s ease-in;
+  -moz-transition: all 0.5s ease-in; /* Firefox 4 */
+  -o-transition: all 0.5s ease-in; /* Opera */
+  -ms-transition: all 0.5s ease-in;
+}
 /*
 *set full page display
 */
+.wrapper{
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -40px;
+}
 
 .push{
 	height:40px;

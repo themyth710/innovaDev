@@ -69,7 +69,7 @@
 		}
 		unset($handler);
 	}
-	
+
 	/*
 		This function handle the resert password form when submitted to server
 	*/
@@ -247,4 +247,61 @@
 		else
 			return false;
 	}
+
+	/* Added fucntion */
+	function form_login_handler($form, &$form_state){
+		
+		//connect to database
+		$handler = new handler();
+		
+		//store the password and email value from the form
+		$password = $form_state['values']['password'];
+		$email    = $form_state['values']['email'];
+		
+		if(isset($email) && isset($password))
+		{
+
+			//this is drupal function to login the user into system
+			if($uid = user_authenticate($email, $password)){
+				//this is a hash userID
+				if($userID = $handler -> handleLoginCheck($email, $password)){
+
+					if($handler -> handleCheckUserActivation($email)){
+
+						//finalize the login with drupal
+						global $user;
+						$user = user_load($uid);
+						drupal_session_regenerate();
+						
+						//format : $list, $hashUserID = null, $isRegID = true
+						//retrieve the list type phone and register ID 
+						$listRegAndType    = $handler -> handleRetreiveListRegIDAndTypePhone(null, $userID);
+
+						//store the email into session because we want to check the userID with email for security purpose
+						$_SESSION[USER_ID] = $userID;
+						$_SESSION[EMAIL]   = $email;
+
+						//format: $list, $hashUserID = null, $isRegID = true
+						//retrieve the list of register ID
+						$_SESSION[REG_ID]  = $handler -> handleRetreiveListRegIDAndTypePhone($listRegAndType);
+
+						//redirect user
+						$form_state['redirect'] = 'tracking2';
+					}
+					else{
+						drupal_set_message(t(ACCOUNT_NOT_ACTIVATE));
+					}
+
+				}
+				else{
+					drupal_set_message(t(INCORRECT_ACCOUNT));
+				}
+			}
+			else{
+					drupal_set_message(t(INCORRECT_ACCOUNT));
+			}
+		}
+		unset($handler);
+	}
+
 ?>

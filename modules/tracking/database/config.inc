@@ -244,4 +244,10 @@
 	define('ACTIVITY_LOG_BACKUP'			, '4');
 	define('ACTIVITY_LOG_LOCK'			, '5');
 	define('ACTIVITY_LOG_IMAGE_CAPTURE'		, '6');
+
+	/*
+		drupal message
+	*/
+	define('ACCOUNT_NOT_ACTIVATE'			, 'Account not activate');
+	define('INCORRECT_ACCOUNT'				, 'Incorrect account')
 ?>

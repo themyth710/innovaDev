@@ -374,7 +374,7 @@ var ui = (function ($){
 			api._this.bigScreenAction(false);
 			api._this.sendMessage(api.PHONE_ACTION.backupContact, api._this.dataSuccessSendMessageHandle, api._this.displayErrorCallBackAction, message);
 
-			api._this.send
+			//api._this.send
 			
 		})
 
@@ -1736,8 +1736,7 @@ var ui = (function ($){
 		var message   = api._curPhoneID + '_' + api._curPhoneType; 
 
 		if(action == api.PHONE_ACTION.takePicture)
-			message   = api._curPhoneID + '_' + api._curPhoneType + '_' + api._curImageNumber; 
-
+			message   = api._curPhoneID + '_' + api._curPhoneType + '_' + api._curImageNumber;
 		api._this.ajaxObject.ajaxAction(action, message, successCallBack, errorCallBack);
                 
 	}
