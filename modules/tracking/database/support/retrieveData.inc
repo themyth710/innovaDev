@@ -874,16 +874,15 @@
             }
         }
 
-        public function retrievePhoneLostNotification($macPhone, $regID){
+        public function retrievePhoneLostNotification($regID, $macPhone = null){
 
             $columnCondition = PHONE_INFO_MAC_COL;
             $conditionValue  = $macPhone;
-
+            
             if(is_null($macPhone)){
                 $columnCondition = PHONE_INFO_REGID_COL;
                 $conditionValue  = $regID;
-            }
-
+            }    
             //the query to execute
             $query = sprintf("SELECT ".PHONE_INFO_LOST_COL." FROM ".PHONE_INFORMATION_TABLE." WHERE ".$columnCondition." = '%s' ",
                               mysql_real_escape_string($conditionValue));

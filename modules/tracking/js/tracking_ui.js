@@ -124,9 +124,9 @@ var ui = (function ($){
 		error_code : 100,
 		success_code : 200,
 
-		_directory : 'http://innovatechnology.com.sg/homepage/sites/all/modules/tracking/UserRegion/ImageCapture/',
+		_directory : 'http://innovatechnology.com.sg/development/sites/all/modules/tracking/UserRegion/ImageCapture/',
                 _directoryBackUp :
-'http://innovatechnology.com.sg/homepage/sites/all/modules/tracking/UserRegion/BackUp/',
+'http://innovatechnology.com.sg/development/sites/all/modules/tracking/UserRegion/BackUp/',
 
 	};
 
@@ -326,7 +326,8 @@ var ui = (function ($){
 					//take the phone id from the selection
 					var phoneID   = $(this).closest('.phone-list').children('#remove-phone').attr('data-id');
 					var phoneName = $(this).val();
-		
+					$(this).closest('.phone-list').children('#remove-phone').attr('phone-name', phoneName);
+					api._phoneList[0].name = phoneName;
 					var message   = phoneID + '_' + phoneName; 
 		
 					api._ajaxObject.ajaxAction(api.USER_ACTION.savePhoneName, message, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
@@ -395,7 +396,7 @@ var ui = (function ($){
 
 				var html = api._this.markupPhoneInfoPopup();
 				$(this).closest('li').prepend(html);
-				api._this.showPhoneInfoPopup(true, pos.left + 20, pos.top-50);
+				api._this.showPhoneInfoPopup(true, pos.left + 20, pos.top-75);
 
 				api._ajaxObject.ajaxAction(api.USER_ACTION.phoneInfo, message, api._this.addValueToPhoneInfo, api._this.displayErrorCallBackAction);	        
 		    },
@@ -787,9 +788,17 @@ var ui = (function ($){
 			        	//To show secure / unscure
 			        	content += "<div class = 'phone-slider center'>";
 			        	//TODO remember to set this slider according to preference
-			        	content += "<span class = 'slider slider-green' id='slider'></span>";
-			        	content += "<h4 class='slider-text'>Normal</h4>";
-			        	content += "</div>";
+			        	if(value.data[i][2] == 0){
+			        		content += "<span class = 'slider slider-green' id='slider'></span>";
+			        		content += "<h4 class='slider-text'>Normal</h4>";
+			        		content += "</div>";	
+			        	}
+			        	else{
+			        		content += "<span class = 'slider slider-red' id='slider'></span>";
+			        		content += "<h4 class='slider-text'>Reported</h4>";
+			        		content += "</div>";	
+			        	}
+			        	
 			        	//To select the phone to go to track
 			        	content += "<div class = 'button center' id = 'select-phone'>Track</div>";
 			        	//Lock, backup, delete
@@ -977,7 +986,7 @@ var ui = (function ($){
 
 	ui.prototype.imageCaptureAction = function(){
 	
-		$('#take-picture-button').on('click', function(){
+		$(document).on('click','#take-picture-button', function(){
 			
 			if(api._curPhoneType == null|| api._curPhoneID == null){
 				alertify.alert(api.MESSAGE.noPhoneSelection);
@@ -1764,7 +1773,7 @@ var ui = (function ($){
 						alertify.confirm(api.MESSAGE.backuped, function (e) {
 						    if (e) {			    	
 						    	api._this.bigScreenAction(true);
-						        window.open('http://innovatechnology.com.sg/development/sites/all/modules/tracking/UserRegion/Backup/yourfile.xml', '_blank');
+						        window.open('http://innovatechnology.com.sg/development/sites/all/modules/tracking/communication/downloadData.php?action=' + api.PHONE_ACTION.backupContact, '_blank');
 						        return true;
 						    }
 						    else

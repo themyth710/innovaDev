@@ -216,7 +216,7 @@
             }else if($action == PASSIVE_TRACK){
                 $this -> update -> updatePhoneLostNotification(null, $regID, '1');
             }else if($action == STOP_PASSIVE_TRACK){
-                
+                $this -> update -> updatePhoneLostNotification(null, $regID, '0');
             }
             else{
                 //fail if wrong action

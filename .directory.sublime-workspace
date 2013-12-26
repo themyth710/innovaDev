@@ -497,6 +497,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.sftp":
+	{
+		"height": 353.0
+	},
 	"project": ".directory.sublime-project",
 	"replace":
 	{

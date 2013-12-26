@@ -55,7 +55,8 @@
                 //push the list regID of iosPhone to array
                 foreach($iOSRegID as $key){
                     $phoneName = $this -> retrieve -> retrievePhoneName($key);
-                    $data      = array(REG_ID => $key, TYPE_PHONE => IOS, PHONE_NAME => $phoneName);
+                    $phoneLost = $this -> retrieve -> retrievePhoneLostNotification($key);
+                    $data      = array(REG_ID => $key, TYPE_PHONE => IOS, PHONE_NAME => $phoneName, PHONE_LOST_NOTI => $phoneLost);
                     
                     array_push($sendBackData, $data);
                 }
@@ -63,7 +64,8 @@
                 //push the list regID of android phone to array
                 foreach ($andrRegID as $key) {
                      $phoneName = $this -> retrieve -> retrievePhoneName($key);
-                     $data = array(REG_ID => $key, TYPE_PHONE => ANDROID, PHONE_NAME => $phoneName);
+                     $phoneLost = $this -> retrieve -> retrievePhoneLostNotification($key);
+                     $data = array(REG_ID => $key, TYPE_PHONE => ANDROID, PHONE_NAME => $phoneName, PHONE_LOST_NOTI => $phoneLost);
 
                      array_push($sendBackData, $data);
                 }
@@ -549,6 +551,19 @@
                 $this -> display -> displayJSON('SUCCESS', null, $data); 
         }
 
+        public function brDownloadBackupFile($userID){
+            $csvFile = "../UserRegion/Backup/".$userID.'_contact/backup.csv';
+            if(file_exists($csvFile)){
+                $fileName = 'yourBackup.csv';
+                header("Cache-Control: public");
+                header("Content-Description: File Transfer");
+                header("Content-Disposition: attachment; filename=$fileName");
+                header("Content-Type: text/csv");
+                header("Content-Transfer-Encoding: binary");
+
+                readfile($csvFile);    
+            }
+        }
         /*==========================================
 
         	@destroy the token by setting it to null

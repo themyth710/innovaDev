@@ -41,7 +41,7 @@
 				</div>					
 				<div class="top-nav-icon">
 				</div>
-				<div class='smallest-reloader'>
+				<div class='smallest-reloader' style = 'width:100%'>
 				</div>
 				<div id = 'lock-button' class="button first">
 					Lock it

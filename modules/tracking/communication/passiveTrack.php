@@ -28,7 +28,7 @@
 						if($phone -> dbValidateInputFormat(null, null, null, $macPhone, $dateCreate, $lat, $long, $bat, $acc)){
 							if($phone -> dbValidateInputInfo($userID, null, $macPhone, null, false, false)){
 								
-								$phone -> phPassiveTrackAction($macPhone, $regID, $dateCreate, $lat, $long, $bat, $acc, $userID);
+								$phone -> phPassiveTrackAction($macPhone, null, $dateCreate, $lat, $long, $bat, $acc, $userID);
 							}
 						}
 					}
@@ -51,7 +51,6 @@
 
 						if($phone -> dbValidateInputFormat(null, null, null, $macPhone)){
 							if($phone -> dbValidateInputInfo($userID, null, $macPhone, null, false, false)){
-								file_put_contents('test.txt', 'go here');
 								$phone -> phUploadPassiveTrackImageAction($userID, $image1, $image2);
 							}
 						}

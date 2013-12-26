@@ -67,7 +67,7 @@ blockquote:before, blockquote:after, q:before, q:after { content: ''; }
 blockquote, q { quotes: "" ""; }
 
 /*remove the underline default of a*/
- a, a:visited{text-decoration:none;white-space: nowrap;}
+ a, a:visited, a:focus, a:hover{text-decoration:none !important;white-space: nowrap;}
 
 /* Remove annoying border on linked images. */
 a img { border: none; }

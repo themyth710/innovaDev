@@ -183,6 +183,7 @@
 	define('PHONE_NAME'						,'phoneName');
 	define('LOAD_ACTIVITY'					,'activityListLoad');
 	define('LOAD_PHONE_INFO'				,'loadPhoneInfo');
+	define('STOP_PASSIVE_TRACK'				,'stopPassiveTrack');
 
 	/*
 		browser action
@@ -230,6 +231,7 @@
 	define('PASSIVE_TRACK'					,'passiveTrack');
 	define('LAST_FLARE'						,'lastFlare');
 	define('IMEI'							,'iMEI');
+	define('PHONE_LOST_NOTI'				,'phoneLost');
 	/*
 		messages
 	*/

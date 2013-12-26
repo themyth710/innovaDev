@@ -24,7 +24,7 @@
 	            	if($data[PHONE_NAME] =='')
 	            		$data[PHONE_NAME] = $data[TYPE_PHONE];
 
-	            	array_push($dataRetrieve, array($data[TYPE_PHONE], $data[PHONE_NAME]));
+	            	array_push($dataRetrieve, array($data[TYPE_PHONE], $data[PHONE_NAME], $data[PHONE_LOST_NOTI]));
 	            	array_push($listReg, $data[REG_ID]); 
 
 	            }        

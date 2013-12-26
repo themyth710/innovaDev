@@ -199,8 +199,8 @@
 						$long       = $_POST[LONG];
 						$acc        = $_POST[ACC];
 						$bat        = $_POST[BAT]; 
-						file_put_contents('test2.txt', $lat);
-						$phone -> phLastFlareAction($userID, $lat, $long, $acc, $dateCreate);
+
+						$phone -> phLastFlareAction($userID, $lat, $long, $acc, $bat, $dateCreate);
 					}
 				}
 			}

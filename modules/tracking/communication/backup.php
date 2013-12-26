@@ -25,8 +25,8 @@
 				break;
 		}
 	} 
-	file_put_contents('../UserRegion/Backup/yourfile.xml',$xml_source);
-	//$phone = new phone();
-	//$phone -> phBackupUserContact($xml_source, $userID, $email);
+	//file_put_contents('../UserRegion/Backup/yourfile.xml',$xml_source);
+	$phone = new phone();
+	$phone -> phBackupUserContact($xml_source, $userID, $email);
 
 ?>

@@ -73,7 +73,7 @@
 	        		case IMAGE_CAPTURE:
 	        			return ACTIVITY_LOG_IMAGE_CAPTURE;
 	        		default:
-	        			return ACTIVITY_LOG_UNKNOWN;
+	        			return;
 	        	}
 	        }
 	    	
