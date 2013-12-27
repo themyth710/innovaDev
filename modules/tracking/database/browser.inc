@@ -280,10 +280,8 @@
             //if it is android then send the message to the phone
             //if it is ios then just update the notification table only            
             if($typePhone == ANDROID){
-
-                $this -> brSendPhoneRequest($regID, $message);
                 $logger -> addActionToLog($userID,$action);   
-
+                $this -> brSendPhoneRequest($regID, $message);
             }
             else
                 if($typePhone == IOS && ($action==TEST_TRACK || $action==IMAGE_CAPTURE)){

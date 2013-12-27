@@ -52,9 +52,8 @@
 	    	}
 	    	
 	    	public function addActionToLog($userID, $action){
-        		$logNum = $this -> actionToActivityLogNum($action);
- 				
-        		$this -> addLog($userID,$logNum);
+        		if($logNum = $this -> actionToActivityLogNum($action))
+ 					$this -> addLog($userID,$logNum);
         	}
         	
 	        //Converts action in brSendMessage to logNum for activity list
@@ -73,7 +72,7 @@
 	        		case IMAGE_CAPTURE:
 	        			return ACTIVITY_LOG_IMAGE_CAPTURE;
 	        		default:
-	        			return;
+	        			return false;
 	        	}
 	        }
 	    	
