@@ -1,7 +1,7 @@
 <?php
 	require_once(dirname(__FILE__).'/../database/phone.inc');
 	require_once(dirname(__FILE__).'/../database/config.inc');
-	file_put_contents('test2.txt', 'heher');
+	
 	if(isset($_POST[ACTION])){
 		
 		$phone = new phone();
@@ -200,7 +200,7 @@
 						$acc        = $_POST[ACC];
 						$bat        = $_POST[BAT]; 
 
-						$phone -> phLastFlareAction($userID, $lat, $long, $acc, $bat, $dateCreate);
+						$phone -> phLastFlareAction($userID, $lat, $long, $acc, $bat, $dateCreate, $macPhone);
 					}
 				}
 			}

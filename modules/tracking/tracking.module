@@ -35,12 +35,22 @@
 		     	break;
 		     	case 'passive_track_mail':
 		    		// Send a simple message from the reset form.
-		    		$message['subject'] = $params['subject'];
-		     		$message['lat']     = $params['lat'];
-		     		$message['long']    = $params['long'];
-		     		$message['bat']     = $params['bat'];
-		     		$message['acc']     = $params['acc'];
-		     		$message['date']    = $params['date'];
+		    		$message['subject'] 	= $params['subject'];
+		    		$message['phoneName'] 	= $params['phoneName'];
+		     		$message['lat']     	= $params['lat'];
+		     		$message['long']    	= $params['long'];
+		     		$message['bat']     	= $params['bat'];
+		     		$message['acc']     	= $params['acc'];
+		     		$message['date']    	= $params['date'];
+		     	break;
+		     	case 'last_flare_mail':
+		     		$message['subject'] 	= $params['subject'];
+		    		$message['phoneName'] 	= $params['phoneName'];
+		     		$message['lat']     	= $params['lat'];
+		     		$message['long']    	= $params['long'];
+		     		$message['bat']     	= $params['bat'];
+		     		$message['acc']     	= $params['acc'];
+		     		$message['date']    	= $params['date'];
 		     	break;
 		     	case 'upload_image_mail':
 		     		$message['subject'] = $params['subject'];

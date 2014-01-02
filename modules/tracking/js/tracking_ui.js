@@ -114,7 +114,7 @@ var ui = (function ($){
 		_lostReportContactNumber: null,
 		
 		_firstTimeLoadImageCapturePage : true,
-        _firstTimeLoadBackUpDetailsPage : true,
+        	_firstTimeLoadBackUpDetailsPage : true,
 		_firstTimeLoadProfileSettingPage : true,
 
 		_curImageNumber : 0,
@@ -1067,12 +1067,18 @@ var ui = (function ($){
 			api._this.bigScreenAction(false);
 
 			var content  = "<div id = 'backup-Details-container' class = 'backup-Details-container'>";
-				content +=		"<div class = 'text-bold large-text'><h2>Your Backup Contacts</h2></div>";
-				content +=		    "<div id = 'backup-list' class ='backup-list'>";
-				content +=			"<ul>";
-				content	+=			"</ul>";
-				content	+=			"<div class = 'button' id ='backup-button'>BackUp</div>";
-				content	+=		"</div>";
+				content += "<select id ='backup-select-dropdown'>";
+				for(var i=0; i<api._phoneList.length;i++){
+					content += "<option value='"+i+"'>"+api._phoneList[i].name+"</option>";
+				}
+
+				content += "</select>";
+				content += "<div id='backup-phonename' class = 'text-bold large-text'><h2>Phone name</h2></div>";
+				
+				//scrollbox
+				content	+= "<div class = 'button' style='display:inline-block' id ='backup-retrieve-button'>Retrieve Backup</div>";
+				content	+= "<div class = 'button' style='display:inline-block' id ='backup-download-button'>Download .csv</div>";
+				
 				content	+= "</div>";
 			
 			//show the content of backup Details
@@ -1080,7 +1086,6 @@ var ui = (function ($){
 
 			api._firstTimeLoadBackUpDetailsPage = false;
 			
-			//api._ajaxObject.ajaxAction(api.USER_ACTION.retrieveImgCap, null, //api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
 		}
 		else{
 			api._this.displayObject($('#backup-Details-container'), true);
@@ -1094,7 +1099,10 @@ var ui = (function ($){
 	}
 
         ui.prototype.backupContactAction = function(){
-          $('#backup-button').on('click', function(){
+          	$('#backup-select-dropdown').change(function() {
+			$('#backup-phonename').text(api._phoneList[$('#backup-select-dropdown').val()].name+" Contacts");
+		});
+          $('#backup-retrieve-button').on('click', function(){
 			
 			if(api._curPhoneType == null|| api._curPhoneID == null){
 				alertify.alert(api.MESSAGE.noPhoneSelection);
@@ -1121,6 +1129,7 @@ var ui = (function ($){
 		//change the title
 		api._this.displayObject($('#title'), true);
 		api._this.displayObject($('#activity-updates'), false);
+		
 		$('#title h1').text('Profile Settings');
 
 		if(api._firstTimeLoadProfileSettingPage){
@@ -1162,6 +1171,7 @@ var ui = (function ($){
 			api._this.displayObject($('#profile-settings-container'), true);
 		}
 		api._this.displayObject($('#image-capture-container'), false);
+		api._this.displayObject($('#backup-Details-container'), false);
 		api._this.displayObject($('#content-2'), true);
 		api._this.displayObject($('#map-region'), false);
 		api._this.displayObject($('#content'), false);
@@ -1293,6 +1303,7 @@ var ui = (function ($){
 				    $(switchName).bootstrapSwitch('setState', true);  
 				    api._lost_info_list[0] = 0; // set the lost info as secured
 				    $("#alertMessage0").html("<font color = 'green'>Belongings reported as secured<br></br></font>");
+				    $('#editBtn0').html("");
 				    $('#statusLabel0').html("<font color = 'green'>Secured</font>");
 	    		},
 	    		error: function(textStatus,xhr){
@@ -1341,6 +1352,7 @@ var ui = (function ($){
 				    $(switchName).bootstrapSwitch('setState', true);  
 				    api._lost_info_list[1] = 0; // set the lost info as secured
 					$("#alertMessage1").html("<font color = 'green'>Belongings reported as secured<br></br></font>");
+					$('#editBtn1').html("");
 				    $('#statusLabel1').html("<font color = 'green'>Secured</font>");	    		
 				},
 	    		error: function(textStatus,xhr){
@@ -1386,6 +1398,7 @@ var ui = (function ($){
 				    $(switchName).bootstrapSwitch('setState', true);
 				    api._lost_info_list[2] = 0; // set the lost info as secured  
 				    $("#alertMessage2").html("<font color = 'green'>Belongings reported as secured<br></br></font>");
+				    $('#editBtn2').html("");
 				    $('#statusLabel2').html("<font color = 'green'>Secured</font>");	 
 	    		},
 	    		error: function(textStatus,xhr){
@@ -1431,6 +1444,7 @@ var ui = (function ($){
 				    $(switchName).bootstrapSwitch('setState', true); 
 				    api._lost_info_list[3] = 0; // set the lost info as secured  
 				    $("#alertMessage3").html("<font color = 'green'>Belongings reported as secured<br></br></font>");
+				    $('#editBtn3').html("");
 				    $('#statusLabel3').html("<font color = 'green'>Secured</font>");	 
 	    		},
 	    		error: function(textStatus,xhr){
@@ -1442,6 +1456,28 @@ var ui = (function ($){
 	    }
 	});
 	
+	$(document).on('click', '#confirmDelete', function(){
+		$.ajax({
+				type: "POST",
+				dataType: "json",
+				url: "/development/sites/all/modules/tracking/communication/delete_protag.php",
+				data:{
+					'mac_ad':api._ad_mac_list[currentIndex]
+				},
+				success: function(data,textStatus,xhr){
+					console.log("deleteProtag success");
+			   		$('#deleteProtag').modal('hide');
+			   		$('#protag'+currentIndex).modal('hide');
+				},
+				error: function(textStatus,xhr){
+					console.log("deleteProtag Failure");
+				}		
+			})
+		api._markerList[currentIndex].setMap(null)
+		api._this.showTrackBelongingPage();
+		return;
+	});
+
 	$(document).on('click', '#sendReport', function(){
 		$.ajax({
 			type: "post",
@@ -1463,6 +1499,7 @@ var ui = (function ($){
 			    api._lost_info_list[currentIndex] = 1; // set the lost info as lost
 			    $("#alertMessage"+currentIndex).html("<font color = 'red'>Belongings reported as lost<br></br></font>");
 			    $('#statusLabel'+currentIndex).html("<font color = 'red'>Lost</font>");
+			    $('#editBtn'+currentIndex).html("<button  class='btn mybtn pull-right' data-toggle='modal' data-target='#myModal'>Edit Report</button>")
 			    $('#myModal').modal('hide');
 			},
 			error: function(textStatus,xhr){
@@ -1627,7 +1664,12 @@ var ui = (function ($){
 				long  	   = value.data[i].protag[1];
 				api._ad_mac_list[i]  = value.data[i].protag[4];
 				api._lost_info_list[i]  = value.data[i].protag[5]; //lost status
-				api._serial_list[i] = value.data[i].protag['serialNumber'];
+				api._serial_list[i] = value.data[i].protag['serialNumber'];	
+							
+				if(api._serial_list[i]===null){
+					api._serial_list[i] = "click to edit";
+				}
+
 
 				if(lat && long){
 					var point = new google.maps.LatLng(lat,long);	
@@ -1707,9 +1749,6 @@ var ui = (function ($){
 	   $('#protagName'+i).html(api._protag_name_list[i]);
 	   $('#lastKnownLoc'+i).html(api._location_list[i]);
 	   $('#timeLost'+i).html(api._tagDate_list[i]);
-	   $('#deleteProtag'+i).on('click',function(e){
-	   		window.location.assign(window.location.pathname);
-	   });
 	   $('#serial_num'+i).html(api._serial_list[i]);
 	}
 

@@ -371,7 +371,7 @@
         =====================================*/
         public function brEncodeImage($userID, $expectedNumPic){
 
-            $fileAddr = '../homepage/sites/all/modules/tracking/UserRegion/ImageCapture/'.$userID.'_img/pic_'.$expectedNumPic.'.jpg';
+            $fileAddr = '../development/sites/all/modules/tracking/UserRegion/ImageCapture/'.$userID.'_img/pic_'.$expectedNumPic.'.jpg';
  
             if(file_exists($fileAddr)){
                //  $encode = file_get_contents($fileAddr);

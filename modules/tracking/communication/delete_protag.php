@@ -8,9 +8,9 @@
 			$protag = new protag();
 			$result = $protag -> prDeleteProtag($mac_addr);
 			if ($result) {
-				trackingRespond(200);
+				respondToClient(200);
 			} else {
-				trackingRespond(400);
+				respondToClient(400);
 			}
 		}
 	}

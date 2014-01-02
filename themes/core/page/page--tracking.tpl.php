@@ -81,10 +81,7 @@
 	      		<br></br>
 	      		<div class="alertMessage" id="alertMessage0"></div>
 	      		<div id="deletePro">
-	      			<form action="sites/all/modules/tracking/communication/delete_protag.php" method="post">
-	      				<input type="hidden" id="mac_addr0" name="mac_ad">
-	      				<a id='deleteProtag0' onclick="$(this).closest('form').submit()">Delete This Belonging</a>
-	      			</form>
+	      			<a id='deleteProtag0' data-toggle='modal' data-target='#deleteProtag'>Delete This Belonging</a>
 	      		</div>
 	  	  </div>
 	    </div><!-- /.modal-content -->
@@ -119,10 +116,10 @@
 				<br></br>
 	      		<div class="alertMessage" id="alertMessage1"></div>
 	      		<div id="deletePro">
-	      			<form action="sites/all/modules/tracking/communication/delete_protag.php" method="post">
-	      				<input type="hidden" id="mac_addr1" name="mac_ad">
-	      				<a id='deleteProtag1' onclick="$(this).closest('form').submit()">Delete This Belonging</a>
-	      			</form>
+	      			<!-- <form action="sites/all/modules/tracking/communication/delete_protag.php" method="post">
+	      				<input type="hidden" id="mac_addr1" name="mac_ad"> -->
+	      				<a id='deleteProtag1' data-toggle='modal' data-target='#deleteProtag'>Delete This Belonging</a>
+	      			<!-- </form> -->
 	      		</div>
 	  	  </div>
 	    </div><!-- /.modal-content -->
@@ -157,10 +154,7 @@
 				<br></br>
 	      		<div class="alertMessage" id="alertMessage2"></div>
 	      		<div id="deletePro">
-	      			<form action="sites/all/modules/tracking/communication/delete_protag.php" method="post">
-	      				<input type="hidden" id="mac_addr2" name="mac_ad">
-	      				<a id='deleteProtag2' onclick="$(this).closest('form').submit()">Delete This Belonging</a>
-	      			</form>
+	      			<a id='deleteProtag2' data-toggle='modal' data-target='#deleteProtag'>Delete This Belonging</a>
 	      		</div>
 	  	  </div>
 	    </div><!-- /.modal-content -->
@@ -195,10 +189,7 @@
 	      		<br></br>
 	      		<div class="alertMessage" id="alertMessage3"></div>
 	      		<div id="deletePro">
-	      			<form action="sites/all/modules/tracking/communication/delete_protag.php" method="post">
-	      				<input type="hidden" id="mac_addr3" name="mac_ad">
-	      				<a id='deleteProtag3' onclick="$(this).closest('form').submit()">Delete This Belonging</a>
-	      			</form>
+	      			<a id='deleteProtag3' data-toggle='modal' data-target='#deleteProtag'>Delete This Belonging</a>
 	      		</div>
 	  	  </div>
 	    </div><!-- /.modal-content -->
@@ -230,6 +221,23 @@
 	      <div class="modal-footer">
 	      	<button class="btn btn-primary" id="sendReport">Save changes</button>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+
+	<div class="modal fade" id="deleteProtag" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">Delete Protag </h4>
+	      </div>
+	      <div class="modal-body">
+	          Are you sure to delete this protag?
+	      <div class="modal-footer">
+	      	<button class="btn btn-primary" id="confirmDelete">Yes</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
 	      </div>
 	    </div><!-- /.modal-content -->
 	  </div><!-- /.modal-dialog -->

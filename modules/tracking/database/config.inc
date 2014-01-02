@@ -57,9 +57,9 @@
 	*/
 	define('ACTIVATION_MAIL'				,'activation_mail');
 	define('RESET_MAIL'						,'reset_mail');
-	define('LAST_FLARE_MAIL'				,'lastFlare');
 	define('PASSIVE_TRACK_MAIL'				,'passive_track_mail');
 	define('NON_USER_FOUND_MAIL'			,'non_user_found_mail');
+	define('LAST_FLARE_MAIL'				,'last_flare_mail');
 	/*
 			Number
 	*/

@@ -835,16 +835,13 @@
             if(!$executeQuery){
                 return false;
             }
-            else if(mysql_num_rows($executeQuery) == 0){
-                return false;
-            } else {
-                $arr = array();
-            	while($row = mysql_fetch_array($executeQuery, MYSQL_ASSOC)){
-				    array_push($arr, $row);
-                }
-
-                return $arr;
+            else 
+                if(mysql_num_rows($executeQuery) == MAXIMUM_USER){
+                    $row = mysql_fetch_array($executeQuery, MYSQL_ASSOC);
+                    return $row;
             }
+            else
+                return false; 
         }
 
         /*=================================================

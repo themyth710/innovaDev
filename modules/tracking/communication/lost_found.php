@@ -19,14 +19,15 @@
 			} else if($lost_status == -1){
 				$current_result = array('mac_ad' => $mac_addr,
 										'lost_status' => -2);
-				array_push($result_array, $current_result);
+				array_push($result_array, $current_result);	
 			} else if($lost_status == 0){
 				$current_result = array('mac_ad' => $mac_addr,
 										'lost_status' => 0);
 				array_push($result_array, $current_result);
 			} else {
 				$lost_report = $protag -> prRetrieveProtagLostReport($mac_addr);
-				$protag_name = $protag -> prRetrieveProtagName($mac_addr);
+				//$protag_name = $protag -> prRetrieveProtagName($mac_addr);
+				file_put_contents('yourfile.txt', serialize($lost_report));
 				if ($lost_report['will_notify']) {
 					$protag_name = $protag -> prRetrieveProtagName($mac_addr);
 					$current_result = array('mac_ad' => $mac_addr,
@@ -40,7 +41,7 @@
 					$phone = new phone();
 				} else {
 					$current_result = array('mac_ad' => $mac_addr,
-										'lost_status' => 1);
+										'lost_status' => $lost_report['will_notify']);
 					array_push($result_array, $current_result);
 				}
 			}

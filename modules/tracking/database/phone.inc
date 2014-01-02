@@ -188,8 +188,8 @@
                 $userID = $this -> retrieve ->retrieveUserID($email);
             }
 
-            //$addr = '../UserRegion/ImageCapture/'.$userID.'_img/';
-            $addr = '/';
+            $addr = '../UserRegion/ImageCapture/'.$userID.'_img/';
+            //$addr = '/';
 
             $imageNum = $this -> retrieve -> retrieveImageNum($userID);
 
@@ -310,12 +310,17 @@
                
                if($lost == 1){
                     //send message to user
-                    $this -> phUpdatePhoneLocation($macPhone, null, $lat, $long, $acc, $bat);
+                    $this -> phUpdatePhoneLocation($macPhone, null, $lat, $long, $acc, $bat, $dateCreate);
                     $this -> update -> updatePhoneLostNotification($macPhone, null , '2');
 
                     $email = $this -> retrieve -> retrieveEmailUsingUserID($userID);
+                    $macPhoneArr = array($macPhone);
+                    $regID = $this -> retrieve -> retrieveRegIDFromMacPhoneList($macPhoneArr);
+
+                    $phoneName = $this -> retrieve -> retrievePhoneName($regID[0]);
 
                     $params = array('subject' => 'Send data',
+                            'phoneName' => $phoneName,
                             'date'    => $dateCreate,
                             'acc'     => $acc,
                             'lat'     => $lat,
@@ -331,17 +336,25 @@
                             //send email to user here
 
                             $email = $this -> retrieve -> retrieveEmailUsingUserID($userID);
+                            
+                            $macPhoneArr = array($macPhone);
+                            $regID = $this -> retrieve -> retrieveRegIDFromMacPhoneList($macPhoneArr);
 
-                            $params = array('subject' => 'Send data',
+                            $phoneName = $this -> retrieve -> retrievePhoneName($regID[0]);
+
+                            $params = array('subject' => 'Your phone location with passive track',
+                                    'phoneName' => $phoneName,
                                     'date'    => $dateCreate,
                                     'acc'     => $acc,
                                     'lat'     => $lat,
-                                    'long'    => $long
+                                    'long'    => $long,
+                                    'bat'     => $bat
                                     );
                             $this -> send -> sendMail(PASSIVE_TRACK_MAIL, $email, $params);
                         }
                         else{
                             //not send email to user
+                            return;
                         }
                     }
             }
@@ -349,7 +362,7 @@
         }
 
         public function phCheckAccuracyAndDateTimeForLost($acc, $lastDateTime, $currentDateTime){
-            if($this -> validate -> isDateExceedOtherDate($$lastDateTime, $currentDateTime, 0.6)){
+            if($this -> validate -> isDateExceedOtherDate($lastDateTime, $currentDateTime, 0.01)){
                 if($acc > SEND_MAIL_ACCURACY){
                      $this -> phUpdatePhoneLocation($macPhone, null, $lat, $long, $acc, $bat, $currentDateTime);
                      return true;
@@ -358,17 +371,20 @@
             return false;
         }
 
-        public function phLastFlareAction($userID, $lat, $long, $acc, $bat, $dateCreate){
+        public function phLastFlareAction($userID, $lat, $long, $acc, $bat, $dateCreate, $macPhone){
             $email = $this -> retrieve -> retrieveEmailUsingUserID($userID);
-            
-            $params = array('subject' => 'Send data',
+            $macPhoneArr = array($macPhone);
+            $regID = $this -> retrieve -> retrieveRegIDFromMacPhoneList($macPhoneArr);
+            $phoneName = $this -> retrieve -> retrievePhoneName($regID[0]);
+            $params = array('subject' => 'Your phone location with last flare',
+                            'phoneName' => $phoneName,
                             'date'    => $dateCreate,
                             'acc'     => $acc,
                             'lat'     => $lat,
                             'long'    => $long,
                             'bat'     => $bat
                             );
-            $this           -> send -> sendMail(PASSIVE_TRACK_MAIL, $email, $params);   
+            $this           -> send -> sendMail(LAST_FLARE_MAIL, $email, $params);   
         }
 
         /*====================================================

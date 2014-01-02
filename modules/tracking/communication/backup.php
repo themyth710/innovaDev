@@ -4,17 +4,33 @@
 	require_once(dirname(__FILE__).'/../database/config.inc');
 
 	$content = file_get_contents('php://input');
-#
+
 	$xml_source = str_replace(array("&amp;", "&"), array("&", "&amp;"), $content);
-    #$xml = preg_replace('#&(?=[a-z_0-9]+=)#', '&amp;', $content);
 
 	$userID = null;
 	$email  = null;
-
-	$xmlReader = new XMLReader();
-	$xmlReader->open('php://input');
 	
+	
+	//Fixing file formating of iOS
+	$start = strpos($xml_source,'<?xml');
+	if($start==false){
+		$start = strpos($xml_source, '<email>');
+		if($start==false)
+			return;
+	}
+	
+	$end = strpos($xml_source,'</backup>');
+	if($end==false)
+		return;
+	$end += 9; //strlen of </backup>
+	$xml_source = substr($xml_source,$start,$end - $start);
+		
+	
+	$xmlReader = new XMLReader();
+	$xmlReader->XML($xml_source);
+
 	while($xmlReader -> read()){
+	
 		if($xmlReader->name == 'userID'){
 			$userID =  $xmlReader -> readString();
 			break;
@@ -24,9 +40,8 @@
 				$email = $xmlReader -> readString();
 				break;
 		}
-	} 
-	//file_put_contents('../UserRegion/Backup/yourfile.xml',$xml_source);
+	}
+	
 	$phone = new phone();
 	$phone -> phBackupUserContact($xml_source, $userID, $email);
-
 ?>
