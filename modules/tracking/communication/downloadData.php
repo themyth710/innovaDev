@@ -20,6 +20,7 @@
 				$br = new browser();
 				if($br -> brCheckSession($hashUserID, $email)){
 					$userID = $br -> brRetrieveUserID($hashUserID);
+					
 					$br -> brDownloadBackupFile($userID);
 				}
 			}		

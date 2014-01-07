@@ -3,3 +3,6 @@
 [27-Dec-2013 18:20:18] PHP Parse error:  syntax error, unexpected T_WHILE in /home/mycloset/innova/development/sites/all/modules/tracking/communication/backup.php on line 38
 [27-Dec-2013 18:20:26] PHP Parse error:  syntax error, unexpected T_WHILE in /home/mycloset/innova/development/sites/all/modules/tracking/communication/backup.php on line 38
 [27-Dec-2013 18:22:14] PHP Parse error:  syntax error, unexpected T_WHILE in /home/mycloset/innova/development/sites/all/modules/tracking/communication/backup.php on line 38
+[02-Jan-2014 09:50:51] PHP Fatal error:  Call to undefined function  encode_json() in /home/mycloset/innova/development/sites/all/modules/tracking/communication/lost_found.php on line 30
+[02-Jan-2014 10:16:53] PHP Fatal error:  Call to undefined function  double() in /home/mycloset/innova/development/sites/all/themes/core/mail/htmlmail--Tracking--last_flare_mail.tpl.php on line 9
+[03-Jan-2014 11:18:24] PHP Parse error:  syntax error, unexpected $end in /home/mycloset/innova/development/sites/all/modules/tracking/database/phone.inc on line 99

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <backup>
-	<userID>5</userID>
-	<email>sheema.p@innovatechnology.com.sg</email>
+	<userID>20</userID>
+	<email>luk_mk@hotmail.com</email>
 	<contact>
 		<contact_name>AbramLi</contact_name>
 		<contact_number>9113 5406</contact_number>
@@ -1003,7 +1003,6 @@
 	</contact>
 	<contact>
 		<contact_name>ShiaZhisheng</contact_name>
-		<contact_number>+6596359086</contact_number>
 	</contact>
 	<contact>
 		<contact_name>JianHui</contact_name>
@@ -1115,5 +1114,12 @@
 	<contact>
 		<contact_name>HồngNhậtVương</contact_name>
 		<contact_number>+6592414492</contact_number>
+	</contact>
+	<contact>
+		<contact_name>KhengMengYeo</contact_name>
+	</contact>
+	<contact>
+		<contact_name>YeeTat</contact_name>
+		<contact_number>+6581276906</contact_number>
 	</contact>
 </backup>

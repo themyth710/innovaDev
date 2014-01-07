@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"info",
+				"infowindow"
+			],
+			[
+				"xml",
+				"xml_source"
+			],
+			[
+				"phone",
+				"phoneName"
+			],
+			[
 				"inli",
 				"inline-block  (value)"
 			],
@@ -98,10 +110,6 @@
 			[
 				"mark",
 				"markupPhoneInfoPopup"
-			],
-			[
-				"xml",
-				"xmlReader"
 			],
 			[
 				"clie",
@@ -292,42 +300,18 @@
 	"buffers":
 	[
 		{
-			"file": "modules/tracking/database/config.inc",
-			"settings":
-			{
-				"buffer_size": 9403,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "modules/tracking/database/phone.inc",
-			"settings":
-			{
-				"buffer_size": 22998,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "themes/core/mail/htmlmail--Tracking--last_flare_mail.tpl.php",
-			"settings":
-			{
-				"buffer_size": 3859,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "themes/core/mail/htmlmail--Tracking--passive_track_mail.tpl.php",
-			"settings":
-			{
-				"buffer_size": 3358,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "modules/tracking/tracking.module",
 			"settings":
 			{
-				"buffer_size": 10380,
+				"buffer_size": 10476,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "modules/tracking/js/tracking_ui.js",
+			"settings":
+			{
+				"buffer_size": 79166,
 				"line_ending": "Unix"
 			}
 		}
@@ -388,21 +372,29 @@
 	},
 	"file_history":
 	[
-		"/home/nhat/project/modules/tracking/communication/phoneDataReceive.php",
 		"/home/nhat/project/modules/tracking/database/phone.inc",
+		"/home/nhat/project/modules/tracking/communication/downloadData.php",
+		"/home/nhat/project/modules/tracking/communication/backup.php",
+		"/home/nhat/project/modules/tracking/communication/yourfile.txt",
+		"/var/www/dump/test.php",
+		"/var/www/dump/test.xml",
+		"/var/www/dump/test2.xml",
+		"/home/nhat/project/modules/tracking/communication/phoneDataReceive.php",
+		"/home/nhat/project/modules/tracking/communication/error_log",
+		"/home/nhat/project/themes/core/css/login/login.css",
+		"/home/nhat/project/modules/tracking/database/config.inc",
+		"/home/nhat/project/modules/tracking/tracking.module",
+		"/home/nhat/project/themes/core/mail/googleMapEnc.php",
 		"/home/nhat/project/themes/core/mail/htmlmail--Tracking--passive_track_mail.tpl.php",
+		"/home/nhat/project/themes/core/mail/htmlmail--Tracking--last_flare_mail.tpl.php",
+		"/home/nhat/project/modules/tracking/database/support/retrieveData.inc",
+		"/home/nhat/project/modules/tracking/communication/lost_found.php",
 		"/home/nhat/project/modules/tracking/database/db_functions.inc",
 		"/home/nhat/project/modules/tracking/database/browser.inc",
-		"/home/nhat/project/modules/tracking/tracking.module",
-		"/home/nhat/project/modules/tracking/database/config.inc",
 		"/home/nhat/project/modules/tracking/database/activityLog.inc",
-		"/home/nhat/project/modules/tracking/communication/backup.php",
-		"/home/nhat/project/modules/tracking/communication/error_log",
 		"/home/nhat/project/modules/tracking/communication/passiveTrack.php",
-		"/home/nhat/project/modules/tracking/database/support/retrieveData.inc",
 		"/home/nhat/project/modules/tracking/js/tracking_ui.js",
 		"/home/nhat/project/modules/tracking/communication/clientAction.php",
-		"/home/nhat/project/modules/tracking/communication/downloadData.php",
 		"/home/nhat/project/modules/tracking/communication/test2.txt",
 		"/home/nhat/Downloads/backup.xml",
 		"/home/nhat/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
@@ -433,8 +425,6 @@
 		"/home/nhat/project/modules/tracking.zip",
 		"/home/nhat/project/modules/mailsystem/LICENSE.txt",
 		"/home/nhat/project/themes/core/css/tracking/tracking.css",
-		"/var/www/dump/test.php",
-		"/var/www/dump/test.xml",
 		"/home/nhat/Downloads/yourFile.xml",
 		"/home/nhat/project/modules/tracking/communication/test.txt",
 		"/home/nhat/project/modules/tracking/tracking.info",
@@ -456,7 +446,6 @@
 		"/home/nhat/Downloads/tracking/js/tracking_ajax.js",
 		"/home/nhat/project/modules/tracking/communication/clientDataChecking.php",
 		"/home/nhat/project/modules/tracking/communication/sendMessage.php",
-		"/home/nhat/project/themes/core/css/login/login.css",
 		"/home/nhat/.config/sublime-text-3/Packages/SFTP/Default (Linux).sublime-keymap",
 		"/home/nhat/project/modules/tracking/database/support/displayData.inc",
 		"/var/www/innova_dev/sites/all/themes/core/css/login/login.css",
@@ -490,7 +479,7 @@
 	],
 	"find":
 	{
-		"height": 36.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -504,6 +493,24 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"showPhoneTRackingPage",
+			"trackingPage",
+			"oms",
+			"loadListMapLocation",
+			"retrieveProtag",
+			"showTrack",
+			"belonging",
+			"marker",
+			"showTrackBelongingPage",
+			"trackBelonging",
+			"trackBeloging",
+			"nav-tr-belong",
+			"PHONE_NAME",
+			"phStorePHoneInfo",
+			"lost",
+			"while",
+			"retrieveLost",
+			"lostRe",
 			"mail",
 			"phUpdatePhone",
 			"retrievePhoneLocation",
@@ -613,25 +620,7 @@
 			"activityListDisplay",
 			"displaySuccessCallBackAction",
 			"displaySucc",
-			"slider",
-			"phoneListDisplay",
-			"displaySuccessCallBackAction",
-			"sendMessage",
-			"track-button",
-			"PHONE_ACTION.track",
-			"track ",
-			"track",
-			"startTrack",
-			"innerAction",
-			"brSendPhone",
-			"brSendPhoneRequest",
-			"dataSuccessChecking",
-			"displaySuccessCallBackAction",
-			"displaySuccess",
-			"retrieveRegIDFrom",
-			"retrievePhone",
-			".instruction",
-			"send"
+			"slider"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -649,24 +638,24 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "modules/tracking/database/config.inc",
+					"file": "modules/tracking/tracking.module",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9403,
+						"buffer_size": 10476,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1750,
-								1750
+								7990,
+								7990
 							]
 						],
 						"settings":
@@ -782,26 +771,26 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 916.0,
+						"translation.y": 3726.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "modules/tracking/database/phone.inc",
+					"file": "modules/tracking/js/tracking_ui.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 22998,
+						"buffer_size": 79166,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								17637,
-								17637
+								60703,
+								60703
 							]
 						],
 						"settings":
@@ -913,416 +902,12 @@
 							"remote_loading": false,
 							"sublime_auto_complete": true,
 							"synced": true,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false,
+							"word_separators": "./\\\\()\\\"\\'-:,.;<>~!@#%^&*|+=[]{}`~?"
 						},
 						"translation.x": 0.0,
-						"translation.y": 8456.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "themes/core/mail/htmlmail--Tracking--last_flare_mail.tpl.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3859,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								542,
-								542
-							]
-						],
-						"settings":
-						{
-							"codeintel": true,
-							"codeintel_config":
-							{
-								"JavaScript":
-								{
-									"codeintel_max_recursive_dir_depth": 2,
-									"codeintel_scan_files_in_project": false,
-									"javascriptExtraPaths":
-									[
-									]
-								},
-								"PHP":
-								{
-									"codeintel_max_recursive_dir_depth": 5,
-									"codeintel_scan_files_in_project": false,
-									"phpExtraPaths":
-									[
-									]
-								},
-								"Python":
-								{
-									"env":
-									{
-									}
-								}
-							},
-							"codeintel_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_live": true,
-							"codeintel_live_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_max_recursive_dir_depth": 10,
-							"codeintel_scan_exclude_dir":
-							{
-								"JavaScript":
-								[
-									"/build/",
-									"/min/"
-								]
-							},
-							"codeintel_scan_files_in_project": true,
-							"codeintel_selected_catalogs":
-							[
-								"PyWin32",
-								"jQuery",
-								"Rails"
-							],
-							"codeintel_snippets": true,
-							"codeintel_syntax_map":
-							{
-								"Python Django": "Python"
-							},
-							"codeintel_tooltips": "popup",
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"sublime_auto_complete": true,
-							"synced": true,
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 103.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "themes/core/mail/htmlmail--Tracking--passive_track_mail.tpl.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3358,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								163,
-								163
-							]
-						],
-						"settings":
-						{
-							"codeintel": true,
-							"codeintel_config":
-							{
-								"JavaScript":
-								{
-									"codeintel_max_recursive_dir_depth": 2,
-									"codeintel_scan_files_in_project": false,
-									"javascriptExtraPaths":
-									[
-									]
-								},
-								"PHP":
-								{
-									"codeintel_max_recursive_dir_depth": 5,
-									"codeintel_scan_files_in_project": false,
-									"phpExtraPaths":
-									[
-									]
-								},
-								"Python":
-								{
-									"env":
-									{
-									}
-								}
-							},
-							"codeintel_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_live": true,
-							"codeintel_live_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_max_recursive_dir_depth": 10,
-							"codeintel_scan_exclude_dir":
-							{
-								"JavaScript":
-								[
-									"/build/",
-									"/min/"
-								]
-							},
-							"codeintel_scan_files_in_project": true,
-							"codeintel_selected_catalogs":
-							[
-								"PyWin32",
-								"jQuery",
-								"Rails"
-							],
-							"codeintel_snippets": true,
-							"codeintel_syntax_map":
-							{
-								"Python Django": "Python"
-							},
-							"codeintel_tooltips": "popup",
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"sublime_auto_complete": true,
-							"synced": true,
-							"syntax": "Packages/PHP/PHP.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "modules/tracking/tracking.module",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10380,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2043,
-								2043
-							]
-						],
-						"settings":
-						{
-							"codeintel": true,
-							"codeintel_config":
-							{
-								"JavaScript":
-								{
-									"codeintel_max_recursive_dir_depth": 2,
-									"codeintel_scan_files_in_project": false,
-									"javascriptExtraPaths":
-									[
-									]
-								},
-								"PHP":
-								{
-									"codeintel_max_recursive_dir_depth": 5,
-									"codeintel_scan_files_in_project": false,
-									"phpExtraPaths":
-									[
-									]
-								},
-								"Python":
-								{
-									"env":
-									{
-									}
-								}
-							},
-							"codeintel_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_live": true,
-							"codeintel_live_enabled_languages":
-							[
-								"JavaScript",
-								"Mason",
-								"XBL",
-								"XUL",
-								"RHTML",
-								"SCSS",
-								"Python",
-								"HTML",
-								"Ruby",
-								"Python3",
-								"XML",
-								"Sass",
-								"XSLT",
-								"Django",
-								"HTML5",
-								"Perl",
-								"CSS",
-								"Twig",
-								"Less",
-								"Smarty",
-								"Node.js",
-								"Tcl",
-								"TemplateToolkit",
-								"PHP"
-							],
-							"codeintel_max_recursive_dir_depth": 10,
-							"codeintel_scan_exclude_dir":
-							{
-								"JavaScript":
-								[
-									"/build/",
-									"/min/"
-								]
-							},
-							"codeintel_scan_files_in_project": true,
-							"codeintel_selected_catalogs":
-							[
-								"PyWin32",
-								"jQuery",
-								"Rails"
-							],
-							"codeintel_snippets": true,
-							"codeintel_syntax_map":
-							{
-								"Python Django": "Python"
-							},
-							"codeintel_tooltips": "popup",
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"sublime_auto_complete": true,
-							"synced": true,
-							"syntax": "Packages/HTML/HTML.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 696.0,
+						"translation.y": 31510.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1332,7 +917,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 28.0
+		"height": 26.0
 	},
 	"input":
 	{
@@ -1368,7 +953,7 @@
 	"project": "innova.sublime-project",
 	"replace":
 	{
-		"height": 52.0
+		"height": 48.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1402,7 +987,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 409.0,
+	"side_bar_width": 228.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

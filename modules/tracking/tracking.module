@@ -225,6 +225,7 @@
 			drupal_add_js(drupal_get_path('module', 'Tracking') . '/js/jquery.fancybox.js', array('scope' => 'footer'));
 			drupal_add_js(drupal_get_path('theme', 'INNOVA') . 'sites/all/themes/core/js/login/jquery.formvalidate.min.js', array('scope' => 'footer'));
 			drupal_add_js("http://maps.googleapis.com/maps/api/js?sensor=false");
+			drupal_add_js(drupal_get_path('module', 'Tracking') . '/js/OverlappingMarkerSpiderfier.js');
 			drupal_add_js(drupal_get_path('module', 'Tracking') . '/js/tracking_ajax.js', array('scope' => 'footer'));
 			drupal_add_js(drupal_get_path('module', 'Tracking') . '/js/tracking_ui.js', array('scope' => 'footer'));
 			drupal_add_js(drupal_get_path('module', 'Tracking') . '/js/tracking.js', array('scope' => 'footer'));

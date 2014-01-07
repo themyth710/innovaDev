@@ -78,7 +78,7 @@
 	define('USER_CMD_SET'					, 0);
 	define('MAXIMUM_IMAGE'					, 6);
 	define('MAXIMUM_PROTAG_MAC'				, 1);
-	define('SEND_MAIL_ACCURACY'				, 15);
+	define('SEND_MAIL_ACCURACY'				, 10);
 	define('MAXIMUM_NON_USER_REPORT'        , 3);
 	define('VALID_SERIAL_NUM_LENGTH'   		, 8);
 	/*

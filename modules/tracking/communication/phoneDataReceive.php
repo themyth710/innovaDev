@@ -58,7 +58,6 @@
 					$dateCreate = $_POST[DATE_CREATE];
 					$phoneName  = $_POST[PHONE_NAME];
 					$imei		= $_POST[IMEI];
-					
 					//check the input format
 					if($phone -> dbValidateInputFormat(null ,null, $regID, $macPhone, $dateCreate)){
 						$phone -> phPhoneLogin(null, null, $regID , $macPhone , $dateCreate , $typePhone , $userID, $phoneName, $imei);

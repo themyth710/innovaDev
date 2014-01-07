@@ -9,13 +9,13 @@
 
 	$userID = null;
 	$email  = null;
-	
-	
+		
 	//Fixing file formating of iOS
 	$start = strpos($xml_source,'<?xml');
-	if($start==false){
+	
+	if($start===false){
 		$start = strpos($xml_source, '<email>');
-		if($start==false)
+		if($start===false)
 			return;
 	}
 	
@@ -23,14 +23,15 @@
 	if($end==false)
 		return;
 	$end += 9; //strlen of </backup>
-	$xml_source = substr($xml_source,$start,$end - $start);
-		
+	$xml_source = substr($xml_source,$start,$end - $start);	
 	
 	$xmlReader = new XMLReader();
-	$xmlReader->XML($xml_source);
+
+	$xmlReader->xml($xml_source);
+
 
 	while($xmlReader -> read()){
-	
+		
 		if($xmlReader->name == 'userID'){
 			$userID =  $xmlReader -> readString();
 			break;
@@ -41,7 +42,6 @@
 				break;
 		}
 	}
-	
 	$phone = new phone();
 	$phone -> phBackupUserContact($xml_source, $userID, $email);
 ?>

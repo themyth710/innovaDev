@@ -127,7 +127,8 @@ var ui = (function ($){
 		_directory : 'http://innovatechnology.com.sg/development/sites/all/modules/tracking/UserRegion/ImageCapture/',
                 _directoryBackUp :
 'http://innovatechnology.com.sg/development/sites/all/modules/tracking/UserRegion/BackUp/',
-
+		
+		_oms : null,
 	};
 
 	/*==============
@@ -872,6 +873,8 @@ var ui = (function ($){
 	ui.prototype.showPhoneTrackingPage = function(phoneID, typePhone, phoneName){
 
 		if(api._markerList){
+			api._oms.clearMarkers();
+			api._oms = null;
 			for(var i = 0; i < api._markerList.length; i++){
 				api._markerList[i].setMap(null);
 				google.maps.event.clearInstanceListeners(api._markerList[i]);
@@ -1097,9 +1100,13 @@ var ui = (function ($){
 		api._this.displayObject($('#content'), false);
 		
 	}
+	
+	ui.prototype.selectBackupPhone = function(){
+	}
 
         ui.prototype.backupContactAction = function(){
           	$('#backup-select-dropdown').change(function() {
+          		alert('test');
 			$('#backup-phonename').text(api._phoneList[$('#backup-select-dropdown').val()].name+" Contacts");
 		});
           $('#backup-retrieve-button').on('click', function(){
@@ -1636,7 +1643,7 @@ var ui = (function ($){
 
 	}
 	var currentReportIndex ;
-	ui.prototype.loadListMapLocation = function(value){
+	/*ui.prototype.loadListMapLocation = function(value){
 		
 		if(api._marker)	
 			api._marker.setMap(null);
@@ -1655,6 +1662,9 @@ var ui = (function ($){
 		api._tagDate_list = new Array();
 		api._serial_list = new Array();
 		api._lost_info_list = new Array();
+
+		var oms = new OverlappingMarkerSpiderfier(api._map, {markersWontMove: true, markersWontHide: true, keepSpiderfied : true});
+
 
 		if(value && value.data && value.data instanceof Array){
 			for(var i = 0; i < value.data.length ;i++){
@@ -1683,7 +1693,8 @@ var ui = (function ($){
 
 					api._markerList[i]=marker;
 
-					marker.setPosition(point);
+					//marker.setPosition(point);
+					oms.addMarker(marker);
 				}
 				else
 					continue;
@@ -1701,7 +1712,10 @@ var ui = (function ($){
 
 				infoWindowArray[i]=infowindow;
 
-				api._this.listenMarker(marker, infowindow, i);
+				//api._this.listenMarker(marker, infowindow, i);
+				oms.addListener('click', function(marker, event){
+					infowindow.open(api._map, marker);
+				}); 	
 			}
 
 			if(infoWindowArray){
@@ -1712,6 +1726,86 @@ var ui = (function ($){
 		}
 
 		api._this.setBound();
+
+		return false;
+	}*/
+
+	ui.prototype.loadListMapLocation = function(value){
+		
+		if(api._marker)	
+			api._marker.setMap(null);
+		
+		if(api._markerList){
+			for(var i = 0; i < api._markerList.length; i++){
+				api._markerList[i].setMap(null);
+				google.maps.event.clearInstanceListeners(api._markerList[i]);
+			}
+		}
+
+		api._markerList = new Array();
+		infoWindowArray = new Array();
+		api._protag_name_list = new Array();
+		api._location_list = new Array();
+		api._tagDate_list = new Array();
+		api._serial_list = new Array();
+		api._lost_info_list = new Array();
+
+		/*spider marker*/
+		api._oms = new OverlappingMarkerSpiderfier(api._map, {markersWontMove: true, markersWontHide: true, keepSpiderfied : true});
+
+		var infowindow = new google.maps.InfoWindow();
+		
+		api._oms.addListener('click', function(marker, event){
+			infowindow.setContent(marker.content);
+			infowindow.open(api._map, marker);
+		});
+		/*spider marker*/
+
+		if(value && value.data && value.data instanceof Array){
+			for(var i = 0; i < value.data.length ;i++){
+				api._protag_name_list[i]  = value.data[i].protag[2];
+				api._tagDate_list[i]      = value.data[i].protag[3];
+				lat   	   = value.data[i].protag[0];
+				long  	   = value.data[i].protag[1];
+				api._ad_mac_list[i]  = value.data[i].protag[4];
+				api._lost_info_list[i]  = value.data[i].protag[5]; //lost status
+				api._serial_list[i] = value.data[i].protag['serialNumber'];	
+							
+				if(api._serial_list[i]===null){
+					api._serial_list[i] = "click to edit";
+				}
+
+				var contentString =  '<div id="infowindowDiv"><center><div><strong><a id="link'+i+'" href="#" data-toggle="modal" data-target="#protag'+i+'">'+ api._protag_name_list[i] + '</a></strong></div>';					
+					if(api._lost_info_list[i]==1){
+						contentString += "<div class='lostLabel' id='statusLabel" + i + "'> LOST </div></dvi></div></center>";
+					}
+					else{
+						contentString += "<div class='securedLabel' id ='statusLabel" + i + "'> Secured </div></center></div>";
+				}
+
+				if(lat && long){
+					var point = new google.maps.LatLng(lat,long);	
+
+					api._this.googleReverseGeo(lat,long,i);
+
+					var marker = new google.maps.Marker({
+						map: api._map,
+						position: point,
+					});
+
+					api._markerList[i] = marker;
+					
+					marker.content = contentString;			  
+					
+					api._oms.addMarker(marker);
+				}
+				else
+					continue;
+			}
+		}
+
+		api._this.setBound();
+
 		return false;
 	}
 
@@ -1752,7 +1846,7 @@ var ui = (function ($){
 	   $('#serial_num'+i).html(api._serial_list[i]);
 	}
 
-	ui.prototype.listenMarker = function(marker, tooltip, i){
+	ui.prototype.listenMarker = function(marker, tooltip, i, oms){
 		
 	    // so marker is associated with the closure created for the listenMarker function call
 	    google.maps.event.addListener(marker, 'click', function() {
@@ -1766,8 +1860,8 @@ var ui = (function ($){
 								// $('#myModal').modal({
 								//     show: true,
 								// });
-	                    });
-		}
+	                   });
+	}
 
 	ui.prototype.setBound = function(){
 		var bounds = new google.maps.LatLngBounds();

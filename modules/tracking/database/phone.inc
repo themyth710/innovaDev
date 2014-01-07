@@ -70,74 +70,87 @@
                 }
             }
             else{
-		if($typePhone == ANDROID){
-			//$email and $password will be null here
-			//for android only
-			//userList will contain ID1, act1, ID2, act2
-			if($userList = $this -> retrieve -> retrieveUserIDFromPhoneUserTable($macPhone)){
-				//Only if user is in the first column then we reply as true
-				if($this -> validate -> isUserExistInPhoneUserTable($userList, $userID, true)){
-					//if yes -> update the registration id according to the macphoen
-					$this -> update -> updateRegIDForAndroidPhone($macPhone, $regID);
-					$this -> display -> displayJSON('SUCCESS');
-				}
-				else if(!($this -> validate -> isUserExistInPhoneUserTable($userList, null, true))){
-					//check if first user column is empty
-					//if it is empty, add user to that column and reply as success
-					$this -> phStorePhoneUser(null, $macPhone, $typePhone, true, false, null, $userID);  
-					$this -> update -> updateRegIDForAndroidPhone($macPhone, $regID);
-					$this -> display -> displayJSON('SUCCESS');
-				}else{
-					//Since userID does not exist as first user in userList
-					$this -> display -> displayJSON('FAIL', 'MAX_USER');
-				}
+        		
+                if($typePhone == ANDROID){
+        			//$email and $password will be null here
+        			//for android only
+        			//userList will contain ID1, act1, ID2, act2
+        			if($userList = $this -> retrieve -> retrieveUserIDFromPhoneUserTable($macPhone)){
+        				//Only if user is in the first column then we reply as true
+        				if($this -> validate -> isUserExistInPhoneUserTable($userList, $userID, true)){
+        					//if yes -> update the registration id according to the macphoen
+        					$this -> update -> updateRegIDForAndroidPhone($macPhone, $regID);
+        					$this -> display -> displayJSON('SUCCESS');
+        				}
+        				else if(!($this -> validate -> isUserExistInPhoneUserTable($userList, null, true))){
+        					//check if first user column is empty
+        					//if it is empty, add user to that column and reply as success
+        					$this -> phStorePhoneUser(null, $macPhone, $typePhone, true, false, null, $userID);  
+        					$this -> update -> updateRegIDForAndroidPhone($macPhone, $regID);
+        					$this -> display -> displayJSON('SUCCESS');
+        				}
+                        else{
+        					//Since userID does not exist as first user in userList
+        					$this -> display -> displayJSON('FAIL', 'MAX_USER');
+        				}
 	                }
-	                else{
-	                	//creates row in PHONE_INFORMATION_TABLE
-				$this -> phStorePhoneInfo($regID, $macPhone, $dateCreate, $typePhone, $phoneName, $imei);
-				//Create phone entry and set this user as FirstUser
-				//$isFirstUser does not matter, $isStore here is true
-				$this -> phStorePhoneUser(null, $macPhone, $typePhone, true, true, null, $userID);
-				
-				$this -> display -> displayJSON('SUCCESS');
-	                }
-                }else if($typePhone == IOS){
-                	//$email and $password will be null here
-                	//retrieveUserIDFromPhoneUserTable($macPhone = null, $regID = null)
-                	//userList will contain ID1, act1, ID2, act2
-			if($userList = $this -> retrieve -> retrieveUserIDFromPhoneUserTable(null, $regID)){
-				//check if the user already has the phone or not
-				//isUserExistInPhoneUserTable($userList, $userID, $isFirstUser = false, $isSecondUser = false)
-				//Since Phone and user is now 1:1, only the FirstUser is the owner
-				if($this -> validate -> isUserExistInPhoneUserTable($userList, $userID, true)){
-					//Since userID is already the FirstUser, return success message
-					$this -> display -> displayJSON('SUCCESS');
-				}else if(!$this -> validate -> isUserExistInPhoneUserTable($userList, null, true)){
-					//check if FirstUser is null. If it is, it means that there is no ownership of this phone and it can have a new owner
-					//phStorePhoneUser($email, $macPhone, $typePhone, $isFirstUser, $isStore, $regID = null, $userID = null)
-					//$isStore is to create the data row
-					$this -> phStorePhoneUser(null, null, $typePhone, true, false, $regID, $userID);  
-           				$this -> display -> displayJSON('SUCCESS');
-				}else{
-					//Since userID does not exist as first user in userList
-					$this -> display -> displayJSON('FAIL', 'MAX_USER');
-				}
-			}else{
-				//creates row in PHONE_INFORMATION_TABLE
-				//phStorePhoneInfo($regID, $macPhone, $dateCreate, $typePhone)
-				$this -> phStorePhoneInfo($regID, '00:00:00:00:00:00', $dateCreate, $typePhone);
-			
-				//Create phone entry and set this user as FirstUser
-				//$isFirstUser does not matter, $isStore here is true
-				//creates row in iOS_USER_TABLE
-				$this -> phStorePhoneUser(null, null, $typePhone, true, true, $regID, $userID);
-				
-				$this -> display -> displayJSON('SUCCESS');
-				//This is just assuming that only this part creates new row in both PHONE_INFORMATION_TABLE and iOS_USER_TABLE
-				//In the event that there are other places that create the rows, this logic will inevitably fail
-                	}
-            	}
-             }
+	           
+                    else{
+    	                //creates row in PHONE_INFORMATION_TABLE
+    				    $this -> phStorePhoneInfo($regID, $macPhone, $dateCreate, $typePhone, $phoneName, $imei);
+    				    //Create phone entry and set this user as FirstUser
+    				    //$isFirstUser does not matter, $isStore here is true
+    				    $this -> phStorePhoneUser(null, $macPhone, $typePhone, true, true, null, $userID);
+    				
+    				    $this -> display -> displayJSON('SUCCESS');
+    	            }
+
+                }
+                else 
+                    if($typePhone == IOS){
+                    	//$email and $password will be null here
+                    	//retrieveUserIDFromPhoneUserTable($macPhone = null, $regID = null)
+                    	//userList will contain ID1, act1, ID2, act2
+			            if($userList = $this -> retrieve -> retrieveUserIDFromPhoneUserTable(null, $regID)){
+        				
+                        //check if the user already has the phone or not
+        				//isUserExistInPhoneUserTable($userList, $userID, $isFirstUser = false, $isSecondUser = false)
+        				//Since Phone and user is now 1:1, only the FirstUser is the owner
+				            if($this -> validate -> isUserExistInPhoneUserTable($userList, $userID, true)){
+            					//Since userID is already the FirstUser, return success message
+            					$this -> display -> displayJSON('SUCCESS');
+				            }
+                            else 
+                                if(!$this -> validate -> isUserExistInPhoneUserTable($userList, null, true)){
+                					//check if FirstUser is null. If it is, it means that there is no ownership of this phone and it can have a new owner
+                					//phStorePhoneUser($email, $macPhone, $typePhone, $isFirstUser, $isStore, $regID = null, $userID = null)
+                					//$isStore is to create the data row
+					                
+                                    $this -> phStorePhoneUser(null, null, $typePhone, true, false, $regID, $userID);  
+           				            $this -> display -> displayJSON('SUCCESS');
+				            }
+                            else{
+					            //Since userID does not exist as first user in userList
+					            $this -> display -> displayJSON('FAIL', 'MAX_USER');
+				            }
+
+			            }
+                        else{
+            				//creates row in PHONE_INFORMATION_TABLE
+            				//phStorePhoneInfo($regID, $macPhone, $dateCreate, $typePhone)
+            				$this -> phStorePhoneInfo($regID, '00:00:00:00:00:00', $dateCreate, $typePhone);
+            			
+            				//Create phone entry and set this user as FirstUser
+            				//$isFirstUser does not matter, $isStore here is true
+            				//creates row in iOS_USER_TABLE
+            				$this -> phStorePhoneUser(null, null, $typePhone, true, true, $regID, $userID);
+            				
+            				$this -> display -> displayJSON('SUCCESS');
+            				//This is just assuming that only this part creates new row in both PHONE_INFORMATION_TABLE and iOS_USER_TABLE
+            				//In the event that there are other places that create the rows, this logic will inevitably fail
+                        }
+                }
+            }
         }
 
         /*==============================================================
@@ -270,7 +283,7 @@
 
             global $base_url;
             $params    = array('subject' => 'Account Activation',
-                               'token'   => 'http://innovatechnology.com.sg/development/activation?token='.$token
+                               'token'   => 'http://innovatechnology.com.sg/development/activated?token='.$token
                               );
             $this           -> send -> sendMail(ACTIVATION_MAIL, $email, $params);
 
@@ -319,7 +332,7 @@
 
                     $phoneName = $this -> retrieve -> retrievePhoneName($regID[0]);
 
-                    $params = array('subject' => 'Send data',
+                    $params = array('subject' => 'Your phone location with passive track',
                             'phoneName' => $phoneName,
                             'date'    => $dateCreate,
                             'acc'     => $acc,
@@ -331,10 +344,12 @@
                }
                else
                     if($lost == 2){
-                        $lastDateTime = $this -> retrieve -> retrievePhoneLocationLastDateTime($macPhone, $regID);
-                        if($this -> phCheckAccuracyAndDateTimeForLost($acc, $lastDateTime, $dateCreate)){
-                            //send email to user here
 
+                        $lastDateTime = $this -> retrieve -> retrievePhoneLocationLastDateTime($macPhone, $regID);
+
+                        if($acc > SEND_MAIL_ACCURACY){
+
+                            //send type 2 email here
                             $email = $this -> retrieve -> retrieveEmailUsingUserID($userID);
                             
                             $macPhoneArr = array($macPhone);
@@ -350,15 +365,32 @@
                                     'long'    => $long,
                                     'bat'     => $bat
                                     );
-                            $this -> send -> sendMail(PASSIVE_TRACK_MAIL, $email, $params);
+                            $this -> send -> sendMail(PASSIVE_TRACK_MAIL, $email, $params);   
                         }
-                        else{
-                            //not send email to user
+                        else 
+                            if($this -> validate -> isDateExceedOtherDate($lastDateTime, $dateCreate, 0.01)){
+                                //send type 1 email every 10 mins
+                                $email = $this -> retrieve -> retrieveEmailUsingUserID($userID);
+                            
+                                $macPhoneArr = array($macPhone);
+                                $regID = $this -> retrieve -> retrieveRegIDFromMacPhoneList($macPhoneArr);
+
+                                $phoneName = $this -> retrieve -> retrievePhoneName($regID[0]);
+
+                                $params = array('subject' => 'Your phone location with passive track',
+                                        'phoneName' => $phoneName,
+                                        'date'    => $dateCreate,
+                                        'acc'     => $acc,
+                                        'lat'     => $lat,
+                                        'long'    => $long,
+                                        'bat'     => $bat
+                                );
+                                $this -> send -> sendMail(PASSIVE_TRACK_MAIL, $email, $params);
+                            }
+                        else
                             return;
-                        }
                     }
             }
-
         }
 
         public function phCheckAccuracyAndDateTimeForLost($acc, $lastDateTime, $currentDateTime){
