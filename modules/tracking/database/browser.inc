@@ -284,7 +284,7 @@
                 $this -> brSendPhoneRequest($regID, $message);
             }
             else
-                if($typePhone == IOS && ($action==TEST_TRACK || $action==IMAGE_CAPTURE)){
+                if($typePhone == IOS && ($action==TEST_TRACK || $action==IMAGE_CAPTURE || $action==BACKUP_CONTACT)){
                 
                     $tempToken = $this -> retrieve -> retrieve_iOS_NotiTokenUsingRegID($regID);
 			         
@@ -505,7 +505,26 @@
         public function brLoadPhoneInfo($regID, $phoneType){
 
             if($phoneType == IOS){
+                $data    = $this -> retrieve -> retrievePhoneInformation($regID);
 
+                if($data[0] == null){
+                    $data[0] = $phoneType;    
+                }
+
+                if($data[1] == IOS_ID){
+                    $data[1] = IOS;
+                }
+                else{
+                    $data[1] = ANDROID;
+                }
+
+                if($data[2] == null){
+                    $data[2] = '-';
+                }
+                
+                $data = array('phoneName' => $data[0], 'phoneType' => $data[1], 'imei' => $data[2]);
+
+                $this -> display -> displayJSON('SUCCESS', null ,  $data);
             }
             else
                 if($phoneType == ANDROID){
@@ -526,7 +545,7 @@
                     }
 
                     if($data[2] == null){
-                        $data[2] = 'None';
+                        $data[2] = '-';
                     }
                     
                     $data = array('phoneName' => $data[0], 'phoneType' => $data[1], 'imei' => $data[2]);

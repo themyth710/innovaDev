@@ -126,7 +126,7 @@ var ui = (function ($){
 
 		_directory : 'http://innovatechnology.com.sg/development/sites/all/modules/tracking/UserRegion/ImageCapture/',
                 _directoryBackUp :
-'http://innovatechnology.com.sg/development/sites/all/modules/tracking/UserRegion/BackUp/',
+'http://www.innovatechnology.com.sg/development/sites/all/modules/tracking/UserRegion/BackUp/',
 		
 		_oms : null,
 	};
@@ -246,6 +246,7 @@ var ui = (function ($){
 					if(!$(this).hasClass('nav-active')){
 						$(this).addClass('nav-active');
 						api._this.showBackUpDetailsPage();
+	
 					}
 				}
 			else 
@@ -371,17 +372,26 @@ var ui = (function ($){
 			var phoneID   = $(this).closest('.phone-list').children('#remove-phone').attr('data-id');
 			var typePhone = $(this).closest('.phone-list').children('#remove-phone').attr('type-phone');
 
-			var message   = phoneID + '_' + typePhone;
+			if(typePhone=='Android'){
+				var message   = phoneID + '_' + typePhone;
 
-			api._this.bigScreenAction(false);
-			api._this.sendMessage(api.PHONE_ACTION.backupContact, api._this.dataSuccessSendMessageHandle, api._this.displayErrorCallBackAction, message);
-
-			//api._this.send
+				api._this.bigScreenAction(false);
+				api._this.sendMessage(api.PHONE_ACTION.backupContact, api._this.dataSuccessSendMessageHandle, api._this.displayErrorCallBackAction, message);
+			}else if(typePhone=='iOS'){
+				alertify.prompt('Enter bogus message to send', function (e,str) {
+				    if (e) {
+				    	//erase all underscore because it is used as seperator
+				    	api._customiOSMessage = str.replace(/_/g,"");
+				    	if(api._this.sendMessage(api.PHONE_ACTION.backupContact, api._this.dataSuccessSendMessageHandle, api._this.displayErrorCallBackAction)){
+						api._this.bigScreenAction(false);
+					}
+				    }
+				},api.MESSAGE.defaultiOSImageMessage);
+			}
 			
-		})
+			
 
-		$(document).on('click', '#see-backup', function(){
-			window.open('http://innovatechnology.com.sg/development/sites/all/modules/tracking/UserRegion/Backup/yourfile.php', '_blank');
+			
 		})
 
 		$(document).on({
@@ -1067,10 +1077,11 @@ var ui = (function ($){
 
 
 		if(api._firstTimeLoadBackUpDetailsPage){
-			api._this.bigScreenAction(false);
+			api._this.bigScreenAction(true);
 
 			var content  = "<div id = 'backup-Details-container' class = 'backup-Details-container'>";
 				content += "<select id ='backup-select-dropdown'>";
+				content += "<option value='' disabled selected>Select your phone</option>";
 				for(var i=0; i<api._phoneList.length;i++){
 					content += "<option value='"+i+"'>"+api._phoneList[i].name+"</option>";
 				}
@@ -1079,57 +1090,97 @@ var ui = (function ($){
 				content += "<div id='backup-phonename' class = 'text-bold large-text'><h2>Phone name</h2></div>";
 				
 				//scrollbox
-				content	+= "<div class = 'button' style='display:inline-block' id ='backup-retrieve-button'>Retrieve Backup</div>";
-				content	+= "<div class = 'button' style='display:inline-block' id ='backup-download-button'>Download .csv</div>";
+				/*content += "<div style='height:300px;width:250px;overflow-y:auto;'>";
+				
+				for(var i=0;i<10;i++){
+					content += "<div>";
+					content += "<p>Dummy Name </br>123456789</p>";
+
+					
+					content += "</div>";
+				}
+				
+				content += "</div>";*/
+
+				
+				content	+= "<div class = 'button' style='display:inline-block' id ='backup-retrieve-button'>Retrieve New Backup</div>";
+				//content	+= "<div class = 'button' style='display:inline-block' id ='backup-download-button'>Download .csv</div>";
 				
 				content	+= "</div>";
 			
 			//show the content of backup Details
 			api._this.displayHtml($('#content-2'), content);
+			api._this.backupContactAction();
 
-			api._firstTimeLoadBackUpDetailsPage = false;
-			
+			api._firstTimeLoadBackUpDetailsPage = false;			
 		}
 		else{
 			api._this.displayObject($('#backup-Details-container'), true);
 		}
+		
+		if(api._curPhoneID!=null){
+			$('#backup-select-dropdown').val( api._curPhoneID );
+		}
+		
                 api._this.displayObject($('#image-capture-container'), false);
 		api._this.displayObject($('#profile-settings-container'), false);
 		api._this.displayObject($('#content-2'), true);
 		api._this.displayObject($('#map-region'), false);
 		api._this.displayObject($('#content'), false);
+		$('#backup-phonename').text("");
+		
+		api._this.selectBackupPhone();
 		
 	}
 	
 	ui.prototype.selectBackupPhone = function(){
+		if($('#backup-select-dropdown').val()==null)
+			return;
+
+		//change the phone text
+		$('#backup-phonename').text(api._phoneList[$('#backup-select-dropdown').val()].name+" Contacts");
+		api._curPhoneID = $('#backup-select-dropdown').val();
+		api._curPhoneType = api._phoneList[api._curPhoneID].type;
+
+		//populate contacts view
 	}
 
         ui.prototype.backupContactAction = function(){
+
           	$('#backup-select-dropdown').change(function() {
-          		alert('test');
-			$('#backup-phonename').text(api._phoneList[$('#backup-select-dropdown').val()].name+" Contacts");
+          		api._this.selectBackupPhone();
+          			
 		});
-          $('#backup-retrieve-button').on('click', function(){
-			
+		
+          	$('#backup-retrieve-button').on('click', function(){			
 			if(api._curPhoneType == null|| api._curPhoneID == null){
 				alertify.alert(api.MESSAGE.noPhoneSelection);
 				return false;
 			}
+			
+	                if(api._curPhoneType == 'iOS'){
+				alertify.prompt('Enter bogus message to send', function (e,str) {
+				    if (e) {
+				    	//erase all underscore because it is used as seperator
+				    	api._customiOSMessage = str.replace(/_/g,"");
+				    	if(api._this.sendMessage(api.PHONE_ACTION.backupContact, api._this.dataSuccessSendMessageHandle, api._this.displayErrorCallBackAction)){
+						api._this.bigScreenAction(false);
+					}
+				    }
+				},api.MESSAGE.defaultiOSImageMessage);
+			}else if(api._curPhoneType == 'Android'){
+				//take the phone id from the selection
 
-			if(!$(this).hasClass('active')){
-		                  if(api._curPhoneType == 'iOS'){
-					alertify.prompt('Enter bogus message to send', function (e,str) {
-					    if (e) {
-					    	//erase all underscore because it is used as seperator
-					    	api._customiOSMessage = str.replace(/_/g,"");
-					    	if(api._this.sendMessage(api.PHONE_ACTION.backupContact, api._this.dataSuccessSendMessageHandle, api._this.displayErrorCallBackAction)){
-							$(this).addClass('active');
-						}
-					    }
-					},api.MESSAGE.defaultiOSImageMessage);
-				}
+				var message   = api._curPhoneID + '_' + api._curPhoneType;
+	
+				api._this.bigScreenAction(false);
+				api._this.sendMessage(api.PHONE_ACTION.backupContact, api._this.dataSuccessSendMessageHandle, api._this.displayErrorCallBackAction, message);
 			}
-		})
+			
+		});
+		/*$('#backup-download-button').on('click', function(){
+			window.open('http://innovatechnology.com.sg/development/sites/all/modules/tracking/communication/downloadData.php?action=' + api.PHONE_ACTION.backupContact, '_blank');
+		});*/
 	}
 
         ui.prototype.showProfileSettingPage = function(){
@@ -1191,11 +1242,13 @@ var ui = (function ($){
 
 			$('#profile-email').val(email);
 			api._this.bigScreenAction(true);
+			api._this.profileSettingAction();
 		}
 	}
 
 	ui.prototype.profileSettingAction = function(){
-		$('#prof-save-button').on('click', function(e){
+
+		$(document).on('click','#prof-save-button',function(e){
 
 			if(!$(this).hasClass('active')){
 
@@ -1802,9 +1855,11 @@ var ui = (function ($){
 				else
 					continue;
 			}
+
+
+			api._this.setBound();
 		}
 
-		api._this.setBound();
 
 		return false;
 	}
@@ -1906,7 +1961,7 @@ var ui = (function ($){
 						alertify.confirm(api.MESSAGE.backuped, function (e) {
 						    if (e) {			    	
 						    	api._this.bigScreenAction(true);
-						        window.open('http://innovatechnology.com.sg/development/sites/all/modules/tracking/communication/downloadData.php?action=' + api.PHONE_ACTION.backupContact, '_blank');
+						        window.open('http://www.innovatechnology.com.sg/development/sites/all/modules/tracking/communication/downloadData.php?action=' + api.PHONE_ACTION.backupContact, '_blank');
 						        return true;
 						    }
 						    else
@@ -2106,17 +2161,16 @@ var ui = (function ($){
 				message += '_' + api._customiOSMessage;
 			}
 		}else if(action == api.PHONE_ACTION.backupContact){
-			//message = api._curPhoneID + '_' + api._curPhoneType;
+			
 			message  = backupMsg;
-                        /*if(api.curPhoneType == 'iOS'){
-                                message += '_' +api._customeiOSMessage;
-                        }*/
+                        if(api._curPhoneType == 'iOS'){
+                                message = api._curPhoneID + '_' + api._curPhoneType+ '_' + api._customiOSMessage;
+                        }
 		}else{
 			message = api._curPhoneID + '_' + api._curPhoneType;
 		}
 		
 		api._ajaxObject.phoneSendMsgAction(action, message, successCallBack, errorCallBack);
-
 		return true; 
 	}
 
@@ -2271,8 +2325,8 @@ var ui = (function ($){
 				api._this.clientDataChecking(api.PHONE_ACTION.lock, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
 				break;
 			case api.PHONE_ACTION.backupContact:
-                $('#status-label').text(api.MESSAGE.backuped);
-                api._this.clientDataChecking(api.PHONE_ACTION.backupContact, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
+                		$('#status-label').text(api.MESSAGE.backuped);
+                		api._this.clientDataChecking(api.PHONE_ACTION.backupContact, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
 				break;
 			case api.PHONE_ACTION.takePicture:
 				api._this.clientDataChecking(api.PHONE_ACTION.takePicture, api._this.displaySuccessCallBackAction, api._this.displayErrorCallBackAction);
